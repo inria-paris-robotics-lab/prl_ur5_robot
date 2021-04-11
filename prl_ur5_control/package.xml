@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>prl_ur5_control</name>
+  <version>0.1.0</version>
+  <description>
+    prl_ur5_control provides stuff to control the physical PRL UR5 robot
+  </description>
+
+  <maintainer email="igor.kalevatykh@inria.fr">Igor Kalevatykh</maintainer>
+  <author email="igor.kalevatykh@inria.fr">Igor Kalevatykh</author>
+
+  <license>MIT</license>
+
+  <url type="repository">https://github.com/inria-paris-robotic-lab/prl_ur5_robot</url>
+  <url type="bugtracker">https://github.com/inria-paris-robotic-lab/prl_ur5_robot/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>onrobot_control</exec_depend>
+  <exec_depend>ur_robot_driver</exec_depend>
+  <exec_depend>robotiq_ft_sensor</exec_depend>
+  <exec_depend>prl_ur5_description</exec_depend>
+</package>
