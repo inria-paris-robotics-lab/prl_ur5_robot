@@ -1,0 +1,11 @@
+<launch>
+
+  <!-- This file makes it easy to include different planning pipelines;
+       It is assumed that all planning pipelines are named XXX_planning_pipeline.launch  -->
+
+  <arg name="pipeline" default="ompl"/>
+  <arg name="setup" default="none"/>
+
+  <include file="$(find prl_ur5_moveit_config)/launch/$(arg pipeline)_planning_pipeline.launch.xml" pass_all_args="true"/>
+
+</launch>

@@ -1,0 +1,85 @@
+stomp:
+  left_arm:
+    group_name: left_arm
+    optimization: &optimization
+      num_timesteps: 60
+      num_iterations: 40
+      num_iterations_after_valid: 0
+      num_rollouts: 30
+      max_rollouts: 30
+      initialization_method: 1 #[1 : LINEAR_INTERPOLATION, 2 : CUBIC_POLYNOMIAL, 3 : MININUM_CONTROL_COST, 4: FILL_TRAJECTORY]
+      control_cost_weight: 0.0
+    task:
+      noise_generator: &noise_generator
+        - class: stomp_moveit/GoalGuidedMultivariateGaussian
+          stddev: [0.8, 1.0, 1.0, 0.4, 0.3, 0.3]
+      cost_functions: &cost_functions
+        - class: stomp_moveit/CollisionCheck
+          collision_penalty: 1.0
+          cost_weight: 1.0
+          kernel_window_percentage: 0.2
+          longest_valid_joint_move: 0.05
+        - class: stomp_moveit/ToolGoalPose
+          position_cost_weight: 0.5
+          orientation_cost_weight: 0.5
+      noisy_filters: &noisy_filters
+        - class: stomp_moveit/JointLimits
+          lock_start: True
+          lock_goal: True
+        - class: stomp_moveit/MultiTrajectoryVisualization
+          line_width: 0.02
+          rgb: [255, 255, 0]
+          marker_array_topic: stomp_trajectories
+          marker_namespace: noisy
+      update_filters: &update_filters
+        - class: stomp_moveit/PolynomialSmoother
+          poly_order: 6
+        - class: stomp_moveit/TrajectoryVisualization
+          line_width: 0.05
+          rgb: [0, 191, 255]
+          error_rgb: [255, 0, 0]
+          publish_intermediate: True
+          marker_topic: stomp_trajectory
+          marker_namespace: optimized
+
+  right_arm:
+    group_name: right_arm
+    optimization: *optimization
+    task:
+      noise_generator: *noise_generator
+      cost_functions: *cost_functions
+      noisy_filters: *noisy_filters
+      update_filters: *update_filters
+
+  both_arms:
+    group_name: both_arms
+    optimization: *optimization
+    task:
+      noise_generator:
+        - class: stomp_moveit/NormalDistributionSampling
+          stddev: [0.05, 0.8, 1.0, 0.4, 0.4, 0.4, 0.05, 0.8, 1.0, 0.4, 0.4, 0.4]
+      cost_functions: *cost_functions
+      noisy_filters: *noisy_filters
+      update_filters: *update_filters
+
+  left_gripper:
+    group_name: left_gripper
+    optimization: *optimization
+    task:
+      noise_generator:
+        - class: stomp_moveit/NormalDistributionSampling
+          stddev: [0.05]
+      cost_functions: *cost_functions
+      noisy_filters: *noisy_filters
+      update_filters: *update_filters
+
+  right_gripper:
+    group_name: right_gripper
+    optimization: *optimization
+    task:
+      noise_generator:
+        - class: stomp_moveit/NormalDistributionSampling
+          stddev: [0.05]
+      cost_functions: *cost_functions
+      noisy_filters: *noisy_filters
+      update_filters: *update_filters
