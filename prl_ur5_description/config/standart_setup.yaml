@@ -1,0 +1,72 @@
+# left arm configuration
+left:
+  arm_kinematics: "kinematics/ur5_left.yaml"
+  arm_joint_limits:
+    shoulder_pan: [-3.14159, 3.14159]
+    shoulder_lift: [-3.14159, 3.14159]
+    elbow_joint: [-3.14159, 3.14159]
+    wrist_1: [-3.14159, 3.14159]
+    wrist_2: [-3.14159, 3.14159]
+    wrist_3: [-3.14159, 3.14159]
+  arm_pose:
+    x: -0.17906
+    y: 0.0
+    z: 0.78936
+    roll: 0.0
+    pitch: -2.356194490192345
+    yaw: 0.0
+  gripper: "onrobot-rg6"
+  gripper_pose:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+  camera: "realsense-d435i"
+  camera_pose:
+    x: 0.0
+    y: 0.02
+    z: 0.15
+    roll: -1.57
+    pitch: -1.57
+    yaw: 0.0
+
+# right arm configuration
+right:
+  arm_kinematics: "kinematics/ur5_right.yaml"
+  arm_joint_limits:
+    shoulder_pan: [-3.14159, 3.14159]
+    shoulder_lift: [-3.14159, 3.14159]
+    elbow_joint: [-3.14159, 3.14159]
+    wrist_1: [-3.14159, 3.14159]
+    wrist_2: [-3.14159, 3.14159]
+    wrist_3: [-3.14159, 3.14159]
+  arm_pose:
+    x: 0.17906
+    y: 0.0
+    z: 0.78936
+    roll: 0.0
+    pitch: 2.356194490192345
+    yaw: 0.0
+  gripper: "onrobot-rg2"
+  gripper_pose:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+  camera: "realsense-d435i"
+  camera_pose:
+    x: 0.0
+    y: 0.01
+    z: 0.13
+    roll: -1.57
+    pitch: -1.57
+    yaw: 0.0
+
+# head sensor configuration
+# head:
+#   camera:
+#   camera_pose:

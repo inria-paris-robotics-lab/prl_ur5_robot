@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- single arm -->
+  <xacro:include filename="$(find prl_ur5_description)/urdf/_ur5.urdf.xacro"/>
+  <!-- gazebo -->
+  <xacro:include filename="$(find prl_ur5_description)/urdf/prl_ur5.gazebo.xacro"/>
+
+
+  <xacro:macro name="prl_ur5" params="setup_file hardware_interface table:=true">
+
+    <!-- base link -->
+    <link name="prl_ur5_base"/>
+
+    <!-- bimanual stand -->
+    <link name="stand_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://prl_ur5_description/model/vention_tower.dae"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://prl_ur5_description/model/vention_tower_1.stl"/>
+        </geometry>
+      </collision>
+      <collision>
+        <geometry>
+          <mesh filename="package://prl_ur5_description/model/vention_tower_2.stl"/>
+        </geometry>
+      </collision>
+      <collision>
+        <geometry>
+          <mesh filename="package://prl_ur5_description/model/vention_tower_3.stl"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="stand_fix" type="fixed">
+      <parent link="prl_ur5_base"/>
+      <child link = "stand_link"/>
+      <origin xyz="0.0 -0.3825 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <!-- table -->
+    <xacro:if value="$(arg table)">
+      <link name="table_link">
+        <visual>
+          <geometry>
+            <mesh filename="package://prl_ur5_description/model/vention_table.dae"/>
+          </geometry>
+        </visual>
+        <collision>
+          <geometry>
+            <mesh filename="package://prl_ur5_description/model/vention_table.stl"/>
+          </geometry>
+        </collision>
+      </link>
+
+      <joint name="table_fix" type="fixed">
+        <parent link="stand_link"/>
+        <child link = "table_link"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      </joint>
+    </xacro:if>
+
+    <!-- left arm -->
+    <xacro:property name="left" value="${setup_file.get('left')}"/>
+
+    <xacro:if value="${left is not None}">
+      <xacro:ur5 prefix="left_"
+                 parent="stand_link"
+                 kinematics="$(find prl_ur5_description)/config/${left['arm_kinematics']}"
+                 joint_limits="${left['arm_joint_limits']}"
+                 pose="${left['arm_pose']}"
+                 gripper="${left.get('gripper')}"
+                 gripper_pose="${left.get('gripper_pose')}"
+                 camera="${left.get('camera')}"
+                 camera_pose="${left.get('camera_pose')}"
+                 hardware_interface="${hardware_interface}"/>
+    </xacro:if>
+
+    <!-- right arm -->
+    <xacro:property name="right" value="${setup_file.get('right')}"/>
+
+    <xacro:if value="${right is not None}">
+      <xacro:ur5 prefix="right_"
+                 parent="stand_link"
+                 kinematics="$(find prl_ur5_description)/config/${right['arm_kinematics']}"
+                 joint_limits="${right['arm_joint_limits']}"
+                 pose="${right['arm_pose']}"
+                 gripper="${right.get('gripper')}"
+                 gripper_pose="${right.get('gripper_pose')}"
+                 camera="${right.get('camera')}"
+                 camera_pose="${right.get('camera_pose')}"
+                 hardware_interface="${hardware_interface}"/>
+    </xacro:if>
+
+    <!-- head -->
+    <xacro:property name="head" value="${setup_file.get('head')}"/>
+
+    <xacro:if value="${head is not None}">
+      <xacro:unless value="${head.get('camera') is None}">
+        <xacro:camera_sensor prefix='head_'
+                             parent="stand_link"
+                             camera="${head['camera']}"
+                             pose="${head['camera_pose']}"/>
+      </xacro:unless>
+    </xacro:if>
+
+    <!-- gazebo stuff -->
+    <xacro:prl_ur5_gazebo/>
+
+  </xacro:macro>
+</robot>

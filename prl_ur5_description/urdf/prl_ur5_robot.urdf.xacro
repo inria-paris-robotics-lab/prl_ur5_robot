@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="prl_ur5_robot">
+
+  <!-- args -->
+  <xacro:arg name="setup" default="standart_setup"/>
+  <xacro:arg name="table" default="true"/>
+  <xacro:arg name="hardware_interface" default="hardware_interface/PositionJointInterface"/>
+
+  <!-- ur5 robot -->
+  <xacro:include filename="$(find prl_ur5_description)/urdf/prl_ur5.urdf.xacro"/>
+
+  <xacro:prl_ur5 setup_file="${load_yaml('$(find prl_ur5_description)/config/$(arg setup).yaml')}"
+                 table="$(arg table)"
+                 hardware_interface="$(arg hardware_interface)"/>
+
+</robot>

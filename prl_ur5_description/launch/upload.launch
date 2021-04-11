@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="setup" default="standart_setup" doc="The setup name. The setup name must match the file name in the config/setup/ directory."/>
+  <arg name="table" default="false" doc="Add or not the table model to the URDF."/>
+  <arg name="hardware_interface" default="hardware_interface/PositionJointInterface" doc="The transmission hardware interface."/>
+
+  <!-- Load the universal robot description format (URDF) -->
+  <param name="robot_description" command="
+      $(find xacro)/xacro '$(find prl_ur5_description)/urdf/prl_ur5_robot.urdf.xacro'
+      setup:=$(arg setup)
+      table:=$(arg table)
+      hardware_interface:=$(arg hardware_interface)
+    "/>
+
+  <!-- Load the setup parameters -->
+  <group ns="setup">
+    <param name="name" value="$(arg setup)"/>
+    <rosparam command="load" file="$(find prl_ur5_description)/config/$(arg setup).yaml"/>
+  </group>
+</launch>

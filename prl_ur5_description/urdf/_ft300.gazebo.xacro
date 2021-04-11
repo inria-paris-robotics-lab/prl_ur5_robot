@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="gazebo_ft300" params="prefix visualize:=false">
+
+    <!-- enable force_torque sensor -->
+    <gazebo reference="${prefix}measurment_joint">
+      <preserveFixedJoint>true</preserveFixedJoint>
+      <sensor name="${prefix}force_torque" type="force_torque">
+        <always_on>0</always_on>
+        <update_rate>100.0</update_rate>
+        <visualize>${visualize}</visualize>
+        <force_torque>
+          <frame>${prefix}robotiq_ft_frame_id</frame>
+          <measure_direction>child_to_parent</measure_direction>
+        </force_torque>
+      </sensor>
+    </gazebo>
+
+    <!-- ft_sensor plugin -->
+    <gazebo>
+      <plugin name="${prefix}ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+        <updateRate>100.0</updateRate>
+        <topicName>${prefix}ft_wrench</topicName>
+        <jointName>${prefix}measurment_joint</jointName>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.003</stddev>
+        </noise>
+      </plugin>
+    </gazebo>
+
+    <!-- override link properties -->
+    <gazebo reference="${prefix}ft300_sensor">
+      <material>Gazebo/Black</material>
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}ft300_mounting_plate">
+      <material>Gazebo/Black</material>
+      <selfCollide>true</selfCollide>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

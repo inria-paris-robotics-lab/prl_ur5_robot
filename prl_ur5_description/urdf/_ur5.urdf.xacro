@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- ur5 -->
+  <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro" />
+  <!-- force sensor -->
+  <xacro:include filename="$(find prl_ur5_description)/urdf/_force_sensor.urdf.xacro"/>
+  <!-- gripper -->
+  <xacro:include filename="$(find prl_ur5_description)/urdf/_gripper.urdf.xacro"/>
+  <!-- camera -->
+  <xacro:include filename="$(find prl_ur5_description)/urdf/_camera_sensor.urdf.xacro"/>
+
+  <xacro:macro name="ur5" params="
+      prefix
+      parent
+      pose
+      kinematics
+      joint_limits
+      hardware_interface
+      gripper:=None
+      gripper_pose:=None
+      camera:=None
+      camera_pose:=None
+    ">
+
+    <!-- arm -->
+    <xacro:ur5_robot prefix="${prefix}"
+      joint_limited="true"
+      shoulder_pan_lower_limit="${joint_limits['shoulder_pan'][0]}"
+      shoulder_pan_upper_limit="${joint_limits['shoulder_pan'][1]}"
+      shoulder_lift_lower_limit="${joint_limits['shoulder_lift'][0]}"
+      shoulder_lift_upper_limit="${joint_limits['shoulder_lift'][1]}"
+      elbow_joint_lower_limit="${joint_limits['elbow_joint'][0]}"
+      elbow_joint_upper_limit="${joint_limits['elbow_joint'][1]}"
+      wrist_1_lower_limit="${joint_limits['wrist_1'][0]}"
+      wrist_1_upper_limit="${joint_limits['wrist_1'][1]}"
+      wrist_2_lower_limit="${joint_limits['wrist_2'][0]}"
+      wrist_2_upper_limit="${joint_limits['wrist_2'][1]}"
+      wrist_3_lower_limit="${joint_limits['wrist_3'][0]}"
+      wrist_3_upper_limit="${joint_limits['wrist_3'][1]}"
+      safety_limits="false"
+      safety_pos_margin="0.15"
+      safety_k_position="20"
+      transmission_hw_interface="${hardware_interface}"
+      kinematics_file="${load_yaml(kinematics)}"/>
+
+    <joint name="${prefix}base_joint" type="fixed">
+      <origin xyz="${pose['x']} ${pose['y']} ${pose['z']}" rpy="${pose['roll']} ${pose['pitch']} ${pose['yaw']}"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}base_link"/>
+    </joint>
+
+    <!-- force sensor -->
+    <xacro:force_sensor prefix='${prefix}' parent="${prefix}tool0"/>
+
+    <!-- tool frame -->
+    <link name="${prefix}tool"/>
+
+    <joint name="${prefix}tool_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="${prefix}robotiq_ft_frame_id"/>
+      <child link="${prefix}tool"/>
+    </joint>
+
+    <!-- gripper -->
+    <xacro:unless value="${gripper is None}">
+      <xacro:gripper gripper="${gripper}" prefix='${prefix}' parent="${prefix}tool" pose="${gripper_pose}" hardware_interface="${hardware_interface}"/>
+    </xacro:unless>
+
+    <!-- hand-eye camera -->
+    <xacro:unless value="${camera is None}">
+      <xacro:camera_sensor camera="${camera}" prefix='${prefix}' parent="${prefix}tool" pose="${camera_pose}"/>
+    </xacro:unless>
+
+  </xacro:macro>
+</robot>

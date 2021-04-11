@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- force sensor -->
+  <xacro:include filename="$(find robotiq_ft_sensor)/urdf/robotiq_ft300.urdf.xacro" />
+  <xacro:include filename="$(find prl_ur5_description)/urdf/_ft300.gazebo.xacro"/>
+
+  <xacro:macro name="force_sensor" params="prefix parent">
+
+    <!-- force sensor -->
+    <xacro:robotiq_ft300 prefix="${prefix}" parent="${parent}">
+      <origin rpy="0 0 ${-pi/2}" xyz="0 0 -0.004"/>
+    </xacro:robotiq_ft300>
+    <xacro:gazebo_ft300 prefix="${prefix}"/>
+
+  </xacro:macro>
+</robot>
