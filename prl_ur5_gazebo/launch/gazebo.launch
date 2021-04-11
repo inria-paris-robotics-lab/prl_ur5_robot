@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="gazebo_gui" default="true" doc="Open gazebo window."/>
+  <arg name="setup" default="standart_setup" doc="Robot setup name."/>
+  <arg name="paused" default="true" doc="Start gazebo paused."/>
+  <arg name="physics" default="ode" doc="Physics preset."/>
+  <arg name="hardware_interface" default="hardware_interface/PositionJointInterface" doc="Hardware interface."/>
+  <arg name="controllers" default="position_controllers" doc="Controllers configuration."/>
+
+  <!-- Load ros control configuration from YAML file to parameter server -->
+  <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/gazebo_ros_control.yaml" command="load"/>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/$(arg controllers).yaml" command="load"/>
+
+  <!-- Startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" default="$(find prl_ur5_gazebo)/worlds/default.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gazebo_gui)"/>
+    <arg name="physics" value="$(arg physics)"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- Send robot urdf to param server -->
+  <include file="$(find prl_ur5_description)/launch/upload.launch">
+    <arg name="setup" value="$(arg setup)"/>
+    <arg name="table" value="false"/>
+    <arg name="hardware_interface" value="$(arg hardware_interface)"/>
+  </include>
+
+  <!-- Send robot with table urdf to param server (only used in Gazebo) -->
+  <include file="$(find prl_ur5_description)/launch/upload.launch" ns="gazebo">
+    <arg name="setup" value="$(arg setup)"/>
+    <arg name="table" value="true"/>
+  </include>
+
+  <!-- Push robot_description to factory and spawn robot in gazebo at the origin, change x,y,z arguments to spawn in a different position -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="
+      -urdf
+      -param gazebo/robot_description
+      -model prl_ur5_robot
+      -x 0 -y -0.0 -z 0.79 -Y 3.14
+      -J left_elbow_joint -1.57
+      -J left_shoulder_lift_joint -1.57
+      -J left_shoulder_pan_joint -1.57
+      -J left_wrist_1_joint 0
+      -J left_wrist_2_joint 1.57
+      -J left_wrist_3_joint -0.785
+      -J right_elbow_joint 1.57
+      -J right_shoulder_lift_joint -1.57
+      -J right_shoulder_pan_joint 1.57
+      -J right_wrist_1_joint 3.14
+      -J right_wrist_2_joint -1.57
+      -J right_wrist_3_joint 0.785
+      -unpause
+    "/>
+
+  <!-- Load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
+      joint_state_controller
+      left_arm/scaled_pos_joint_traj_controller
+      right_arm/scaled_pos_joint_traj_controller
+      left_gripper/gripper_controller
+      right_gripper/gripper_controller
+    "/>
+
+  <!-- Given the published joint states, publish tf for the robot links -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen"/>
+
+</launch>
