@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>prl_ur5_demos</name>
+  <version>1.0.0</version>
+  <description>
+    prl_ur5_demos provides several demo scripts for the PRL UR5 robot
+  </description>
+
+  <maintainer email="igor.kalevatykh@inria.fr">Igor Kalevatykh</maintainer>
+  <author email="igor.kalevatykh@inria.fr">Igor Kalevatykh</author>
+
+  <license>MIT</license>
+
+  <url type="repository">https://github.com/inria-paris-robotic-lab/prl_ur5_robot</url>
+  <url type="bugtracker">https://github.com/inria-paris-robotic-lab/prl_ur5_robot/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>moveit_commander</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>python-rospkg</exec_depend>
+</package>

@@ -1,0 +1,28 @@
+<robot name="coke_can_model">
+  <link name="coke_can">
+    <inertial>
+      <mass value="0.390"/>
+      <origin xyz="0 0 0.06"/>
+      <inertia ixx="0.00055575" ixy="0.0" ixz="0.0" iyy="0.00055575" iyz="0.0" izz="0.0001755"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://prl_ur5_demos/models/coke_can.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://prl_ur5_demos/models/coke_can.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="coke_can">
+    <turnGravityOff>false</turnGravityOff>
+    <kp>10000000.0</kp>
+    <kd>1.0</kd>
+    <maxVel>0.1</maxVel>
+    <minDepth>0.001</minDepth>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+</robot>
