@@ -18,5 +18,5 @@
 
   <exec_depend>moveit_commander</exec_depend>
   <exec_depend>gazebo_ros</exec_depend>
-  <exec_depend>python-rospkg</exec_depend>
+  <exec_depend>python3-rospkg</exec_depend>
 </package>

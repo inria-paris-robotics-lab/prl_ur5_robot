@@ -31,6 +31,6 @@
   <!-- This package is referenced in the warehouse launch files, but does not build out of the box at the moment. Commented the dependency until this works. -->
   <!-- <run_depend>warehouse_ros_mongo</run_depend> -->
   <run_depend>prl_ur5_description</run_depend>
-  <run_depend>python-rospkg</run_depend>
+  <run_depend>python3-rospkg</run_depend>
 
 </package>
