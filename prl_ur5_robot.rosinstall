@@ -1,0 +1,20 @@
+- git:
+    uri: https://github.com/fmauch/universal_robot.git
+    local-name: universal_robot
+    version: calibration_devel
+- git:
+    uri: https://github.com/ros-industrial/robotiq
+    local-name: robotiq
+    version: kinetic-devel
+- git:
+    uri: https://github.com/ikalevatykh/onrobot_ros
+    local-name: onrobot_ros
+    version: master
+- git:
+    uri: https://github.com/UniversalRobots/Universal_Robots_ROS_Driver
+    local-name: Universal_Robots_ROS_Driver
+    version: master
+- git:
+    uri: https://github.com/pal-robotics/realsense_gazebo_plugin
+    local-name: realsense_gazebo_plugin
+    version: melodic-devel
