@@ -83,11 +83,11 @@ def _merge_path(robot, left_path, right_path):
 
     factor = min(1.0, right_sec / left_sec)
     left_path = robot.left_arm.retime_trajectory(
-        state_in, left_path, factor, 1.0, algorithm)
+        state_in, left_path, factor, 0.5, algorithm)
 
     factor = min(1.0, left_sec / right_sec)
     right_path = robot.right_arm.retime_trajectory(
-        state_in, right_path, factor, 1.0, algorithm)
+        state_in, right_path, factor, 0.5, algorithm)
 
     # merge trajectories
     dest = left_path.joint_trajectory
