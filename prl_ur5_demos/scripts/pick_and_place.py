@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Demonstration of the pick and place operation using MoveIt! interface."""
 
 import sys

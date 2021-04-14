@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Demonstration of gripper opening/closing using MoveIt! interface."""
 
 import sys

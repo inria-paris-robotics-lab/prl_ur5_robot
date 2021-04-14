@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Demonstration of an introspection using MoveIt! interface."""
 
 from __future__ import print_function

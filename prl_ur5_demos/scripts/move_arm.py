@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Demonstration of arm moving using MoveIt! interface."""
 
 import sys

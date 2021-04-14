@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """Test the robot model in PyBullet."""
 
 import re

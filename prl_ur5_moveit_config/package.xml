@@ -1,4 +1,6 @@
-<package>
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
 
   <name>prl_ur5_moveit_config</name>
   <version>0.3.0</version>
@@ -17,21 +19,22 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <run_depend>moveit_ros_move_group</run_depend>
-  <run_depend>moveit_fake_controller_manager</run_depend>
-  <run_depend>moveit_kinematics</run_depend>
-  <run_depend>moveit_planners_ompl</run_depend>
-  <run_depend>moveit_planners_chomp</run_depend>
-  <run_depend>moveit_ros_visualization</run_depend>
-  <run_depend>moveit_setup_assistant</run_depend>
-  <run_depend>joint_state_publisher</run_depend>
-  <run_depend>joint_state_publisher_gui</run_depend>
-  <run_depend>robot_state_publisher</run_depend>
-  <run_depend>tf2_ros</run_depend>
-  <run_depend>xacro</run_depend>
+  <exec_depend>moveit_ros_move_group</exec_depend>
+  <exec_depend>moveit_fake_controller_manager</exec_depend>
+  <exec_depend>moveit_kinematics</exec_depend>
+  <exec_depend>moveit_planners_ompl</exec_depend>
+  <exec_depend>moveit_planners_chomp</exec_depend>
+  <exec_depend>moveit_ros_visualization</exec_depend>
+  <exec_depend>moveit_setup_assistant</exec_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>xacro</exec_depend>
   <!-- This package is referenced in the warehouse launch files, but does not build out of the box at the moment. Commented the dependency until this works. -->
-  <!-- <run_depend>warehouse_ros_mongo</run_depend> -->
-  <run_depend>prl_ur5_description</run_depend>
-  <run_depend>python3-rospkg</run_depend>
+  <!-- <exec_depend>warehouse_ros_mongo</exec_depend> -->
+  <exec_depend>prl_ur5_description</exec_depend>
+  <exec_depend condition="$ROS_PYTHON_VERSION == 2">python-rospkg</exec_depend>
+  <exec_depend condition="$ROS_PYTHON_VERSION == 3">python3-rospkg</exec_depend>
 
 </package>
