@@ -17,6 +17,5 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <exec_depend>gazebo_ros</exec_depend>
-  <exec_depend>gazebo-ros-control</exec_depend>
   <exec_depend>prl_ur5_description</exec_depend>
 </package>
