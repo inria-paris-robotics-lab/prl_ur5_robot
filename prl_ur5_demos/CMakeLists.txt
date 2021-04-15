@@ -3,12 +3,14 @@ project(prl_ur5_demos)
 
 find_package(catkin REQUIRED)
 
+catkin_python_setup()
+
 catkin_package()
 
 # install
-foreach(dir models)
-    install(DIRECTORY ${dir} DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
-endforeach(dir)
+install(
+    DIRECTORY models
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/models)
 
 catkin_install_python(
     PROGRAMS scripts/group_info.py

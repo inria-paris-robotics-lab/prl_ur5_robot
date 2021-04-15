@@ -6,9 +6,9 @@ from math import pi
 
 import moveit_commander
 import rospy
-
-from utils import (gazebo_delete_model, gazebo_spawn_urdf_model, make_grasp,
-                   make_location, make_pose, full_path, shift_pose)
+from prl_ur5_demos.utils import (full_path, gazebo_delete_model,
+                                 gazebo_spawn_urdf_model, make_grasp,
+                                 make_location, make_pose, shift_pose)
 
 
 def run():
@@ -42,14 +42,16 @@ def run():
         robot.left_arm.set_support_surface_name('table')
 
         # Pick up the coke can
-        eef_grasp_pose = make_pose((-0.23, 0, 0.06), (pi/2, 0, pi/2), 'prl_ur5_base')
+        eef_grasp_pose = make_pose(
+            (-0.23, 0, 0.06), (pi/2, 0, pi/2), 'prl_ur5_base')
         grasp = make_grasp(robot.left_arm, robot.left_gripper, eef_grasp_pose)
         retcode = robot.left_arm.pick('coke_can', grasp, plan_only=False)
         if retcode != 1:
             return
 
         # Place the coke can
-        location = make_location(robot.left_arm, robot.left_gripper, place_pose)
+        location = make_location(
+            robot.left_arm, robot.left_gripper, place_pose)
         retcode = robot.left_arm.place('coke_can', location, plan_only=False)
         if retcode != 1:
             return

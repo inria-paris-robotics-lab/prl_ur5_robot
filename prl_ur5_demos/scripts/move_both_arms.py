@@ -10,7 +10,7 @@ import rospy
 from moveit_msgs.msg import RobotTrajectory
 from trajectory_msgs.msg import JointTrajectory
 
-from utils import make_pose, shift_pose
+from prl_ur5_demos.utils import make_pose, shift_pose
 
 
 def run():

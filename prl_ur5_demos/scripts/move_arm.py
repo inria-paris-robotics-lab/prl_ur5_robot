@@ -7,7 +7,7 @@ from math import pi
 import moveit_commander
 import rospy
 
-from utils import make_pose
+from prl_ur5_demos.utils import make_pose
 
 
 def run():
