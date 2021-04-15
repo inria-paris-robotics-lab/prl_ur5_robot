@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="setup" default="standart_setup" doc="Robot setup"/>
+    <arg name="debug" default="false" doc="Debug flag"/>
+
+    <!-- start sensors specific for the setup -->
+    <include file="$(find prl_ur5_control)/launch/$(arg setup)_sensors.launch.xml"/>
+</launch>

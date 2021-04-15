@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- left camera -->
+    <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+        <arg name="camera" value="left_camera"/>
+        <arg name="serial_no" value="819112070229"/>
+    </include>
+
+    <!-- right camera -->
+    <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+        <arg name="camera" value="right_camera"/>
+        <arg name="serial_no" value="841512070547"/>
+    </include>
+</launch>
