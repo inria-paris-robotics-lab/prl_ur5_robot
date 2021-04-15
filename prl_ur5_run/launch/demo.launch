@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="setup" default="standart_setup" doc="Robot setup"/>
+    <arg name="rviz" default="true" doc="Start RViz"/>
+    <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>
+    <arg name="debug" default="false" doc="Debug flag"/>
+
+    <!-- start MoveIt in demo mode -->
+    <include file="$(find prl_ur5_moveit_config)/launch/demo.launch">
+        <arg name="setup" value="$(arg setup)"/>
+        <arg name="use_rviz" value="$(arg rviz)"/>
+        <arg name="pipeline" value="$(arg pipeline)"/>
+        <arg name="debug" value="$(arg debug)"/>
+    </include>
+</launch>

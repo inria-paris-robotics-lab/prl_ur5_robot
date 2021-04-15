@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>prl_ur5_run</name>
+  <version>0.1.0</version>
+  <description>
+    prl_ur5_run is the starting point for controlling the PRL UR5 robot
+  </description>
+
+  <maintainer email="igor.kalevatykh@inria.fr">Igor Kalevatykh</maintainer>
+  <author email="igor.kalevatykh@inria.fr">Igor Kalevatykh</author>
+
+  <license>MIT</license>
+
+  <url type="repository">https://github.com/inria-paris-robotic-lab/prl_ur5_robot</url>
+  <url type="bugtracker">https://github.com/inria-paris-robotic-lab/prl_ur5_robot/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>prl_ur5_control</exec_depend>
+  <exec_depend>prl_ur5_gazebo</exec_depend>
+  <exec_depend>prl_ur5_moveit_config</exec_depend>
+</package>

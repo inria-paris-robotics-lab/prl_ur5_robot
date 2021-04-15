@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="setup" default="standart_setup" doc="Robot setup"/>
+    <arg name="sensors" default="true" doc="Start sensors"/>
+    <arg name="moveit" default="true" doc="Start MoveIt"/>
+    <arg name="rviz" default="true" doc="Start RViz"/>
+    <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>
+    <arg name="debug" default="false" doc="Debug flag"/>
+
+    <!-- launch robot control loop -->
+    <include file="$(find prl_ur5_control)/launch/control.launch">
+        <arg name="setup" value="$(arg setup)"/>
+        <arg name="debug" value="$(arg debug)"/>
+    </include>
+
+    <!-- launch MoveIt -->
+    <group if="$(arg moveit)">
+        <include file="$(find prl_ur5_moveit_config)/launch/moveit.launch">
+            <arg name="setup" value="$(arg setup)"/>
+            <arg name="use_rviz" value="$(arg rviz)"/>
+            <arg name="pipeline" value="$(arg pipeline)"/>
+            <arg name="debug" value="$(arg debug)"/>
+        </include>
+    </group>
+
+    <!-- launch sensor drivers -->
+    <group if="$(arg sensors)">
+        <include file="$(find prl_ur5_control)/launch/sensors.launch">
+            <arg name="setup" value="$(arg setup)"/>
+            <arg name="debug" value="$(arg debug)"/>
+        </include>
+    </group>
+</launch>

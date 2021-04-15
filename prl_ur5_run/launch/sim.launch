@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="setup" default="standart_setup" doc="Robot setup"/>
+    <arg name="gazebo_gui" default="true" doc="Open Gazebo GUI window"/>
+    <arg name="moveit" default="true" doc="Start MoveIt"/>
+    <arg name="rviz" default="true" doc="Start RViz"/>
+    <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>
+    <arg name="debug" default="false" doc="Debug flag"/>
+
+    <!-- start robot simulation -->
+    <include file="$(find prl_ur5_gazebo)/launch/gazebo.launch">
+        <arg name="setup" value="$(arg setup)"/>
+        <arg name="gazebo_gui" value="$(arg gazebo_gui)"/>
+        <arg name="debug" value="$(arg debug)"/>
+    </include>
+
+    <!-- start MoveIt -->
+    <group if="$(arg moveit)">
+        <include file="$(find prl_ur5_moveit_config)/launch/moveit.launch">
+            <arg name="setup" value="$(arg setup)"/>
+            <arg name="use_rviz" value="$(arg rviz)"/>
+            <arg name="pipeline" value="$(arg pipeline)"/>
+            <arg name="debug" value="$(arg debug)"/>
+        </include>
+    </group>
+</launch>
