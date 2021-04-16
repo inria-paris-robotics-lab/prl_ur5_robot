@@ -6,6 +6,7 @@
   <arg name="physics" default="ode" doc="Physics preset."/>
   <arg name="hardware_interface" default="hardware_interface/PositionJointInterface" doc="Hardware interface."/>
   <arg name="controllers" default="position_controllers" doc="Controllers configuration."/>
+  <arg name="debug" default="true" doc="Debug flag to pass to Gazebo."/>
 
   <!-- Load ros control configuration from YAML file to parameter server -->
   <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/gazebo_ros_control.yaml" command="load"/>
@@ -19,7 +20,7 @@
     <arg name="paused" value="$(arg paused)"/>
     <arg name="gui" value="$(arg gazebo_gui)"/>
     <arg name="physics" value="$(arg physics)"/>
-    <arg name="debug" value="false"/>
+    <arg name="debug" value="$(arg debug)"/>
   </include>
 
   <!-- Send robot urdf to param server -->
