@@ -6,7 +6,7 @@
   <arg name="physics" default="ode" doc="Physics preset."/>
   <arg name="hardware_interface" default="hardware_interface/PositionJointInterface" doc="Hardware interface."/>
   <arg name="controllers" default="position_controllers" doc="Controllers configuration."/>
-  <arg name="debug" default="true" doc="Debug flag to pass to Gazebo."/>
+  <arg name="debug" default="false" doc="Debug flag to pass to Gazebo."/>
 
   <!-- Load ros control configuration from YAML file to parameter server -->
   <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/gazebo_ros_control.yaml" command="load"/>
