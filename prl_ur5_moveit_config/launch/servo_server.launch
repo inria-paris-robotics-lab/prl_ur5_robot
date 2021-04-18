@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Robot setup -->
+    <arg name="setup" default="standart_setup" doc="Robot setup"/>
+    <arg name="arm" default="left_arm" doc="Choose arm"/>
+
+    <rosparam ns="servo_server_config/$(arg arm)" command="load" file="$(find moveit_servo)/config/ur_simulated_config.yaml"/>
+    <rosparam ns="servo_server_config" command="load" file="$(find prl_ur5_moveit_config)/config/$(arg setup)/servo_server.yaml"/>
+
+    <node name="servo_server" pkg="moveit_servo" type="servo_server" output="screen">
+        <param name="parameter_ns" type="string" value="servo_server_config/$(arg arm)"/>
+    </node>
+</launch>
