@@ -8,9 +8,9 @@
       <plugin name="ros_control" filename="libgazebo_ros_control.so"/>
 
       <!-- gravity compensation -->
-      <!-- <plugin name="gravity_compensation" filename="libGravityCompensationPlugin.so">
+      <plugin name="gravity_compensation" filename="libGravityCompensationPlugin.so">
         <uri>model://prl_ur5_robot</uri>
-      </plugin> -->
+      </plugin>
 
       <!-- fix base in Gazebo -->
       <joint name="fixed" type="fixed">
