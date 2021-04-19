@@ -15,13 +15,17 @@
   <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/$(arg controllers).yaml" command="load"/>
 
   <!-- Startup simulated world -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" default="$(find prl_ur5_gazebo)/worlds/default.world"/>
-    <arg name="paused" value="$(arg paused)"/>
-    <arg name="gui" value="$(arg gazebo_gui)"/>
-    <arg name="physics" value="$(arg physics)"/>
-    <arg name="debug" value="$(arg debug)"/>
-  </include>
+  <group>
+    <remap from="joint_states" to="/arms/joint_states"/>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" default="$(find prl_ur5_gazebo)/worlds/default.world"/>
+      <arg name="paused" value="$(arg paused)"/>
+      <arg name="gui" value="$(arg gazebo_gui)"/>
+      <arg name="physics" value="$(arg physics)"/>
+      <arg name="debug" value="$(arg debug)"/>
+    </include>
+  </group>
 
   <!-- Send robot urdf to param server -->
   <include file="$(find prl_ur5_description)/launch/upload.launch">
@@ -62,9 +66,13 @@
       joint_state_controller
       left_arm/scaled_pos_joint_traj_controller
       right_arm/scaled_pos_joint_traj_controller
-      left_gripper/gripper_controller
-      right_gripper/gripper_controller
     "/>
+
+  <!-- combine joint states from arms and grippers -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="rate" value="50"/>
+    <rosparam param="source_list">[/arms/joint_states, /left_gripper/joint_states, /right_gripper/joint_states]</rosparam>
+  </node>
 
   <!-- Given the published joint states, publish tf for the robot links -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen"/>

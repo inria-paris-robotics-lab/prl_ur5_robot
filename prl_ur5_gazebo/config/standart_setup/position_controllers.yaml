@@ -25,14 +25,6 @@ left_arm:
     stop_trajectory_duration: 0.5
     state_publish_rate: *loop_hz
     action_monitor_rate: 10
-# Left gripper controller
-left_gripper:
-  gripper_controller:
-    type: position_controllers/GripperActionController
-    joint: left_gripper_joint
-    stall_velocity_threshold: 0.1
-    stall_timeout: 1.0
-    action_monitor_rate: 10
 # Right arm controller
 right_arm:
   scaled_pos_joint_traj_controller:
@@ -55,10 +47,4 @@ right_arm:
       right_wrist_3_joint: { trajectory: 0.1, goal: 0.1 }
     stop_trajectory_duration: 0.5
     state_publish_rate: *loop_hz
-    action_monitor_rate: 10
-# Right gripper controller
-right_gripper:
-  gripper_controller:
-    type: position_controllers/GripperActionController
-    joint: right_gripper_joint
     action_monitor_rate: 10
