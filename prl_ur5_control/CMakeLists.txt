@@ -9,3 +9,7 @@ catkin_package()
 foreach(dir config launch)
     install(DIRECTORY ${dir} DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
 endforeach(dir)
+
+catkin_install_python(
+    PROGRAMS scripts/ft_sensor_node.py
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
