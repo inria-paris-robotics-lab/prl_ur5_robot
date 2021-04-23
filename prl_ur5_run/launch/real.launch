@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="setup" default="standart_setup" doc="Robot setup"/>
-    <arg name="sensors" default="true" doc="Start sensors"/>
+    <arg name="sensors" default="false" doc="Start sensors"/>
     <arg name="moveit" default="true" doc="Start MoveIt"/>
     <arg name="rviz" default="true" doc="Start RViz"/>
     <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>

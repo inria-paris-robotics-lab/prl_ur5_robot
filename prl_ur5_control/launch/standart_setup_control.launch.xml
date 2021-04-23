@@ -18,6 +18,14 @@
         <arg name="debug" value="$(arg debug)"/>
     </include>
 
+    <!-- left ft sensor -->
+    <node pkg="prl_ur5_control" type="ft_sensor_node.py" name="left_ft_sensor_node">
+        <param name="topic" value="left_ft_wrench"/>
+        <param name="frame_id" value="left_robotiq_ft_frame_id"/>
+        <param name="ip_address" value="192.168.1.21"/>
+        <param name="port" value="63351"/>
+    </node>
+
     <!-- left gripper -->
     <include file="$(find onrobot_control)/launch/onrobot_gripper.launch" ns="left_gripper">
         <arg name="ur_hardware_interface" value="/left_arm/ur_hardware_interface"/>
@@ -38,6 +46,14 @@
         <arg name="use_tool_communication" default="false"/>
         <arg name="debug" value="$(arg debug)"/>
     </include>
+
+    <!-- right ft sensor -->
+    <node pkg="prl_ur5_control" type="ft_sensor_node.py" name="right_ft_sensor_node">
+        <param name="topic" value="right_ft_wrench"/>
+        <param name="frame_id" value="right_robotiq_ft_frame_id"/>
+        <param name="ip_address" value="192.168.1.20"/>
+        <param name="port" value="63351"/>
+    </node>
 
     <!-- right gripper -->
     <include file="$(find onrobot_control)/launch/onrobot_gripper.launch" ns="right_gripper">
