@@ -18,3 +18,7 @@
     uri: https://github.com/pal-robotics/realsense_gazebo_plugin
     local-name: realsense_gazebo_plugin
     version: melodic-devel
+- git:
+    uri: https://github.com/ros-industrial/ur_msgs.git
+    local-name: ur_msgs
+    version: melodic-devel
