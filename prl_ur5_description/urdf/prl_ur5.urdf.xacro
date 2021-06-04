@@ -7,7 +7,7 @@
   <xacro:include filename="$(find prl_ur5_description)/urdf/prl_ur5.gazebo.xacro"/>
 
 
-  <xacro:macro name="prl_ur5" params="setup_file hardware_interface table:=true">
+  <xacro:macro name="prl_ur5" params="setup_file hardware_interface table:=true backwall:=true">
 
     <!-- base link -->
     <link name="prl_ur5_base"/>
@@ -61,6 +61,29 @@
         <parent link="stand_link"/>
         <child link = "table_link"/>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      </joint>
+    </xacro:if>
+
+    <!-- back wall -->
+    <xacro:if value="$(arg backwall)">
+      <link name="backwall_link">
+        <visual>
+          <geometry>
+            <box size="3 0.1 3" />
+          </geometry>
+          <material name="grey"><color rgba="0.8 0.8 0.8 0.2"/></material>
+        </visual>
+        <collision>
+          <geometry>
+            <box size="3 0.1 3" />
+          </geometry>
+        </collision>
+      </link>
+
+      <joint name="backwall_fix" type="fixed">
+        <parent link="prl_ur5_base"/>
+        <child link = "backwall_link"/>
+        <origin xyz="0 -1.05 0" rpy="0.0 0.0 0.0"/>
       </joint>
     </xacro:if>
 

@@ -2,6 +2,7 @@
 <launch>
   <arg name="setup" default="standart_setup" doc="The setup name. The setup name must match the file name in the config/setup/ directory."/>
   <arg name="table" default="false" doc="Add or not the table model to the URDF."/>
+  <arg name="backwall" default="true" doc="Add or not the backwall model to the URDF."/>
   <arg name="hardware_interface" default="hardware_interface/PositionJointInterface" doc="The transmission hardware interface."/>
 
   <!-- Load the universal robot description format (URDF) -->
@@ -9,6 +10,7 @@
       $(find xacro)/xacro '$(find prl_ur5_description)/urdf/prl_ur5_robot.urdf.xacro'
       setup:=$(arg setup)
       table:=$(arg table)
+      backwall:=$(arg backwall)
       hardware_interface:=$(arg hardware_interface)
     "/>
 
