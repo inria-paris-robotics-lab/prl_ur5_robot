@@ -1,0 +1,111 @@
+# Publish all joint states
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: &loop_hz 50
+
+# Left arm controller
+left_arm:
+  # Position controller
+  scaled_pos_joint_traj_controller:
+    type: position_controllers/JointTrajectoryController
+    joints: &left_arm_joints
+      - left_shoulder_pan_joint
+      - left_shoulder_lift_joint
+      - left_elbow_joint
+      - left_wrist_1_joint
+      - left_wrist_2_joint
+      - left_wrist_3_joint
+    constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      left_shoulder_pan_joint:  { trajectory: 0.1, goal: 0.1 }
+      left_shoulder_lift_joint: { trajectory: 0.1, goal: 0.1 }
+      left_elbow_joint:         { trajectory: 0.1, goal: 0.1 }
+      left_wrist_1_joint:       { trajectory: 0.1, goal: 0.1 }
+      left_wrist_2_joint:       { trajectory: 0.1, goal: 0.1 }
+      left_wrist_3_joint:       { trajectory: 0.1, goal: 0.1 }
+    stop_trajectory_duration: 0.5
+    state_publish_rate: *loop_hz
+    action_monitor_rate: 10
+  # Effot controller -- Called 'vel' to match the real ur5 velocity controller
+  scaled_vel_joint_traj_controller:
+    type: effort_controllers/JointTrajectoryController
+    joints: *left_arm_joints
+    gains:
+      left_shoulder_pan_joint:  { p: 500, i: 50, d: 100, i_clamp: 0}
+      left_shoulder_lift_joint: { p: 500, i: 50, d: 100, i_clamp: 0}
+      left_elbow_joint:         { p: 500, i: 50, d: 100, i_clamp: 0}
+      left_wrist_1_joint:       { p: 500, i: 50, d: 100, i_clamp: 0}
+      left_wrist_2_joint:       { p: 500, i: 50, d: 100, i_clamp: 0}
+      left_wrist_3_joint:       { p: 500, i: 50, d: 100, i_clamp: 0}
+    velocity_ff:
+      left_shoulder_pan_joint:  1.0
+      left_shoulder_lift_joint: 1.0
+      left_elbow_joint:         1.0
+      left_wrist_1_joint:       1.0
+      left_wrist_2_joint:       1.0
+      left_wrist_3_joint:       1.0
+    constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      left_shoulder_pan_joint:  { trajectory: 0.1, goal: 0.1 }
+      left_shoulder_lift_joint: { trajectory: 0.1, goal: 0.1 }
+      left_elbow_joint:         { trajectory: 0.1, goal: 0.1 }
+      left_wrist_1_joint:       { trajectory: 0.1, goal: 0.1 }
+      left_wrist_2_joint:       { trajectory: 0.1, goal: 0.1 }
+      left_wrist_3_joint:       { trajectory: 0.1, goal: 0.1 }
+    stop_trajectory_duration: 0.5
+    state_publish_rate:  25
+
+# Right arm controller
+right_arm:
+  scaled_pos_joint_traj_controller:
+    type: position_controllers/JointTrajectoryController
+    joints: &right_arm_joints
+      - right_shoulder_pan_joint
+      - right_shoulder_lift_joint
+      - right_elbow_joint
+      - right_wrist_1_joint
+      - right_wrist_2_joint
+      - right_wrist_3_joint
+    constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      right_shoulder_pan_joint: { trajectory: 0.1, goal: 0.1 }
+      right_shoulder_lift_joint: { trajectory: 0.1, goal: 0.1 }
+      right_elbow_joint: { trajectory: 0.1, goal: 0.1 }
+      right_wrist_1_joint: { trajectory: 0.1, goal: 0.1 }
+      right_wrist_2_joint: { trajectory: 0.1, goal: 0.1 }
+      right_wrist_3_joint: { trajectory: 0.1, goal: 0.1 }
+    stop_trajectory_duration: 0.5
+    state_publish_rate: *loop_hz
+    action_monitor_rate: 10
+  # Effot controller -- Called 'vel' to match the real ur5 velocity controller
+  scaled_vel_joint_traj_controller:
+    type: effort_controllers/JointTrajectoryController
+    joints: *right_arm_joints
+    gains:
+      right_shoulder_pan_joint:  { p: 500, i: 50, d: 100, i_clamp: 0}
+      right_shoulder_lift_joint: { p: 500, i: 50, d: 100, i_clamp: 0}
+      right_elbow_joint:         { p: 500, i: 50, d: 100, i_clamp: 0}
+      right_wrist_1_joint:       { p: 500, i: 50, d: 100, i_clamp: 0}
+      right_wrist_2_joint:       { p: 500, i: 50, d: 100, i_clamp: 0}
+      right_wrist_3_joint:       { p: 500, i: 50, d: 100, i_clamp: 0}
+    velocity_ff:
+      right_shoulder_pan_joint:  1.0
+      right_shoulder_lift_joint: 1.0
+      right_elbow_joint:         1.0
+      right_wrist_1_joint:       1.0
+      right_wrist_2_joint:       1.0
+      right_wrist_3_joint:       1.0
+    constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      right_shoulder_pan_joint:  { trajectory: 0.1, goal: 0.1 }
+      right_shoulder_lift_joint: { trajectory: 0.1, goal: 0.1 }
+      right_elbow_joint:         { trajectory: 0.1, goal: 0.1 }
+      right_wrist_1_joint:       { trajectory: 0.1, goal: 0.1 }
+      right_wrist_2_joint:       { trajectory: 0.1, goal: 0.1 }
+      right_wrist_3_joint:       { trajectory: 0.1, goal: 0.1 }
+    stop_trajectory_duration: 0.5
+    state_publish_rate:  25

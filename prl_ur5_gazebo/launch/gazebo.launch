@@ -4,15 +4,19 @@
   <arg name="setup" default="standart_setup" doc="Robot setup name."/>
   <arg name="paused" default="true" doc="Start gazebo paused."/>
   <arg name="physics" default="ode" doc="Physics preset."/>
-  <arg name="hardware_interface" default="hardware_interface/PositionJointInterface" doc="Hardware interface."/>
-  <arg name="controllers" default="position_controllers" doc="Controllers configuration."/>
   <arg name="debug" default="false" doc="Debug flag to pass to Gazebo."/>
+  <arg name="effort_control" default="false" doc="Position or Effort control of the joint"/>
+
+  <arg name="hardware_interface" value="hardware_interface/PositionJointInterface" unless="$(arg effort_control)"/>
+  <arg name="hardware_interface" value="hardware_interface/EffortJointInterface"       if="$(arg effort_control)"/>
+  <arg name="controller_names" value="scaled_pos_joint_traj_controller" unless="$(arg effort_control)"/>
+  <arg name="controller_names" value="scaled_vel_joint_traj_controller"     if="$(arg effort_control)"/>
 
   <!-- Load ros control configuration from YAML file to parameter server -->
   <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/gazebo_ros_control.yaml" command="load"/>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/$(arg controllers).yaml" command="load"/>
+  <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/controllers_config.yaml" command="load"/>
 
   <!-- Startup simulated world -->
   <group>
@@ -38,6 +42,7 @@
   <include file="$(find prl_ur5_description)/launch/upload.launch" ns="gazebo">
     <arg name="setup" value="$(arg setup)"/>
     <arg name="table" value="true"/>
+    <arg name="hardware_interface" value="$(arg hardware_interface)"/>
   </include>
 
   <!-- Push robot_description to factory and spawn robot in gazebo at the origin, change x,y,z arguments to spawn in a different position -->
@@ -64,8 +69,8 @@
   <!-- Load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
       joint_state_controller
-      left_arm/scaled_pos_joint_traj_controller
-      right_arm/scaled_pos_joint_traj_controller
+      left_arm/$(arg controller_names)
+      right_arm/$(arg controller_names)
     "/>
 
   <!-- combine joint states from arms and grippers -->
