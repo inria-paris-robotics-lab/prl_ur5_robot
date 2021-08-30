@@ -2,6 +2,10 @@
 <launch>
     <arg name="headless_mode" default="true" doc="Automatically send URScript to robot to execute. With this, the URCap is not needed on the robot."/>
     <arg name="debug" default="false" doc="Debug flag that will get passed on to ur_control.launch"/>
+    <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
+
+    <arg name="controller_names" value="scaled_pos_joint_traj_controller" unless="$(arg velocity_control)"/>
+    <arg name="controller_names" value="scaled_vel_joint_traj_controller"     if="$(arg velocity_control)"/>
 
     <!-- left arm driver -->
     <include file="$(find ur_robot_driver)/launch/ur_control.launch" ns="left_arm">
@@ -9,7 +13,7 @@
         <arg name="reverse_port" value="50011"/>
         <arg name="script_sender_port" value="50012"/>
         <arg name="tf_prefix" value="left_"/>
-        <arg name="controllers" value="joint_state_controller scaled_pos_joint_traj_controller speed_scaling_state_controller force_torque_sensor_controller"/>
+        <arg name="controllers" value="joint_state_controller $(arg controller_names) speed_scaling_state_controller force_torque_sensor_controller"/>
         <arg name="stopped_controllers" value="pos_joint_traj_controller joint_group_vel_controller"/>
         <arg name="controller_config_file" value="$(find prl_ur5_control)/config/left_arm_controllers.yaml"/>
         <arg name="kinematics_config" value="$(find prl_ur5_description)/config/kinematics/ur5_left.yaml"/>
@@ -38,7 +42,7 @@
         <arg name="reverse_port" value="50001"/>
         <arg name="script_sender_port" value="50002"/>
         <arg name="tf_prefix" value="right_"/>
-        <arg name="controllers" value="joint_state_controller scaled_pos_joint_traj_controller speed_scaling_state_controller force_torque_sensor_controller"/>
+        <arg name="controllers" value="joint_state_controller $(arg controller_names) speed_scaling_state_controller force_torque_sensor_controller"/>
         <arg name="stopped_controllers" value="pos_joint_traj_controller joint_group_vel_controller"/>
         <arg name="controller_config_file" value="$(find prl_ur5_control)/config/right_arm_controllers.yaml"/>
         <arg name="kinematics_config" value="$(find prl_ur5_description)/config/kinematics/ur5_right.yaml"/>

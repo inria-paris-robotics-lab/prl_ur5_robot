@@ -3,6 +3,7 @@
     <arg name="setup" default="standart_setup" doc="Robot setup"/>
     <arg name="headless_mode" default="true" doc="Automatically send URScript to robot to execute. With this, the URCap is not needed on the robot."/>
     <arg name="debug" default="false" doc="Debug flag that will get passed on to ur_control.launch"/>
+    <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
 
     <!-- send robot urdf to param server -->
     <include file="$(find prl_ur5_description)/launch/upload.launch">
@@ -13,6 +14,7 @@
     <include file="$(find prl_ur5_control)/launch/$(arg setup)_control.launch.xml">
         <arg name="headless_mode" value="$(arg headless_mode)"/>
         <arg name="debug" value="$(arg debug)"/>
+        <arg name="velocity_control" value="$(arg velocity_control)"/>
     </include>
 
     <!-- convert joint states to /tf tranforms -->

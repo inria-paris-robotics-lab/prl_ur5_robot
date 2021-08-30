@@ -6,11 +6,13 @@
     <arg name="rviz" default="true" doc="Start RViz"/>
     <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>
     <arg name="debug" default="false" doc="Debug flag"/>
+    <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
 
     <!-- launch robot control loop -->
     <include file="$(find prl_ur5_control)/launch/control.launch">
         <arg name="setup" value="$(arg setup)"/>
         <arg name="debug" value="$(arg debug)"/>
+        <arg name="velocity_control" value="$(arg velocity_control)"/>
     </include>
 
     <!-- launch MoveIt -->
