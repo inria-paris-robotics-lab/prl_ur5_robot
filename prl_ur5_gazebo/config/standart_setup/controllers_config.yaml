@@ -27,9 +27,9 @@ left_arm:
     stop_trajectory_duration: 0.5
     state_publish_rate: *loop_hz
     action_monitor_rate: 10
-  # Effot controller -- Called 'vel' to match the real ur5 velocity controller
+
   scaled_vel_joint_traj_controller:
-    type: effort_controllers/JointTrajectoryController
+    type: velocity_controllers/JointTrajectoryController
     joints: *left_arm_joints
     gains:
       left_shoulder_pan_joint:  { p: 500, i: 50, d: 100, i_clamp: 0}
@@ -80,9 +80,9 @@ right_arm:
     stop_trajectory_duration: 0.5
     state_publish_rate: *loop_hz
     action_monitor_rate: 10
-  # Effot controller -- Called 'vel' to match the real ur5 velocity controller
+
   scaled_vel_joint_traj_controller:
-    type: effort_controllers/JointTrajectoryController
+    type: velocity_controllers/JointTrajectoryController
     joints: *right_arm_joints
     gains:
       right_shoulder_pan_joint:  { p: 500, i: 50, d: 100, i_clamp: 0}

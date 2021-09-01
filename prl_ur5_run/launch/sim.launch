@@ -6,14 +6,14 @@
     <arg name="rviz" default="true" doc="Start RViz"/>
     <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>
     <arg name="debug" default="false" doc="Debug flag"/>
-    <arg name="effort_control" default="false" doc="Position or Effort control of the joint"/>
+    <arg name="velocity_control" default="false" doc="Position or Velocity control of the joint"/>
 
     <!-- start robot simulation -->
     <include file="$(find prl_ur5_gazebo)/launch/gazebo.launch">
         <arg name="setup" value="$(arg setup)"/>
         <arg name="gazebo_gui" value="$(arg gazebo_gui)"/>
         <arg name="debug" value="$(arg debug)"/>
-        <arg name="effort_control" value="$(arg effort_control)"/>
+        <arg name="velocity_control" value="$(arg velocity_control)"/>
     </include>
 
     <!-- start MoveIt -->

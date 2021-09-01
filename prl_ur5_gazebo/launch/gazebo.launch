@@ -5,15 +5,16 @@
   <arg name="paused" default="true" doc="Start gazebo paused."/>
   <arg name="physics" default="ode" doc="Physics preset."/>
   <arg name="debug" default="false" doc="Debug flag to pass to Gazebo."/>
-  <arg name="effort_control" default="false" doc="Position or Effort control of the joint"/>
+  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joint"/>
 
-  <arg name="hardware_interface" value="hardware_interface/PositionJointInterface" unless="$(arg effort_control)"/>
-  <arg name="hardware_interface" value="hardware_interface/EffortJointInterface"       if="$(arg effort_control)"/>
-  <arg name="controller_names" value="scaled_pos_joint_traj_controller" unless="$(arg effort_control)"/>
-  <arg name="controller_names" value="scaled_vel_joint_traj_controller"     if="$(arg effort_control)"/>
+  <arg name="hardware_interface" value="hardware_interface/PositionJointInterface" unless="$(arg velocity_control)"/>
+  <arg name="hardware_interface" value="hardware_interface/VelocityJointInterface"       if="$(arg velocity_control)"/>
+  <arg name="controller_names" value="scaled_pos_joint_traj_controller" unless="$(arg velocity_control)"/>
+  <arg name="controller_names" value="scaled_vel_joint_traj_controller"     if="$(arg velocity_control)"/>
 
   <!-- Load ros control configuration from YAML file to parameter server -->
-  <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/gazebo_ros_control.yaml" command="load"/>
+  <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/gazebo_ros_control_pos.yaml" command="load" unless="$(arg velocity_control)"/>
+  <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/gazebo_ros_control_vel.yaml" command="load"     if="$(arg velocity_control)"/>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/controllers_config.yaml" command="load"/>
@@ -63,7 +64,7 @@
       -J right_wrist_1_joint 3.14
       -J right_wrist_2_joint -1.57
       -J right_wrist_3_joint 0.785
-      -unpause
+      
     "/>
 
   <!-- Load the controllers -->
