@@ -7,8 +7,6 @@
   <arg name="debug" default="false" doc="Debug flag to pass to Gazebo."/>
   <arg name="velocity_control" default="false" doc="Position or Velocity control of the joint"/>
 
-  <arg name="hardware_interface" value="hardware_interface/PositionJointInterface" unless="$(arg velocity_control)"/>
-  <arg name="hardware_interface" value="hardware_interface/VelocityJointInterface"       if="$(arg velocity_control)"/>
   <arg name="controller_names" value="scaled_pos_joint_traj_controller" unless="$(arg velocity_control)"/>
   <arg name="controller_names" value="scaled_vel_joint_traj_controller"     if="$(arg velocity_control)"/>
 
@@ -36,14 +34,14 @@
   <include file="$(find prl_ur5_description)/launch/upload.launch">
     <arg name="setup" value="$(arg setup)"/>
     <arg name="table" value="false"/>
-    <arg name="hardware_interface" value="$(arg hardware_interface)"/>
+    <arg name="velocity_control" value="$(arg velocity_control)"/>
   </include>
 
   <!-- Send robot with table urdf to param server (only used in Gazebo) -->
   <include file="$(find prl_ur5_description)/launch/upload.launch" ns="gazebo">
     <arg name="setup" value="$(arg setup)"/>
     <arg name="table" value="true"/>
-    <arg name="hardware_interface" value="$(arg hardware_interface)"/>
+    <arg name="velocity_control" value="$(arg velocity_control)"/>
   </include>
 
   <!-- Push robot_description to factory and spawn robot in gazebo at the origin, change x,y,z arguments to spawn in a different position -->
@@ -64,7 +62,7 @@
       -J right_wrist_1_joint 3.14
       -J right_wrist_2_joint -1.57
       -J right_wrist_3_joint 0.785
-      
+
     "/>
 
   <!-- Load the controllers -->

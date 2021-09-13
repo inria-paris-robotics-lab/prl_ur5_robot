@@ -7,7 +7,8 @@
 
     <!-- send robot urdf to param server -->
     <include file="$(find prl_ur5_description)/launch/upload.launch">
-        <arg name="setup" value="$(arg setup)"/>
+      <arg name="setup" value="$(arg setup)"/>
+      <arg name="velocity_control" value="$(arg velocity_control)"/>
     </include>
 
     <!-- start hardware/controllers specific for the setup -->

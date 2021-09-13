@@ -3,7 +3,10 @@
   <arg name="setup" default="standart_setup" doc="The setup name. The setup name must match the file name in the config/setup/ directory."/>
   <arg name="table" default="false" doc="Add or not the table model to the URDF."/>
   <arg name="backwall" default="true" doc="Add or not the backwall model to the URDF."/>
-  <arg name="hardware_interface" default="hardware_interface/PositionJointInterface" doc="The transmission hardware interface."/>
+
+  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
+  <arg name="hardware_interface" value="hardware_interface/PositionJointInterface" doc="The transmission hardware interface." unless="$(arg velocity_control)"/>
+  <arg name="hardware_interface" value="hardware_interface/VelocityJointInterface" doc="The transmission hardware interface."      if="$(arg velocity_control)"/>
 
   <!-- Load the universal robot description format (URDF) -->
   <param name="robot_description" command="

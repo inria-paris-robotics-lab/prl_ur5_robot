@@ -22,6 +22,7 @@
             <arg name="use_rviz" value="$(arg rviz)"/>
             <arg name="pipeline" value="$(arg pipeline)"/>
             <arg name="debug" value="$(arg debug)"/>
+            <arg name="velocity_control" value="$(arg velocity_control)"/>
         </include>
     </group>
 

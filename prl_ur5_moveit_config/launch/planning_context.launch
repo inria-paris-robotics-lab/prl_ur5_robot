@@ -2,6 +2,8 @@
   <!-- Robot setup -->
   <arg name="setup" default="none"/>
 
+  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joint"/>
+
   <!-- By default we do not overwrite the URDF. Change the following to true to change the default behavior -->
   <arg name="load_robot_description" default="false"/>
 
@@ -12,6 +14,7 @@
   <include if="$(arg load_robot_description)" file="$(find prl_ur5_description)/launch/upload.launch">
     <arg name="setup" value="$(arg setup)"/>
     <arg name="table" value="false"/>
+    <arg name="velocity_control" value="$(arg velocity_control)"/>
   </include>
 
   <!-- The semantic description that corresponds to the URDF -->

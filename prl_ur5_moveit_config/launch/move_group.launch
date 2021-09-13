@@ -3,6 +3,8 @@
   <!-- specify the robot setup -->
   <arg name="setup" default="none"/>
 
+  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joint"/>
+
   <!-- GDB Debug Option -->
   <arg name="debug" default="false" />
   <arg unless="$(arg debug)" name="launch_prefix" value="" />
@@ -44,6 +46,7 @@
   <include file="$(find prl_ur5_moveit_config)/launch/planning_context.launch">
     <arg name="load_robot_description" value="$(arg load_robot_description)" />
     <arg name="setup" value="$(arg setup)"/>
+    <arg name="velocity_control" value="$(arg velocity_control)"/>
   </include>
 
   <!-- Planning Functionality -->
