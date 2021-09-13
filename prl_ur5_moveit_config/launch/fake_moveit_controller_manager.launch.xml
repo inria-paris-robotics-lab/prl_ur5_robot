@@ -2,6 +2,9 @@
 
   <!-- Robot setup -->
   <arg name="setup" default="none"/>
+  
+  <!-- Control mode : velocity or position -->
+  <arg name="velocity_control" default="true"/>
 
   <!-- Set the param that trajectory_execution_manager needs to find the controller plugin -->
   <param name="moveit_controller_manager" value="moveit_fake_controller_manager/MoveItFakeControllerManager"/>

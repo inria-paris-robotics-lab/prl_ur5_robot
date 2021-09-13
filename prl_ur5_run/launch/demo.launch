@@ -4,7 +4,7 @@
     <arg name="rviz" default="true" doc="Start RViz"/>
     <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>
     <arg name="debug" default="false" doc="Debug flag"/>
-    <arg name="velocity_control" default="false" doc="Position or Velocity control of the joint"/>
+    <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
 
     <!-- start MoveIt in demo mode -->
     <include file="$(find prl_ur5_moveit_config)/launch/demo.launch">

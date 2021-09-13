@@ -3,7 +3,8 @@
   <!-- specify the robot setup -->
   <arg name="setup" default="none"/>
 
-  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joint"/>
+  <!-- Control mode : velocity or position -->
+  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
 
   <!-- GDB Debug Option -->
   <arg name="debug" default="false" />
@@ -61,6 +62,7 @@
     <arg name="moveit_controller_manager" value="prl_ur5_robot" unless="$(arg fake_execution)"/>
     <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)"/>
     <arg name="setup" value="$(arg setup)"/>
+    <arg name="velocity_control" value="$(arg velocity_control)"/>
   </include>
 
   <!-- Sensors Functionality -->

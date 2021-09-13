@@ -3,7 +3,7 @@
   <!-- specify the robot setup -->
   <arg name="setup" default="standart_setup"/>
 
-  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joint"/>
+  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
 
   <!-- specify the planning pipeline -->
   <arg name="pipeline" default="ompl" />
