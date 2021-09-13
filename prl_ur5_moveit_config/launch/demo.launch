@@ -3,6 +3,8 @@
   <!-- specify the robot setup -->
   <arg name="setup" default="standart_setup"/>
 
+  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
+
   <!-- specify the planning pipeline -->
   <arg name="pipeline" default="ompl" />
 
@@ -29,6 +31,7 @@
   <include file="$(find prl_ur5_moveit_config)/launch/planning_context.launch">
     <arg name="load_robot_description" value="true"/>
     <arg name="setup" value="$(arg setup)"/>
+    <arg name="velocity_control" value="$(arg velocity_control)"/>
   </include>
 
   <!-- If needed, broadcast static tf for robot root -->
@@ -53,6 +56,7 @@
     <arg name="debug" value="$(arg debug)"/>
     <arg name="pipeline" value="$(arg pipeline)"/>
     <arg name="setup" value="$(arg setup)"/>
+    <arg name="velocity_control" value="$(arg velocity_control)"/>
   </include>
 
   <!-- Run Rviz and load the default config to see the state of the move_group node -->
