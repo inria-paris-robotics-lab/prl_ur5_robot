@@ -6,7 +6,7 @@
     <arg name="rviz" default="true" doc="Start RViz"/>
     <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>
     <arg name="debug" default="false" doc="Debug flag"/>
-    <arg name="velocity_control" default="false" doc="Position or Velocity control of the joint"/>
+    <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
 
     <!-- start robot simulation -->
     <include file="$(find prl_ur5_gazebo)/launch/gazebo.launch">

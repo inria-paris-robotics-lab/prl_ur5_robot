@@ -5,7 +5,7 @@
   <arg name="paused" default="true" doc="Start gazebo paused."/>
   <arg name="physics" default="ode" doc="Physics preset."/>
   <arg name="debug" default="false" doc="Debug flag to pass to Gazebo."/>
-  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joint"/>
+  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
 
   <arg name="controller_names" value="scaled_pos_joint_traj_controller" unless="$(arg velocity_control)"/>
   <arg name="controller_names" value="scaled_vel_joint_traj_controller"     if="$(arg velocity_control)"/>

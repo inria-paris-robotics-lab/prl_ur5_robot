@@ -2,7 +2,7 @@
   <!-- Robot setup -->
   <arg name="setup" default="none"/>
 
-  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joint"/>
+  <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
 
   <!-- By default we do not overwrite the URDF. Change the following to true to change the default behavior -->
   <arg name="load_robot_description" default="false"/>
