@@ -1,13 +1,7 @@
 # left arm configuration
 left:
   arm_kinematics: "kinematics/ur5_left.yaml"
-  arm_joint_limits:
-    shoulder_pan: [-3.14159, 3.14159]
-    shoulder_lift: [-3.14159, 3.14159]
-    elbow_joint: [-3.14159, 3.14159]
-    wrist_1: [-3.14159, 3.14159]
-    wrist_2: [-3.14159, 3.14159]
-    wrist_3: [-3.14159, 3.14159]
+  arm_joint_limits: "limits/half_joint_limits.yaml"
   arm_pose:
     x: -0.17906
     y: 0.0
@@ -35,13 +29,7 @@ left:
 # right arm configuration
 right:
   arm_kinematics: "kinematics/ur5_right.yaml"
-  arm_joint_limits:
-    shoulder_pan: [-3.14159, 3.14159]
-    shoulder_lift: [-3.14159, 3.14159]
-    elbow_joint: [-3.14159, 3.14159]
-    wrist_1: [-3.14159, 3.14159]
-    wrist_2: [-3.14159, 3.14159]
-    wrist_3: [-3.14159, 3.14159]
+  arm_joint_limits: "limits/half_joint_limits.yaml"
   arm_pose:
     x: 0.17906
     y: 0.0

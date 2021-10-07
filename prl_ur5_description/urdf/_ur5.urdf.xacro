@@ -23,26 +23,12 @@
       camera_pose:=None
     ">
 
-    <!-- arm -->
-    <!-- joint_limited="true"
-    shoulder_pan_lower_limit="${joint_limits['shoulder_pan'][0]}"
-    shoulder_pan_upper_limit="${joint_limits['shoulder_pan'][1]}"
-    shoulder_lift_lower_limit="${joint_limits['shoulder_lift'][0]}"
-    shoulder_lift_upper_limit="${joint_limits['shoulder_lift'][1]}"
-    elbow_joint_lower_limit="${joint_limits['elbow_joint'][0]}"
-    elbow_joint_upper_limit="${joint_limits['elbow_joint'][1]}"
-    wrist_1_lower_limit="${joint_limits['wrist_1'][0]}"
-    wrist_1_upper_limit="${joint_limits['wrist_1'][1]}"
-    wrist_2_lower_limit="${joint_limits['wrist_2'][0]}"
-    wrist_2_upper_limit="${joint_limits['wrist_2'][1]}"
-    wrist_3_lower_limit="${joint_limits['wrist_3'][0]}"
-    wrist_3_upper_limit="${joint_limits['wrist_3'][1]}"
-   -->
     <xacro:ur5_robot prefix="${prefix}"
       safety_limits="false"
       safety_pos_margin="0.15"
       safety_k_position="20"
       kinematics_parameters_file="${kinematics}"
+      joint_limits_parameters_file="${joint_limits}"
       transmission_hw_interface="${hardware_interface}"
       />
 
