@@ -18,20 +18,13 @@
         <geometry>
           <mesh filename="package://prl_ur5_description/model/vention_tower.dae"/>
         </geometry>
+        <material name="Cyan">
+  14        <color rgba="0 1.0 1.0 1.0"/>
+  15      </material>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://prl_ur5_description/model/vention_tower_1.stl"/>
-        </geometry>
-      </collision>
-      <collision>
-        <geometry>
-          <mesh filename="package://prl_ur5_description/model/vention_tower_2.stl"/>
-        </geometry>
-      </collision>
-      <collision>
-        <geometry>
-          <mesh filename="package://prl_ur5_description/model/vention_tower_3.stl"/>
+          <mesh filename="package://prl_ur5_description/model/vention_tower.stl"/>
         </geometry>
       </collision>
     </link>
