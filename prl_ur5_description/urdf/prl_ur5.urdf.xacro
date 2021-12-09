@@ -5,7 +5,8 @@
   <xacro:include filename="$(find prl_ur5_description)/urdf/_ur5.urdf.xacro"/>
   <!-- gazebo -->
   <xacro:include filename="$(find prl_ur5_description)/urdf/prl_ur5.gazebo.xacro"/>
-
+  <!-- Fixed cameras -->
+  <xacro:include filename="$(find prl_ur5_description)/urdf/_fixed_cameras.urdf.xacro"/>
 
   <xacro:macro name="prl_ur5" params="setup_file hardware_interface table:=true backwall:=true">
 
@@ -55,6 +56,11 @@
         <child link = "table_link"/>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
       </joint>
+
+      <!-- Cameras fixtures (if any) -->
+      <xacro:if value="${setup_file.get('fixed_cameras_file') is not None}">
+        <xacro:fixed_cameras parent="prl_ur5_base" fixed_cameras_file="$(find prl_ur5_description)/config/${setup_file['fixed_cameras_file']}"/>
+      </xacro:if>
     </xacro:if>
 
     <!-- back wall -->

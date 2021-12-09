@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <!-- Build fixed camera with their support from one file -->
+    <xacro:macro name="fixed_cameras" params="parent fixed_cameras_file">
+        <xacro:property name="fixed_cameras" value="${load_yaml(fixed_cameras_file)}"/>
+        <xacro:fixed_cameras_loop parent="${parent}" cameras="${fixed_cameras}"/>
+    </xacro:macro>
+
+    <!-- Reccursive macro to iterate over all the cameras -->
+    <xacro:macro name="fixed_cameras_loop" params="parent cameras">
+        <xacro:if value="${cameras}">
+                <!-- pop first item from list -->
+                <xacro:property name="camera" value="${cameras.pop(0)}"/>
+
+                <xacro:fixed_camera parent="${parent}" camera="${camera}"/>
+
+                <!-- recursively call myself -->
+                <xacro:fixed_cameras_loop parent="${parent}" cameras="${cameras}"/>
+        </xacro:if>
+    </xacro:macro>
+
+    <!-- Build one camera with its stand -->
+    <xacro:macro name="fixed_camera" params="parent camera">
+        <link name="camera_${camera['name']}">
+            <visual>
+            <geometry>
+                <box size="0.2 0.2 0.2" />
+            </geometry>
+            </visual>
+            <collision>
+            <geometry>
+                <box size="0.2 0.2 0.2" />
+            </geometry>
+            </collision>
+        </link>
+
+        <joint name="camera_${camera['name']}_fix" type="fixed">
+            <parent link = "${parent}"/>
+            <child link="camera_${camera['name']}"/>
+            <origin xyz="${camera['pose']['x']} ${camera['pose']['y']} ${camera['pose']['z']}" rpy="0.0 0.0 0.0"/>
+        </joint>
+    </xacro:macro>
+
+</robot>
