@@ -1,5 +1,4 @@
-- name: "A"
-  size: &realsense_size # Dimensions with 1.25 cm margin all around
+- size: &realsense_size # Dimensions with 1.25 cm margin all around
     x: 0.12
     y: 0.04
     z: 0.04
@@ -16,8 +15,7 @@
     y: 0
     z: 0.08
 
-- name: "B"
-  size: *realsense_size
+- size: *realsense_size
   pose:
     x: -0.45
     y: 0.45
@@ -31,8 +29,7 @@
     y: 0
     z: 0.08
 
-- name: "C"
-  size: *realsense_size
+- size: *realsense_size
   pose:
     x: 1.2
     y: 0.1
@@ -46,8 +43,7 @@
     y: 0
     z: 0.08
 
-- name: "D"
-  size: *realsense_size
+- size: *realsense_size
   pose:
     x: -1.2
     y: 0.1

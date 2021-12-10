@@ -4,27 +4,27 @@
     <!-- Build fixed camera with their support from one file -->
     <xacro:macro name="fixed_cameras" params="parent fixed_cameras_file">
         <xacro:property name="fixed_cameras" value="${load_yaml(fixed_cameras_file)}"/>
-        <xacro:fixed_cameras_loop parent="${parent}" cameras="${fixed_cameras}"/>
+        <xacro:fixed_cameras_loop parent="${parent}" number="0" cameras="${fixed_cameras}"/>
     </xacro:macro>
 
     <!-- Reccursive macro to iterate over all the cameras -->
-    <xacro:macro name="fixed_cameras_loop" params="parent cameras">
+    <xacro:macro name="fixed_cameras_loop" params="parent number cameras">
         <xacro:if value="${cameras}">
                 <!-- pop first item from list -->
                 <xacro:property name="camera" value="${cameras.pop(0)}"/>
 
-                <xacro:fixed_camera parent="${parent}" camera="${camera}"/>
+                <xacro:fixed_camera parent="${parent}" number="${number}" camera="${camera}"/>
 
                 <!-- recursively call myself -->
-                <xacro:fixed_cameras_loop parent="${parent}" cameras="${cameras}"/>
+                <xacro:fixed_cameras_loop parent="${parent}" number="${number+1}" cameras="${cameras}"/>
         </xacro:if>
     </xacro:macro>
 
 
     <!-- Build one camera with its stand -->
-    <xacro:macro name="fixed_camera" params="parent camera">
+    <xacro:macro name="fixed_camera" params="parent number camera">
         <!-- Camera -->
-        <link name="camera_${camera['name']}">
+        <link name="fixed_camera_${number}">
             <visual>
                 <geometry>
                     <box size="${camera['size']['x']} ${camera['size']['y']} ${camera['size']['z']}" />
@@ -37,12 +37,12 @@
                 </geometry>
             </collision>
         </link>
-        <gazebo reference="camera_${camera['name']}">
+        <gazebo reference="fixed_camera_${number}">
                 <material>Gazebo/BlueGlow</material>
         </gazebo>
-        <joint name="camera_${camera['name']}_fix" type="fixed">
+        <joint name="fixed_camera_${number}_fix" type="fixed">
             <parent link = "${parent}"/>
-            <child link="camera_${camera['name']}"/>
+            <child link="fixed_camera_${number}"/>
             <origin xyz="${camera['pose']['x']} ${camera['pose']['y']} ${camera['pose']['z']}" rpy="${camera['pose']['roll']} ${camera['pose']['pitch']} ${camera['pose']['yaw']}"/>
         </joint>
 
@@ -81,7 +81,7 @@
         <xacro:property name="vt_len" value="${camera['pose']['z'] - camera['offset']['z'] - camera['size']['z']/2. - hr_z_pos + extrusion_width}"/>
 
         <!-- Horizontal extrusion -->
-        <link name="hr_${camera['name']}">
+        <link name="fixed_hr_${number}">
             <visual>
                 <geometry>
                     <box size="${hr_len} ${extrusion_width} ${extrusion_width}" />
@@ -94,17 +94,17 @@
                 </geometry>
             </collision>
         </link>
-        <gazebo reference="hr_${camera['name']}">
+        <gazebo reference="fixed_hr_${number}">
                 <material>Gazebo/BlueGlow</material>
         </gazebo>
-        <joint name="hr_${camera['name']}_fix" type="fixed">
+        <joint name="fixed_hr_${number}_fix" type="fixed">
             <parent link = "${parent}"/>
-            <child link="hr_${camera['name']}"/>
+            <child link="fixed_hr_${number}"/>
             <origin xyz="${hr_x_pos} ${hr_y_pos} ${hr_z_pos - extrusion_width/2.}" rpy="0 0 ${hr_z_rot}"/>
         </joint>
 
         <!-- Vertical extrusion -->
-        <link name="vt_${camera['name']}">
+        <link name="fixed_vt_${number}">
             <visual>
                 <geometry>
                     <box size="${extrusion_width} ${extrusion_width} ${vt_len}" />
@@ -117,17 +117,17 @@
                 </geometry>
             </collision>
         </link>
-        <gazebo reference="vt_${camera['name']}">
+        <gazebo reference="fixed_vt_${number}">
                 <material>Gazebo/BlueGlow</material>
         </gazebo>
-        <joint name="vt_${camera['name']}_fix" type="fixed">
+        <joint name="fixed_vt_${number}_fix" type="fixed">
             <parent link = "${parent}"/>
-            <child link="vt_${camera['name']}"/>
+            <child link="fixed_vt_${number}"/>
             <origin xyz="${camera['pose']['x'] - camera['offset']['x']} ${camera['pose']['y'] - camera['offset']['y']} ${vt_len/2. + hr_z_pos - extrusion_width}" rpy="0 0 0"/>
         </joint>
 
         <!-- Spherical joint holding the camera -->
-        <link name="sj_${camera['name']}">
+        <link name="fixed_sj_${number}">
             <visual>
                 <geometry>
                     <cylinder radius="${sj_diameter/2}" length="${sj_height}"/>
@@ -140,12 +140,12 @@
                 </geometry>
             </collision>
         </link>
-        <gazebo reference="sj_${camera['name']}">
+        <gazebo reference="fixed_sj_${number}">
                 <material>Gazebo/BlueGlow</material>
         </gazebo>
-        <joint name="sj_${camera['name']}_fix" type="fixed">
+        <joint name="fixed_sj_${number}_fix" type="fixed">
             <parent link = "${parent}"/>
-            <child link="sj_${camera['name']}"/>
+            <child link="fixed_sj_${number}"/>
             <origin xyz="${camera['pose']['x']} ${camera['pose']['y']} ${camera['pose']['z'] - camera['size']['z']/2. - sj_height/2.}" rpy="0 0 0"/>
         </joint>
     </xacro:macro>
