@@ -14,7 +14,7 @@
   offset: # From fixture tip to camera optical frame offset
     x: 0.045
     y: 0
-    z: 0.1
+    z: 0.08
 
 - name: "B"
   size: *realsense_size

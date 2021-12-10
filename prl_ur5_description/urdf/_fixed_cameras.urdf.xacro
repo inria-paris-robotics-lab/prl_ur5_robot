@@ -49,8 +49,8 @@
         <!-- Numerical dimensions for the fixtures -->
         <xacro:property name="extrusion_width" value="${0.045 +0.02}"/> <!-- +/-1cm margin on the real size -->
         <xacro:property name="hr_z_pos" value="-0.05625"/> <!-- height at which the horizontal extrusion are fixed to the table -->
-        <xacro:property name="sj_height" value="${0.17 + 0.09}"/> <!-- Height of the spherical joint supporting the camera (plus the supporting part under) -->
-        <xacro:property name="sj_diameter" value="${0.045 +0.02}"/> <!-- Diameter of the spherical joint supporting the camera (plus the supporting part under) -->
+        <xacro:property name="sj_height" value="${0.08 + 0.09}"/> <!-- Height of the spherical joint supporting the camera + the angle piece supporting the spherical joint -->
+        <xacro:property name="sj_diameter" value="${0.09 +0.015}"/> <!-- Diameter of the spherical joint supporting the camera -->
 
         <!-- Simple math to change the side of the table to which the fixture is attached-->
         <xacro:if value="${camera['fixture_orientation'] == '+x'}">
@@ -78,7 +78,7 @@
             <xacro:property name="hr_z_rot" value="-1.570796327"/>
         </xacro:if>
 
-        <xacro:property name="vt_len" value="${camera['pose']['z'] - camera['offset']['z'] - hr_z_pos + extrusion_width}"/>
+        <xacro:property name="vt_len" value="${camera['pose']['z'] - camera['offset']['z'] - camera['size']['z']/2. - hr_z_pos + extrusion_width}"/>
 
         <!-- Horizontal extrusion -->
         <link name="hr_${camera['name']}">
@@ -121,7 +121,7 @@
         <joint name="vt_${camera['name']}_fix" type="fixed">
             <parent link = "${parent}"/>
             <child link="vt_${camera['name']}"/>
-            <origin xyz="${camera['pose']['x'] - camera['offset']['x']} ${camera['pose']['y'] - camera['offset']['y']} ${camera['pose']['z']-camera['offset']['z']-vt_len/2.}" rpy="0 0 0"/>
+            <origin xyz="${camera['pose']['x'] - camera['offset']['x']} ${camera['pose']['y'] - camera['offset']['y']} ${vt_len/2. + hr_z_pos - extrusion_width}" rpy="0 0 0"/>
         </joint>
 
         <!-- Spherical joint holding the camera -->
@@ -143,7 +143,7 @@
         <joint name="sj_${camera['name']}_fix" type="fixed">
             <parent link = "${parent}"/>
             <child link="sj_${camera['name']}"/>
-            <origin xyz="${camera['pose']['x']} ${camera['pose']['y']} ${camera['pose']['z'] - sj_height/2.}" rpy="0 0 0"/>
+            <origin xyz="${camera['pose']['x']} ${camera['pose']['y']} ${camera['pose']['z'] - camera['size']['z']/2. - sj_height/2.}" rpy="0 0 0"/>
         </joint>
     </xacro:macro>
 
