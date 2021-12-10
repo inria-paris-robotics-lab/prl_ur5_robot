@@ -20,25 +20,130 @@
         </xacro:if>
     </xacro:macro>
 
+
     <!-- Build one camera with its stand -->
     <xacro:macro name="fixed_camera" params="parent camera">
+        <!-- Camera -->
         <link name="camera_${camera['name']}">
             <visual>
-            <geometry>
-                <box size="0.2 0.2 0.2" />
-            </geometry>
+                <geometry>
+                    <box size="${camera['size']['x']} ${camera['size']['y']} ${camera['size']['z']}" />
+                </geometry>
+                <material name="purple"><color rgba="0.8 0 0.8 1"/></material>
             </visual>
             <collision>
-            <geometry>
-                <box size="0.2 0.2 0.2" />
-            </geometry>
+                <geometry>
+                    <box size="${camera['size']['x']} ${camera['size']['y']} ${camera['size']['z']}" />
+                </geometry>
             </collision>
         </link>
-
+        <gazebo reference="camera_${camera['name']}">
+                <material>Gazebo/BlueGlow</material>
+        </gazebo>
         <joint name="camera_${camera['name']}_fix" type="fixed">
             <parent link = "${parent}"/>
             <child link="camera_${camera['name']}"/>
-            <origin xyz="${camera['pose']['x']} ${camera['pose']['y']} ${camera['pose']['z']}" rpy="0.0 0.0 0.0"/>
+            <origin xyz="${camera['pose']['x']} ${camera['pose']['y']} ${camera['pose']['z']}" rpy="${camera['pose']['roll']} ${camera['pose']['pitch']} ${camera['pose']['yaw']}"/>
+        </joint>
+
+        <!-- Numerical dimensions for the fixtures -->
+        <xacro:property name="extrusion_width" value="${0.045 +0.02}"/> <!-- +/-1cm margin on the real size -->
+        <xacro:property name="hr_z_pos" value="-0.05625"/> <!-- height at which the horizontal extrusion are fixed to the table -->
+        <xacro:property name="sj_height" value="${0.17 + 0.09}"/> <!-- Height of the spherical joint supporting the camera (plus the supporting part under) -->
+        <xacro:property name="sj_diameter" value="${0.045 +0.02}"/> <!-- Diameter of the spherical joint supporting the camera (plus the supporting part under) -->
+
+        <!-- Simple math to change the side of the table to which the fixture is attached-->
+        <xacro:if value="${camera['fixture_orientation'] == '+x'}">
+            <xacro:property name="hr_len" value="${camera['pose']['x'] - camera['offset']['x']}"/>
+            <xacro:property name="hr_x_pos" value="${hr_len/2.}"/>
+            <xacro:property name="hr_y_pos" value="${camera['pose']['y'] - camera['offset']['y']}"/>
+            <xacro:property name="hr_z_rot" value="0"/>
+        </xacro:if>
+        <xacro:if value="${camera['fixture_orientation'] == '-x'}">
+            <xacro:property name="hr_len" value="${-camera['pose']['x'] + camera['offset']['x']}"/>
+            <xacro:property name="hr_x_pos" value="${-hr_len/2.}"/>
+            <xacro:property name="hr_y_pos" value="${camera['pose']['y'] - camera['offset']['y']}"/>
+            <xacro:property name="hr_z_rot" value="3.1415926"/>
+        </xacro:if>
+        <xacro:if value="${camera['fixture_orientation'] == '+y'}">
+            <xacro:property name="hr_len" value="${camera['pose']['y'] - camera['offset']['y']}"/>
+            <xacro:property name="hr_x_pos" value="${camera['pose']['x'] - camera['offset']['x']}"/>
+            <xacro:property name="hr_y_pos" value="${hr_len/2.}"/>
+            <xacro:property name="hr_z_rot" value="1.570796327"/>
+        </xacro:if>
+        <xacro:if value="${camera['fixture_orientation'] == '-y'}">
+            <xacro:property name="hr_len" value="${-camera['pose']['y'] + camera['offset']['y']}"/>
+            <xacro:property name="hr_x_pos" value="${camera['pose']['x'] - camera['offset']['x']}"/>
+            <xacro:property name="hr_y_pos" value="${-hr_len/2.}"/>
+            <xacro:property name="hr_z_rot" value="-1.570796327"/>
+        </xacro:if>
+
+        <xacro:property name="vt_len" value="${camera['pose']['z'] - camera['offset']['z'] - hr_z_pos + extrusion_width}"/>
+
+        <!-- Horizontal extrusion -->
+        <link name="hr_${camera['name']}">
+            <visual>
+                <geometry>
+                    <box size="${hr_len} ${extrusion_width} ${extrusion_width}" />
+                </geometry>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${hr_len} ${extrusion_width} ${extrusion_width}" />
+                </geometry>
+            </collision>
+        </link>
+        <gazebo reference="hr_${camera['name']}">
+                <material>Gazebo/BlueGlow</material>
+        </gazebo>
+        <joint name="hr_${camera['name']}_fix" type="fixed">
+            <parent link = "${parent}"/>
+            <child link="hr_${camera['name']}"/>
+            <origin xyz="${hr_x_pos} ${hr_y_pos} ${hr_z_pos - extrusion_width/2.}" rpy="0 0 ${hr_z_rot}"/>
+        </joint>
+
+        <!-- Vertical extrusion -->
+        <link name="vt_${camera['name']}">
+            <visual>
+                <geometry>
+                    <box size="${extrusion_width} ${extrusion_width} ${vt_len}" />
+                </geometry>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${extrusion_width} ${extrusion_width} ${vt_len}" />
+                </geometry>
+            </collision>
+        </link>
+        <gazebo reference="vt_${camera['name']}">
+                <material>Gazebo/BlueGlow</material>
+        </gazebo>
+        <joint name="vt_${camera['name']}_fix" type="fixed">
+            <parent link = "${parent}"/>
+            <child link="vt_${camera['name']}"/>
+            <origin xyz="${camera['pose']['x'] - camera['offset']['x']} ${camera['pose']['y'] - camera['offset']['y']} ${camera['pose']['z']-camera['offset']['z']-vt_len/2.}" rpy="0 0 0"/>
+        </joint>
+
+        <!-- Spherical joint holding the camera -->
+        <link name="sj_${camera['name']}">
+            <visual>
+                <geometry>
+                    <cylinder radius="${sj_diameter/2}" length="${sj_height}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${sj_diameter/2}" length="${sj_height}"/>
+                </geometry>
+            </collision>
+        </link>
+        <gazebo reference="sj_${camera['name']}">
+                <material>Gazebo/BlueGlow</material>
+        </gazebo>
+        <joint name="sj_${camera['name']}_fix" type="fixed">
+            <parent link = "${parent}"/>
+            <child link="sj_${camera['name']}"/>
+            <origin xyz="${camera['pose']['x']} ${camera['pose']['y']} ${camera['pose']['z'] - sj_height/2.}" rpy="0 0 0"/>
         </joint>
     </xacro:macro>
 

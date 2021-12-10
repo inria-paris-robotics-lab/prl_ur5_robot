@@ -57,10 +57,11 @@
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
       </joint>
 
-      <!-- Cameras fixtures (if any) -->
-      <xacro:if value="${setup_file.get('fixed_cameras_file') is not None}">
-        <xacro:fixed_cameras parent="prl_ur5_base" fixed_cameras_file="$(find prl_ur5_description)/config/${setup_file['fixed_cameras_file']}"/>
-      </xacro:if>
+    </xacro:if>
+
+    <!-- Cameras fixtures (if any) -->
+    <xacro:if value="${setup_file.get('fixed_cameras_file') is not None}">
+      <xacro:fixed_cameras parent="prl_ur5_base" fixed_cameras_file="$(find prl_ur5_description)/config/${setup_file['fixed_cameras_file']}"/>
     </xacro:if>
 
     <!-- back wall -->

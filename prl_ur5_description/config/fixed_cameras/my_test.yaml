@@ -1,10 +1,62 @@
 - name: "A"
+  size: &realsense_size # Dimensions with 1.25 cm margin all around
+    x: 0.12
+    y: 0.04
+    z: 0.04
   pose:
     x: 0
     y: 0.45
     z: 0.35
+    roll: 0
+    pitch: 0
+    yaw: 0
+  fixture_orientation: "+y"
+  offset: # From fixture tip to camera optical frame offset
+    x: 0.045
+    y: 0
+    z: 0.1
+
 - name: "B"
+  size: *realsense_size
   pose:
     x: -0.45
     y: 0.45
     z: 0.35
+    roll:  0
+    pitch: 0
+    yaw:   0
+  fixture_orientation: "+y"
+  offset: # From fixture tip to camera optical frame offset
+    x: -0.045
+    y: 0
+    z: 0.08
+
+- name: "C"
+  size: *realsense_size
+  pose:
+    x: 1.2
+    y: 0.1
+    z: 0.45
+    roll: 0
+    pitch: 0
+    yaw: 1.5
+  fixture_orientation: "+x"
+  offset: # From fixture tip to camera optical frame offset
+    x: -0.045
+    y: 0
+    z: 0.08
+
+- name: "D"
+  size: *realsense_size
+  pose:
+    x: -1.2
+    y: 0.1
+    z: 0.20
+    roll: 0
+    pitch: 0
+    yaw: -1.5
+  fixture_orientation: "-x"
+  offset: # From fixture tip to camera optical frame offset
+    x: -0.045
+    y: 0
+    z: 0.08
