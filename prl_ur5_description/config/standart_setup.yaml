@@ -67,4 +67,4 @@ right:
     yaw: 0.0
 
 # Fixed cameras
-fixed_cameras_file: "fixed_cameras/my_test.yaml"
+fixed_cameras_file: "fixed_cameras/example.yaml"
