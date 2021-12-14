@@ -55,30 +55,30 @@
         <!-- Simple math to change the side of the table to which the fixture is attached-->
         <xacro:if value="${camera['fixture_orientation'] == '+x'}">
             <xacro:property name="hr_len" value="${camera['pose']['x'] - camera['offset']['x']}"/>
-            <xacro:property name="hr_x_pos" value="${hr_len/2.}"/>
+            <xacro:property name="hr_x_pos" value="${hr_len/2. + extrusion_width/2}"/>
             <xacro:property name="hr_y_pos" value="${camera['pose']['y'] - camera['offset']['y']}"/>
             <xacro:property name="hr_z_rot" value="0"/>
         </xacro:if>
         <xacro:if value="${camera['fixture_orientation'] == '-x'}">
             <xacro:property name="hr_len" value="${-camera['pose']['x'] + camera['offset']['x']}"/>
-            <xacro:property name="hr_x_pos" value="${-hr_len/2.}"/>
+            <xacro:property name="hr_x_pos" value="${-hr_len/2. - extrusion_width/2.}"/>
             <xacro:property name="hr_y_pos" value="${camera['pose']['y'] - camera['offset']['y']}"/>
             <xacro:property name="hr_z_rot" value="3.1415926"/>
         </xacro:if>
         <xacro:if value="${camera['fixture_orientation'] == '+y'}">
             <xacro:property name="hr_len" value="${camera['pose']['y'] - camera['offset']['y']}"/>
             <xacro:property name="hr_x_pos" value="${camera['pose']['x'] - camera['offset']['x']}"/>
-            <xacro:property name="hr_y_pos" value="${hr_len/2.}"/>
+            <xacro:property name="hr_y_pos" value="${hr_len/2. + extrusion_width/2.}"/>
             <xacro:property name="hr_z_rot" value="1.570796327"/>
         </xacro:if>
         <xacro:if value="${camera['fixture_orientation'] == '-y'}">
             <xacro:property name="hr_len" value="${-camera['pose']['y'] + camera['offset']['y']}"/>
             <xacro:property name="hr_x_pos" value="${camera['pose']['x'] - camera['offset']['x']}"/>
-            <xacro:property name="hr_y_pos" value="${-hr_len/2.}"/>
+            <xacro:property name="hr_y_pos" value="${-hr_len/2. - extrusion_width/2.}"/>
             <xacro:property name="hr_z_rot" value="-1.570796327"/>
         </xacro:if>
 
-        <xacro:property name="vt_len" value="${camera['pose']['z'] - camera['offset']['z'] - camera['size']['z']/2. - hr_z_pos + extrusion_width}"/>
+        <xacro:property name="vt_len" value="${camera['pose']['z'] - camera['offset']['z'] - camera['size']['z']/2. - hr_z_pos}"/>
 
         <!-- Horizontal extrusion -->
         <link name="fixed_hr_${number}">
@@ -123,7 +123,7 @@
         <joint name="fixed_vt_${number}_fix" type="fixed">
             <parent link = "${parent}"/>
             <child link="fixed_vt_${number}"/>
-            <origin xyz="${camera['pose']['x'] - camera['offset']['x']} ${camera['pose']['y'] - camera['offset']['y']} ${vt_len/2. + hr_z_pos - extrusion_width}" rpy="0 0 0"/>
+            <origin xyz="${camera['pose']['x'] - camera['offset']['x']} ${camera['pose']['y'] - camera['offset']['y']} ${vt_len/2. + hr_z_pos}" rpy="0 0 0"/>
         </joint>
 
         <!-- Spherical joint holding the camera -->
