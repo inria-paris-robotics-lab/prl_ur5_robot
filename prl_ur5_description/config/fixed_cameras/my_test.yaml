@@ -18,12 +18,12 @@
 - size: *realsense_size
   pose:
     x: -0.45
-    y: 0.45
+    y: -0.9
     z: 0.35
     roll:  0
     pitch: 0
     yaw:   0
-  fixture_orientation: "+y"
+  fixture_orientation: "-y"
   offset: # From fixture tip to camera optical frame offset
     x: -0.045
     y: 0
