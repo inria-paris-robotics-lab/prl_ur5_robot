@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <!-- Build fixed camera with their support from one file -->
+    <xacro:macro name="fixed_cameras" params="parent fixed_cameras_file">
+        <xacro:property name="fixed_cameras" value="${load_yaml(fixed_cameras_file)}"/>
+        <xacro:fixed_cameras_loop parent="${parent}" number="0" cameras="${fixed_cameras}"/>
+    </xacro:macro>
+
+    <!-- Reccursive macro to iterate over all the cameras -->
+    <xacro:macro name="fixed_cameras_loop" params="parent number cameras">
+        <xacro:if value="${cameras}">
+                <!-- pop first item from list -->
+                <xacro:property name="camera" value="${cameras.pop(0)}"/>
+
+                <xacro:fixed_camera parent="${parent}" number="${number}" camera="${camera}"/>
+
+                <!-- recursively call myself -->
+                <xacro:fixed_cameras_loop parent="${parent}" number="${number+1}" cameras="${cameras}"/>
+        </xacro:if>
+    </xacro:macro>
+
+
+    <!-- Build one camera with its stand -->
+    <xacro:macro name="fixed_camera" params="parent number camera">
+        <!-- Numerical dimensions for the fixtures -->
+        <xacro:property name="extrusion_width" value="${0.045 +0.02}"/> <!-- +/-1cm margin on the real size -->
+        <xacro:property name="hr_z_pos_absolute" value="-0.05625"/> <!-- height at which the horizontal extrusion are fixed to the table -->
+        <xacro:property name="sj_height" value="${0.08 + 0.09}"/> <!-- Height of the spherical joint supporting the camera + the angle piece supporting the spherical joint -->
+        <xacro:property name="sj_diameter" value="${0.09 +0.015}"/> <!-- Diameter of the spherical joint supporting the camera -->
+
+        <!-- Simple math to change the side of the table to which the fixture is attached-->
+        <!-- The arbitrary values 0.92 0.92 0.29 0.52 correspond to the dimensions of the table with 1cm margin, so the extrusions are not touching the table-->
+        <xacro:if value="${camera['fixture_orientation'] == '+x'}">
+            <xacro:property name="hr_len" value="${camera['position']['x'] - camera['offset']['x'] + extrusion_width/2. - 0.92}"/>
+            <xacro:property name="hr_x_pos_relative" value="${- hr_len/2. + extrusion_width/2.}"/>
+            <xacro:property name="hr_y_pos_relative" value="0"/>
+            <xacro:property name="hr_z_rot_relative" value="0"/>
+        </xacro:if>
+        <xacro:if value="${camera['fixture_orientation'] == '-x'}">
+            <xacro:property name="hr_len" value="${-camera['position']['x'] + camera['offset']['x'] + extrusion_width/2. - 0.92}"/>
+            <xacro:property name="hr_x_pos_relative" value="${hr_len/2. - extrusion_width/2.}"/>
+            <xacro:property name="hr_y_pos_relative" value="0"/>
+            <xacro:property name="hr_z_rot_relative" value="3.1415926"/>
+        </xacro:if>
+        <xacro:if value="${camera['fixture_orientation'] == '+y'}">
+            <xacro:property name="hr_len" value="${camera['position']['y'] - camera['offset']['y'] + extrusion_width/2.  - 0.29}"/>
+            <xacro:property name="hr_x_pos_relative" value="0"/>
+            <xacro:property name="hr_y_pos_relative" value="${- hr_len/2. + extrusion_width/2.}"/>
+            <xacro:property name="hr_z_rot_relative" value="1.570796327"/>
+        </xacro:if>
+        <xacro:if value="${camera['fixture_orientation'] == '-y'}">
+            <xacro:property name="hr_len" value="${-camera['position']['y'] + camera['offset']['y'] + extrusion_width/2.  - 0.52}"/>
+            <xacro:property name="hr_x_pos_relative" value="0"/>
+            <xacro:property name="hr_y_pos_relative" value="${hr_len/2. - extrusion_width/2.}"/>
+            <xacro:property name="hr_z_rot_relative" value="-1.570796327"/>
+        </xacro:if>
+
+        <xacro:property name="vt_len" value="${camera['position']['z'] - camera['offset']['z'] - hr_z_pos_absolute}"/>
+
+        <!-- Camera -->
+        <link name="fixed_camera_${number}">
+            <visual>
+                <geometry>
+                    <cylinder radius="${camera['size']['width']/2.}" length="${camera['size']['height']}"/>
+                </geometry>
+                <material name="purple"><color rgba="0.01 0.32 0.41 1"/></material>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${camera['size']['width']/2.}" length="${camera['size']['height']}"/>
+                </geometry>
+            </collision>
+        </link>
+        <gazebo reference="fixed_camera_${number}">
+                <material>Gazebo/BlueGlow</material>
+        </gazebo>
+        <joint name="fixed_camera_${number}_fix" type="fixed">
+            <parent link = "${parent}"/>
+            <child link="fixed_camera_${number}"/>
+            <origin xyz="${camera['position']['x']} ${camera['position']['y']} ${camera['position']['z']}" rpy="0 0 0"/>
+        </joint>
+
+        <!-- Spherical joint holding the camera -->
+        <link name="fixed_sj_${number}">
+            <visual>
+                <geometry>
+                    <cylinder radius="${sj_diameter/2}" length="${sj_height}"/>
+                </geometry>
+                <material name="purple"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${sj_diameter/2}" length="${sj_height}"/>
+                </geometry>
+            </collision>
+        </link>
+        <gazebo reference="fixed_sj_${number}">
+                <material>Gazebo/BlueGlow</material>
+        </gazebo>
+        <joint name="fixed_sj_${number}_fix" type="fixed">
+            <parent link = "fixed_camera_${number}"/>
+            <child link="fixed_sj_${number}"/>
+            <origin xyz="0 0 ${- camera['size']['height']/2. - sj_height/2.}" rpy="0 0 0"/>
+        </joint>
+
+        <!-- Vertical extrusion -->
+        <link name="fixed_vt_${number}">
+            <visual>
+                <geometry>
+                    <box size="${extrusion_width} ${extrusion_width} ${vt_len}" />
+                </geometry>
+                <material name="purple"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${extrusion_width} ${extrusion_width} ${vt_len}" />
+                </geometry>
+            </collision>
+        </link>
+        <gazebo reference="fixed_vt_${number}">
+                <material>Gazebo/BlueGlow</material>
+        </gazebo>
+        <joint name="fixed_vt_${number}_fix" type="fixed">
+            <parent link = "fixed_sj_${number}"/>
+            <child link="fixed_vt_${number}"/>
+            <origin xyz="${-camera['offset']['x']} ${-camera['offset']['y']} ${sj_height/2. + camera['size']['height']/2. - camera['offset']['z'] - vt_len/2.}" rpy="0 0 0"/>
+        </joint>
+
+        <!-- Horizontal extrusion -->
+        <link name="fixed_hr_${number}">
+            <visual>
+                <geometry>
+                    <box size="${hr_len} ${extrusion_width} ${extrusion_width}" />
+                </geometry>
+                <material name="purple"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${hr_len} ${extrusion_width} ${extrusion_width}" />
+                </geometry>
+            </collision>
+        </link>
+        <gazebo reference="fixed_hr_${number}">
+                <material>Gazebo/BlueGlow</material>
+        </gazebo>
+        <joint name="fixed_hr_${number}_fix" type="fixed">
+            <parent link = "fixed_vt_${number}"/>
+            <child link="fixed_hr_${number}"/>
+            <origin xyz="${hr_x_pos_relative} ${hr_y_pos_relative} ${- vt_len/2. - extrusion_width/2.}" rpy="0 0 ${hr_z_rot_relative}"/>
+        </joint>
+
+    </xacro:macro>
+
+</robot>
