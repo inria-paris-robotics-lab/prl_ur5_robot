@@ -10,6 +10,7 @@
     <!-- left arm driver -->
     <include file="$(find ur_robot_driver)/launch/ur_control.launch" ns="left_arm">
         <arg name="robot_ip" value="192.168.1.21"/>
+        <arg name="trajectory_port" value="50003"/>
         <arg name="reverse_port" value="50011"/>
         <arg name="script_sender_port" value="50012"/>
         <arg name="tf_prefix" value="left_"/>
@@ -39,6 +40,7 @@
     <!-- right arm driver -->
     <include file="$(find ur_robot_driver)/launch/ur_control.launch" ns="right_arm">
         <arg name="robot_ip" value="192.168.1.20"/>
+        <arg name="trajectory_port" value="50033"/>
         <arg name="reverse_port" value="50001"/>
         <arg name="script_sender_port" value="50002"/>
         <arg name="tf_prefix" value="right_"/>
