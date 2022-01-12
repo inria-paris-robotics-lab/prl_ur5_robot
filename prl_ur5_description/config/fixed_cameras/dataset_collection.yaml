@@ -1,12 +1,37 @@
+# alpha_camera
 - size: &realsense_size # Dimensions with 1.25 cm margin all around
     width: 0.15
     height: 0.06
   position:
-    x: -0.47516099
-    y: 0.58447758
-    z: 0.50245634
+    x: 0.33296714518025
+    y: 0.5041386481002348
+    z: 0.5760135627730134
   fixture_orientation: "+y"
   offset: # From fixture tip to camera optical frame offset
-    x: 0.08
-    y: 0
+    x: -0.05
+    y: -0.085
+    z: 0.09
+
+# bravo_camera
+- size: *realsense_size
+  position:
+    x: -0.4791410777731108
+    y: 0.5651942545159625
+    z: 0.48285303080741293
+  fixture_orientation: "+y"
+  offset: # From fixture tip to camera optical frame offset
+    x: 0.05
+    y: -0.05
+    z: 0.09
+
+# charlie_camera
+- size: *realsense_size
+  position:
+    x: -1.2318604200947795
+    y: 0.043461181426853075
+    z: 0.4443586724266328
+  fixture_orientation: "-x"
+  offset: # From fixture tip to camera optical frame offset
+    x: -0.02
+    y: 0.02
     z: 0.09
