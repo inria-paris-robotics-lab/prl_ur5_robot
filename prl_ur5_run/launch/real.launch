@@ -3,10 +3,18 @@
     <arg name="setup" default="standart_setup" doc="Robot setup"/>
     <arg name="sensors" default="false" doc="Start sensors"/>
     <arg name="moveit" default="true" doc="Start MoveIt"/>
-    <arg name="rviz" default="true" doc="Start RViz"/>
     <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>
-    <arg name="debug" default="false" doc="Debug flag"/>
     <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
+    <arg name="debug" default="false" doc="Debug flag"/>
+    <arg name="rviz" default="true" doc="Start RViz"/>
+
+    <!-- Enable/disable cameras separately  -->
+    <arg name="enable_left_camera"  default="true" doc="Enable (or disable) left_camera"/>
+    <arg name="enable_right_camera" default="true" doc="Enable (or disable) right_camera"/>
+    <arg name="enable_alpha_camera"   default="false" doc="Enable (or disable) alpha_camera"/>
+    <arg name="enable_bravo_camera"   default="false" doc="Enable (or disable) bravo_camera"/>
+    <arg name="enable_charlie_camera" default="false" doc="Enable (or disable) charlie_camera"/>
+    <arg name="enable_delta_camera"   default="false" doc="Enable (or disable) delta_camera"/>
 
     <!-- launch robot control loop -->
     <include file="$(find prl_ur5_control)/launch/control.launch">
@@ -31,6 +39,13 @@
         <include file="$(find prl_ur5_control)/launch/sensors.launch">
             <arg name="setup" value="$(arg setup)"/>
             <arg name="debug" value="$(arg debug)"/>
+
+            <arg name="enable_left_camera" value="$(arg enable_left_camera)"/>
+            <arg name="enable_right_camera" value="$(arg enable_right_camera)"/>
+            <arg name="enable_alpha_camera" value="$(arg enable_alpha_camera)"/>
+            <arg name="enable_bravo_camera" value="$(arg enable_bravo_camera)"/>
+            <arg name="enable_charlie_camera" value="$(arg enable_charlie_camera)"/>
+            <arg name="enable_delta_camera" value="$(arg enable_delta_camera)"/>
         </include>
     </group>
 </launch>

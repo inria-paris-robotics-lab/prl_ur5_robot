@@ -1,8 +1,61 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="setup" default="standart_setup" doc="Robot setup"/>
-    <arg name="debug" default="false" doc="Debug flag"/>
+    <arg name="setup" default="standart_setup" doc="Robot setup"/> <!-- Unused -->
+    <arg name="debug" default="false" doc="Debug flag"/> <!-- Unused -->
 
-    <!-- start sensors specific for the setup -->
-    <include file="$(find prl_ur5_control)/launch/$(arg setup)_sensors.launch.xml"/>
+    <!-- Cameras -->
+    <arg name="enable_left_camera"  default="true" doc="Enable (or disable) left_camera"/>
+    <arg name="enable_right_camera" default="true" doc="Enable (or disable) right_camera"/>
+    <arg name="enable_alpha_camera"   default="false" doc="Enable (or disable) alpha_camera"/>
+    <arg name="enable_bravo_camera"   default="false" doc="Enable (or disable) bravo_camera"/>
+    <arg name="enable_charlie_camera" default="false" doc="Enable (or disable) charlie_camera"/>
+    <arg name="enable_delta_camera"   default="false" doc="Enable (or disable) delta_camera"/>
+
+    <!-- left camera -->
+    <group if="$(arg enable_left_camera)">
+        <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+            <arg name="camera" value="left_camera"/>
+            <arg name="serial_no" value="819112070229"/>
+        </include>
+    </group>
+
+    <!-- right camera -->
+    <group if="$(arg enable_right_camera)">
+        <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+            <arg name="camera" value="right_camera"/>
+            <arg name="serial_no" value="841512070547"/>
+        </include>
+    </group>
+
+    <!-- alpha camera -->
+    <group if="$(arg enable_alpha_camera)">
+        <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+            <arg name="camera" value="alpha_camera"/>
+            <arg name="serial_no" value="145422071857"/>
+        </include>
+    </group>
+
+    <!-- bravo camera -->
+    <group if="$(arg enable_bravo_camera)">
+        <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+            <arg name="camera" value="bravo_camera"/>
+            <arg name="serial_no" value="031522071313"/>
+        </include>
+    </group>
+
+    <!-- charlie camera -->
+    <group if="$(arg enable_charlie_camera)">
+        <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+            <arg name="camera" value="charlie_camera"/>
+            <arg name="serial_no" value="143122078418"/>
+        </include>
+    </group>
+
+    <!-- delta camera -->
+    <group if="$(arg enable_delta_camera)">
+        <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+            <arg name="camera" value="delta_camera"/>
+            <arg name="serial_no" value="143122078486"/>
+        </include>
+    </group>
 </launch>
