@@ -1,0 +1,12 @@
+- size: &realsense_size # Dimensions with 1.25 cm margin all around
+    width: 0.15
+    height: 0.06
+  position:
+    x: -0.47516099
+    y: 0.58447758
+    z: 0.50245634
+  fixture_orientation: "+y"
+  offset: # From fixture tip to camera optical frame offset
+    x: 0.08
+    y: 0
+    z: 0.09
