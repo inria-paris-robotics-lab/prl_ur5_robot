@@ -3,9 +3,9 @@
     width: 0.15
     height: 0.06
   position:
-    x: 0.33296714518025
-    y: 0.5041386481002348
-    z: 0.5760135627730134
+    x: 0.3356643701837427
+    y: 0.5080872582263424
+    z: 0.5666293804450906
   fixture_orientation: "+y"
   offset: # From fixture tip to camera optical frame offset
     x: -0.05
@@ -15,9 +15,9 @@
 # bravo_camera
 - size: *realsense_size
   position:
-    x: -0.4791410777731108
-    y: 0.5651942545159625
-    z: 0.48285303080741293
+    x: -0.47373724480704804
+    y: 0.5686585112320682
+    z: 0.46999420059472913
   fixture_orientation: "+y"
   offset: # From fixture tip to camera optical frame offset
     x: 0.05
@@ -27,9 +27,9 @@
 # charlie_camera
 - size: *realsense_size
   position:
-    x: -1.2318604200947795
-    y: 0.043461181426853075
-    z: 0.4443586724266328
+    x: -1.149242766972055
+    y: 0.0157334663991249
+    z: 0.6050571714458082
   fixture_orientation: "-x"
   offset: # From fixture tip to camera optical frame offset
     x: -0.02
