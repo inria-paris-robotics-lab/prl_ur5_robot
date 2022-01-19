@@ -1,7 +1,7 @@
 # alpha_camera
 - size: &realsense_size # Dimensions with 1.25 cm margin all around
-    width: 0.15
-    height: 0.06
+    width: 0.20
+    height: 0.14
   position:
     x: 0.3356643701837427
     y: 0.5080872582263424

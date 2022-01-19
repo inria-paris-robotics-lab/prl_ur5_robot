@@ -24,10 +24,10 @@
     <!-- Build one camera with its stand -->
     <xacro:macro name="fixed_camera" params="parent number camera">
         <!-- Numerical dimensions for the fixtures -->
-        <xacro:property name="extrusion_width" value="${0.045 +0.04}"/> <!-- +/-2cm margin on the real size -->
+        <xacro:property name="extrusion_width" value="${0.045 +0.06}"/> <!-- +/-3cm margin on the real size -->
         <xacro:property name="hr_z_pos_absolute" value="-0.05625"/> <!-- height at which the horizontal extrusion are fixed to the table -->
         <xacro:property name="sj_height" value="${0.08 + 0.09}"/> <!-- Height of the spherical joint supporting the camera + the angle piece supporting the spherical joint -->
-        <xacro:property name="sj_diameter" value="${0.09 +0.015}"/> <!-- Diameter of the spherical joint supporting the camera -->
+        <xacro:property name="sj_diameter" value="${0.09 +0.03}"/> <!-- Diameter of the spherical joint supporting the camera -->
 
         <!-- Simple math to change the side of the table to which the fixture is attached-->
         <!-- The arbitrary values 0.92 0.92 0.29 0.52 correspond to the dimensions of the table with 1cm margin, so the extrusions are not touching the table-->
