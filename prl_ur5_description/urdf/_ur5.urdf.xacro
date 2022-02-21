@@ -53,6 +53,26 @@
     <!-- gripper -->
     <xacro:unless value="${gripper is None}">
       <xacro:gripper gripper="${gripper}" prefix='${prefix}' parent="${prefix}tool" pose="${gripper_pose}" hardware_interface="${hardware_interface}"/>
+
+      <!-- Right angle connector -->
+      <link name="${prefix}wrist_connector_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://prl_ur5_description/model/RG_connector_simple.stl"/>
+            </geometry>
+            <material name="connector_green"><color rgba="0.2 0.8 0 1"/></material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://prl_ur5_description/model/RG_connector_simple.stl"/>
+            </geometry>
+        </collision>
+      </link>
+      <joint name="${prefix}wrist_connector" type="fixed">
+        <origin xyz="0 -0.0375 -0.02" rpy="1.5708 0 0"/>
+        <parent link="${prefix}wrist_3_link"/>
+        <child link="${prefix}wrist_connector_link"/>
+      </joint>
     </xacro:unless>
 
     <!-- hand-eye camera -->
