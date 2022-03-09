@@ -1,3 +1,3 @@
 [submodule "prl_ur5_description/config"]
 	path = prl_ur5_description/config
-	url = git@github.com:inria-paris-robotic-lab/prl_ur5_robot_config.git
+	url = ../prl_ur5_robot_config.git

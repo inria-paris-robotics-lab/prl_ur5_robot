@@ -309,6 +309,7 @@
     <disable_collisions link1="left_wrist_1_link" link2="left_wrist_2_link" reason="Adjacent"/>
     <disable_collisions link1="left_wrist_1_link" link2="left_wrist_3_link" reason="Never"/>
     <disable_collisions link1="left_wrist_2_link" link2="left_wrist_3_link" reason="Adjacent"/>
+    <disable_collisions link1="left_wrist_3_link" link2="left_wrist_connector_link" reason="Adjacent"/>
     <disable_collisions link1="right_base_link" link2="right_shoulder_link" reason="Adjacent"/>
     <disable_collisions link1="right_base_link" link2="stand_link" reason="Adjacent"/>
     <disable_collisions link1="right_camera_link" link2="right_ee_link" reason="Never"/>
@@ -452,4 +453,5 @@
     <disable_collisions link1="right_wrist_1_link" link2="right_wrist_2_link" reason="Adjacent"/>
     <disable_collisions link1="right_wrist_1_link" link2="right_wrist_3_link" reason="Never"/>
     <disable_collisions link1="right_wrist_2_link" link2="right_wrist_3_link" reason="Adjacent"/>
+    <disable_collisions link1="right_wrist_3_link" link2="right_wrist_connector_link" reason="Adjacent"/>
 </robot>
