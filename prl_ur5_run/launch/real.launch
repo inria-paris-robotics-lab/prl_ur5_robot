@@ -8,6 +8,8 @@
     <arg name="debug" default="false" doc="Debug flag"/>
     <arg name="rviz" default="true" doc="Start RViz"/>
 
+    <arg name="log_path" value="$(env PRL_LOG_PATH)"/>
+
     <!-- Enable/disable cameras separately  -->
     <arg name="enable_left_camera"  default="true" doc="Enable (or disable) left_camera"/>
     <arg name="enable_right_camera" default="true" doc="Enable (or disable) right_camera"/>
@@ -33,6 +35,12 @@
             <arg name="velocity_control" value="$(arg velocity_control)"/>
         </include>
     </group>
+
+    <!-- Record joint states (for debug/safety purposes)  -->
+    <node name="record_joint_states" pkg="rosbag" type="record" args="
+        /joint_states
+        -o $(arg log_path)/joint_states
+    "/>
 
     <!-- launch sensor drivers -->
     <group if="$(arg sensors)">
