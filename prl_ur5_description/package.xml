@@ -19,4 +19,5 @@
   <exec_depend>robotiq_ft_sensor</exec_depend>
   <exec_depend>ur_description</exec_depend>
   <exec_depend>xacro</exec_depend>
+  <exec_depend>prl_ur5_robot_configuration</exec_depend>
 </package>

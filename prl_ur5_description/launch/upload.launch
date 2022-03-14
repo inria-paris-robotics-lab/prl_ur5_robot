@@ -20,6 +20,6 @@
   <!-- Load the setup parameters -->
   <group ns="setup">
     <param name="name" value="$(arg setup)"/>
-    <rosparam command="load" file="$(find prl_ur5_description)/config/$(arg setup).yaml"/>
+    <rosparam command="load" file="$(find prl_ur5_robot_configuration)/config/$(arg setup).yaml"/>
   </group>
 </launch>

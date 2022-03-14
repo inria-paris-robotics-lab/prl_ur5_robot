@@ -17,7 +17,7 @@
         <arg name="controllers" value="joint_state_controller $(arg controller_names) speed_scaling_state_controller force_torque_sensor_controller"/>
         <arg name="stopped_controllers" value="pos_joint_traj_controller joint_group_vel_controller"/>
         <arg name="controller_config_file" value="$(find prl_ur5_control)/config/left_arm_controllers.yaml"/>
-        <arg name="kinematics_config" value="$(find prl_ur5_description)/config/kinematics/ur5_left.yaml"/>
+        <arg name="kinematics_config" value="$(find prl_ur5_robot_configuration)/config/kinematics/ur5_left.yaml"/>
         <arg name="headless_mode" value="$(arg headless_mode)"/>
         <arg name="use_tool_communication" default="false"/>
         <arg name="debug" value="$(arg debug)"/>
@@ -47,7 +47,7 @@
         <arg name="controllers" value="joint_state_controller $(arg controller_names) speed_scaling_state_controller force_torque_sensor_controller"/>
         <arg name="stopped_controllers" value="pos_joint_traj_controller joint_group_vel_controller"/>
         <arg name="controller_config_file" value="$(find prl_ur5_control)/config/right_arm_controllers.yaml"/>
-        <arg name="kinematics_config" value="$(find prl_ur5_description)/config/kinematics/ur5_right.yaml"/>
+        <arg name="kinematics_config" value="$(find prl_ur5_robot_configuration)/config/kinematics/ur5_right.yaml"/>
         <arg name="headless_mode" value="$(arg headless_mode)"/>
         <arg name="use_tool_communication" default="false"/>
         <arg name="debug" value="$(arg debug)"/>

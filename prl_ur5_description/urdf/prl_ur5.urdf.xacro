@@ -61,7 +61,7 @@
 
     <!-- Cameras fixtures (if any) -->
     <xacro:if value="${setup_file.get('fixed_cameras_file') is not None}">
-      <xacro:fixed_cameras parent="prl_ur5_base" fixed_cameras_file="$(find prl_ur5_description)/config/${setup_file['fixed_cameras_file']}"/>
+      <xacro:fixed_cameras parent="prl_ur5_base" fixed_cameras_file="$(find prl_ur5_robot_configuration)/config/${setup_file['fixed_cameras_file']}"/>
     </xacro:if>
 
     <!-- back wall -->
@@ -93,8 +93,8 @@
     <xacro:if value="${left is not None}">
       <xacro:ur5 prefix="left_"
                  parent="stand_link"
-                 kinematics="$(find prl_ur5_description)/config/${left['arm_kinematics']}"
-                 joint_limits="$(find prl_ur5_description)/config/${left['arm_joint_limits']}"
+                 kinematics="$(find prl_ur5_robot_configuration)/config/${left['arm_kinematics']}"
+                 joint_limits="$(find prl_ur5_robot_configuration)/config/${left['arm_joint_limits']}"
                  pose="${left['arm_pose']}"
                  gripper="${left.get('gripper')}"
                  gripper_pose="${left.get('gripper_pose')}"
@@ -109,8 +109,8 @@
     <xacro:if value="${right is not None}">
       <xacro:ur5 prefix="right_"
                  parent="stand_link"
-                 kinematics="$(find prl_ur5_description)/config/${right['arm_kinematics']}"
-                 joint_limits="$(find prl_ur5_description)/config/${right['arm_joint_limits']}"
+                 kinematics="$(find prl_ur5_robot_configuration)/config/${right['arm_kinematics']}"
+                 joint_limits="$(find prl_ur5_robot_configuration)/config/${right['arm_joint_limits']}"
                  pose="${right['arm_pose']}"
                  gripper="${right.get('gripper')}"
                  gripper_pose="${right.get('gripper_pose')}"

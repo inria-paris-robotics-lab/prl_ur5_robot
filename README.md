@@ -74,6 +74,18 @@ wstool init src ./src/prl_ur5_robot/prl_ur5_robot.rosinstall
 rosdep install --from-paths src --ignore-src --skip-keys=python-pymodbus -r -y
 ```
 
+Get the robot configuration:
+* **Option 1** :
+Clone the repo in your catkin workspace:
+```
+git clone b master https://github.com/inria-paris-robotic-lab/prl_ur5_robot_configuration src/prl_ur5_robot_configuration
+```
+* **Option 2** :
+Create a symbolic link to an already existing configuration folder:
+```
+ln -s /path/to/existing/folder src/prl_ur5_robot_configuration
+```
+
 Init and build the workspace:
 
 ```
@@ -87,4 +99,10 @@ Add a link to setup to bashrc:
 ```
 echo "source /catkin_ws/devel/setup.bash" >> ~/.bashrc
 source /catkin_ws/devel/setup.bash
+```
+
+Set environment variables (for log and config files):
+
+```
+echo "export PRL_LOG_PATH=/my/log/path" >> ~/.bashrc
 ```

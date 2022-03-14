@@ -9,7 +9,7 @@
   <!-- ur5 robot -->
   <xacro:include filename="$(find prl_ur5_description)/urdf/prl_ur5.urdf.xacro"/>
 
-  <xacro:prl_ur5 setup_file="${load_yaml('$(find prl_ur5_description)/config/$(arg setup).yaml')}"
+  <xacro:prl_ur5 setup_file="${load_yaml('$(find prl_ur5_robot_configuration)/config/$(arg setup).yaml')}"
                  table="$(arg table)"
                  hardware_interface="$(arg hardware_interface)"/>
 
