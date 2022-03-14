@@ -101,7 +101,7 @@ echo "source /catkin_ws/devel/setup.bash" >> ~/.bashrc
 source /catkin_ws/devel/setup.bash
 ```
 
-Set environment variables (for log and config files):
+Set environment variables (for log files):
 
 ```
 echo "export PRL_LOG_PATH=/my/log/path" >> ~/.bashrc
