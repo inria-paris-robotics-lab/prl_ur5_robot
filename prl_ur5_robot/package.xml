@@ -4,8 +4,8 @@
   <version>0.1.0</version>
   <description>prl_ur5_robot is a metapackage for all PRL UR5 ROS packages</description>
 
-  <maintainer email="igor.kalevatykh@inria.fr">Igor Kalevatykh</maintainer>
-  <author email="igor.kalevatykh@inria.fr">Igor Kalevatykh</author>
+  <maintainer email="etienne.arlaud@inria.fr">Etienne Arlaud</maintainer>
+  <author email="etienne.arlaud@inria.fr">Etienne Arlaud</author>
 
   <license>MIT</license>
 
