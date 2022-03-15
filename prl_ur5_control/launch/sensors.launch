@@ -15,7 +15,7 @@
     <group if="$(arg enable_left_camera)">
         <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
             <arg name="camera" value="left_camera"/>
-            <arg name="serial_no" value="819112070229"/>
+            <arg name="serial_no" value="841512070547"/>
         </include>
     </group>
 
@@ -23,7 +23,7 @@
     <group if="$(arg enable_right_camera)">
         <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
             <arg name="camera" value="right_camera"/>
-            <arg name="serial_no" value="841512070547"/>
+            <arg name="serial_no" value="819112070229"/>
         </include>
     </group>
 
