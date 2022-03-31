@@ -26,3 +26,7 @@
     local-name: Universal_Robots_ROS_scaled_controllers
     uri: https://github.com/UniversalRobots/Universal_Robots_ROS_scaled_controllers.git
     version: main
+- git:
+    local-name: joint_group_ff_controllers
+    uri: https://github.com/inria-paris-robotic-lab/joint_group_ff_controllers.git
+    version: master

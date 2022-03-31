@@ -57,6 +57,16 @@ left_arm:
     stop_trajectory_duration: 0.5
     state_publish_rate:  25
 
+  ff_controller:
+   type: joint_group_ff_controllers/JointGroupVelocityFFController
+   joints: *left_arm_joints
+   left_shoulder_pan_joint:  { kp: 20., kp_safe: 20 }
+   left_shoulder_lift_joint: { kp: 20., kp_safe: 20 }
+   left_elbow_joint:         { kp: 20., kp_safe: 20 }
+   left_wrist_1_joint:       { kp: 20., kp_safe: 20 }
+   left_wrist_2_joint:       { kp: 20., kp_safe: 20 }
+   left_wrist_3_joint:       { kp: 20., kp_safe: 20 }
+
 # Right arm controller
 right_arm:
   scaled_pos_joint_traj_controller:
@@ -109,3 +119,13 @@ right_arm:
       right_wrist_3_joint:       { trajectory: 0.1, goal: 0.1 }
     stop_trajectory_duration: 0.5
     state_publish_rate:  25
+
+  ff_controller:
+   type: joint_group_ff_controllers/JointGroupVelocityFFController
+   joints: *right_arm_joints
+   right_shoulder_pan_joint:  { kp: 20., kp_safe: 20 }
+   right_shoulder_lift_joint: { kp: 20., kp_safe: 20 }
+   right_elbow_joint:         { kp: 20., kp_safe: 20 }
+   right_wrist_1_joint:       { kp: 20., kp_safe: 20 }
+   right_wrist_2_joint:       { kp: 20., kp_safe: 20 }
+   right_wrist_3_joint:       { kp: 20., kp_safe: 20 }

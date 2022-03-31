@@ -7,6 +7,7 @@
     <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>
     <arg name="debug" default="false" doc="Debug flag"/>
     <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
+    <arg name="ff_control" default="false" doc="Trajecotry of Feed-Forward control of the joints"/>
 
     <!-- start robot simulation -->
     <include file="$(find prl_ur5_gazebo)/launch/gazebo.launch">
@@ -14,10 +15,13 @@
         <arg name="gazebo_gui" value="$(arg gazebo_gui)"/>
         <arg name="debug" value="$(arg debug)"/>
         <arg name="velocity_control" value="$(arg velocity_control)"/>
+        <arg name="ff_control" value="$(arg ff_control)"/>
     </include>
 
     <!-- start MoveIt -->
     <group if="$(arg moveit)">
+        <!-- Dumb way to rais an error in launchfiles : Moveit is not setup to work with feedforward controllers -->
+        <node name="Cannot have moveit if have ff_control is True (set moveit:=false) !" if="$(arg ff_control)"/>
         <include file="$(find prl_ur5_moveit_config)/launch/moveit.launch">
             <arg name="setup" value="$(arg setup)"/>
             <arg name="use_rviz" value="$(arg rviz)"/>

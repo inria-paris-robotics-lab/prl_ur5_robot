@@ -6,9 +6,14 @@
   <arg name="physics" default="ode" doc="Physics preset."/>
   <arg name="debug" default="false" doc="Debug flag to pass to Gazebo."/>
   <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
+  <arg name="ff_control" default="false" doc="Trajecotry of Feed-Forward control of the joints"/>
 
-  <arg name="controller_names" value="scaled_pos_joint_traj_controller" unless="$(arg velocity_control)"/>
-  <arg name="controller_names" value="scaled_vel_joint_traj_controller"     if="$(arg velocity_control)"/>
+  <!-- Determine controllers to use -->
+  <arg name="controller_names" value="scaled_vel_joint_traj_controller"            if="$(eval     arg('velocity_control') and not arg('ff_control'))"/>
+  <arg name="controller_names" value="ff_controller"                               if="$(eval     arg('velocity_control') and     arg('ff_control'))"/>
+  <arg name="controller_names" value="scaled_pos_joint_traj_controller"            if="$(eval not arg('velocity_control') and not arg('ff_control'))"/>
+  <!-- Dumb way to raise an error from launchfile (ff_control cannot be used for position_control) -->
+  <node name="No ff available for position control (set velocity_control:=true) !" if="$(eval not arg('velocity_control') and     arg('ff_control'))"/>
 
   <!-- Load ros control configuration from YAML file to parameter server -->
   <rosparam file="$(find prl_ur5_gazebo)/config/$(arg setup)/gazebo_ros_control_pos.yaml" command="load" unless="$(arg velocity_control)"/>

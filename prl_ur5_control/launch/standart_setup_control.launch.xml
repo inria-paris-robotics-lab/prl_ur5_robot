@@ -3,9 +3,14 @@
     <arg name="headless_mode" default="true" doc="Automatically send URScript to robot to execute. With this, the URCap is not needed on the robot."/>
     <arg name="debug" default="false" doc="Debug flag that will get passed on to ur_control.launch"/>
     <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
+    <arg name="ff_control" default="false" doc="Trajecotry of Feed-Forward control of the joints"/>
 
-    <arg name="controller_names" value="scaled_pos_joint_traj_controller" unless="$(arg velocity_control)"/>
-    <arg name="controller_names" value="scaled_vel_joint_traj_controller"     if="$(arg velocity_control)"/>
+    <!-- Determine controllers to use -->
+    <arg name="controller_names" value="scaled_vel_joint_traj_controller"            if="$(eval     arg('velocity_control') and not arg('ff_control'))"/>
+    <arg name="controller_names" value="ff_controller"                               if="$(eval     arg('velocity_control') and     arg('ff_control'))"/>
+    <arg name="controller_names" value="scaled_pos_joint_traj_controller"            if="$(eval not arg('velocity_control') and not arg('ff_control'))"/>
+    <!-- Dumb way to raise an error from launchfile (ff_control cannot be used for position_control) -->
+    <node name="No ff available for position control (set velocity_control:=true) !" if="$(eval not arg('velocity_control') and     arg('ff_control'))"/>
 
     <!-- left arm driver -->
     <include file="$(find ur_robot_driver)/launch/ur_control.launch" ns="left_arm">
