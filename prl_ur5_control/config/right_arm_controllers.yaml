@@ -144,9 +144,9 @@ ff_controller:
    - right_wrist_1_joint
    - right_wrist_2_joint
    - right_wrist_3_joint
-   right_shoulder_pan_joint:  { kp: 10., kp_safe: 10 }
-   right_shoulder_lift_joint: { kp: 10., kp_safe: 10 }
-   right_elbow_joint:         { kp: 10., kp_safe: 10 }
-   right_wrist_1_joint:       { kp: 10., kp_safe: 10 }
-   right_wrist_2_joint:       { kp: 10., kp_safe: 10 }
-   right_wrist_3_joint:       { kp: 10., kp_safe: 10 }
+   right_shoulder_pan_joint:  { kp: .1, kp_safe: 1 }
+   right_shoulder_lift_joint: { kp: .1, kp_safe: 1 }
+   right_elbow_joint:         { kp: .1, kp_safe: 1 }
+   right_wrist_1_joint:       { kp: .1, kp_safe: 1 }
+   right_wrist_2_joint:       { kp: .1, kp_safe: 1 }
+   right_wrist_3_joint:       { kp: .1, kp_safe: 1 }

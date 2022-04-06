@@ -10,7 +10,6 @@
     <include file="$(find prl_ur5_description)/launch/upload.launch">
       <arg name="setup" value="$(arg setup)"/>
       <arg name="velocity_control" value="$(arg velocity_control)"/>
-      <arg name="ff_control" value="$(arg ff_control)"/>
     </include>
 
     <!-- start hardware/controllers specific for the setup -->
