@@ -9,6 +9,7 @@
     <arg name="debug" default="false" doc="Debug flag"/>
     <arg name="rviz" default="true" doc="Start RViz"/>
 
+    <arg name="ext_cam_sn" default="046d_0825_C560E0B0" doc="External usb camera serial number (for safety video recording). Will be ignored if this argument is set to None."/>
     <arg name="log_path" value="$(env PRL_LOG_PATH)"/>
 
     <!-- Enable/disable cameras separately  -->
@@ -45,6 +46,12 @@
         /joint_states
         -o $(arg log_path)/joint_states
     "/>
+
+    <!-- Record ext_usbcam video (for debug/safety purposes)  -->
+    <node name="record_ext_usbcamera" pkg="prl_ur5_run" type="record_usbcam.sh" args="
+        $(arg ext_cam_sn)
+        $(arg log_path)/ext_video
+    " output="screen" respawn="true" if="$(eval arg('ext_cam_sn') != 'None')"/>
 
     <!-- launch sensor drivers -->
     <group if="$(arg sensors)">
