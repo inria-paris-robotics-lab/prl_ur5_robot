@@ -53,6 +53,12 @@ See instructions [here](https://github.com/inria-paris-robotic-lab/prl_container
 Install Noetic ROS version (Desktop-Full Install recomended):
 [instructions here](http://wiki.ros.org/noetic/Installation/Ubuntu).
 
+Make sure that ROS is correctly sourced:
+
+```
+source /opt/ros/noetic/setup.bash
+```
+
 Install [wstool](http://wiki.ros.org/wstool) and [rosdep](http://wiki.ros.org/rosdep):
 
 ```
@@ -78,7 +84,7 @@ Get the robot configuration:
 * **Option 1** :
 Clone the repo in your catkin workspace:
 ```
-git clone b master https://github.com/inria-paris-robotic-lab/prl_ur5_robot_configuration src/prl_ur5_robot_configuration
+git clone -b master https://github.com/inria-paris-robotic-lab/prl_ur5_robot_configuration src/prl_ur5_robot_configuration
 ```
 * **Option 2** :
 Create a symbolic link to an already existing configuration folder:
@@ -97,8 +103,8 @@ catkin build
 Add a link to setup to bashrc:
 
 ```
-echo "source /catkin_ws/devel/setup.bash" >> ~/.bashrc
-source /catkin_ws/devel/setup.bash
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+source ~/catkin_ws/devel/setup.bash
 ```
 
 Set environment variables (for log files):
