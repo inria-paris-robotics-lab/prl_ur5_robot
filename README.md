@@ -77,6 +77,7 @@ Clone the repo and install dependencies:
 ```
 git clone -b master https://github.com/inria-paris-robotic-lab/prl_ur5_robot src/prl_ur5_robot
 wstool init src ./src/prl_ur5_robot/prl_ur5_robot.rosinstall
+rosdep update
 rosdep install --from-paths src --ignore-src --skip-keys=python-pymodbus -r -y
 ```
 
