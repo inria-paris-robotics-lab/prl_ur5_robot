@@ -7,7 +7,7 @@
     local-name: robotiq
     version: kinetic-devel
 - git:
-    uri: https://github.com/ikalevatykh/onrobot_ros
+    uri: https://github.com/inria-paris-robotic-lab/onrobot_ros
     local-name: onrobot_ros
     version: master
 - git:

@@ -37,10 +37,8 @@
     </node>
 
     <!-- left gripper -->
-    <include file="$(find onrobot_control)/launch/onrobot_gripper.launch" ns="left_gripper">
-        <arg name="ur_hardware_interface" value="/left_arm/ur_hardware_interface"/>
-        <arg name="joint" default="left_gripper_joint"/>
-    </include>
+    <node pkg="prl_ur5_control" type="gripper_controller_launcher.sh" name="gripper_controller_launcher" ns="left_gripper"
+          args="left ur_hardware_interface:='/left_arm/ur_hardware_interface' joint:='left_gripper_joint'"/>
 
     <!-- right arm driver -->
     <include file="$(find ur_robot_driver)/launch/ur_control.launch" ns="right_arm">
@@ -67,10 +65,8 @@
     </node>
 
     <!-- right gripper -->
-    <include file="$(find onrobot_control)/launch/onrobot_gripper.launch" ns="right_gripper">
-        <arg name="ur_hardware_interface" value="/right_arm/ur_hardware_interface"/>
-        <arg name="joint" default="right_gripper_joint"/>
-    </include>
+    <node pkg="prl_ur5_control" type="gripper_controller_launcher.sh" name="gripper_controller_launcher" ns="right_gripper"
+          args="right ur_hardware_interface:='/right_arm/ur_hardware_interface' joint:='right_gripper_joint'"/>
 
     <!-- combine joint states from arms and grippers -->
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
