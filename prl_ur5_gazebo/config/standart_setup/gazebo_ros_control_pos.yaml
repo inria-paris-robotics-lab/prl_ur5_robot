@@ -1,16 +1,16 @@
 gazebo_ros_control:
   pid_gains:
     # left arm
-    left_shoulder_pan_joint: { p: 4000, d: 200, i: 1, i_clamp: 1 }
-    left_shoulder_lift_joint: { p: 10000, d: 200, i: 1, i_clamp: 1 }
-    left_elbow_joint: { p: 2000, d: 20, i: 1, i_clamp: 1 }
-    left_wrist_1_joint: { p: 500, d: 1, i: 1, i_clamp: 1 }
-    left_wrist_2_joint: { p: 500, d: 1, i: 1, i_clamp: 1 }
-    left_wrist_3_joint: { p: 10, d: 0.1, i: 0, i_clamp: 1 }
+    left_shoulder_pan_joint:  {p: 550.0, i: 2.0, d: 10.0}
+    left_shoulder_lift_joint: {p: 550.0, i: 2.0, d: 10.0}
+    left_elbow_joint:         {p: 650.0, i: 2.0, d: 10.0}
+    left_wrist_1_joint:       {p: 350.0, i: 0.5, d: 10.0}
+    left_wrist_2_joint:       {p: 350.0, i: 0.1, d: 10.0}
+    left_wrist_3_joint:       {p: 250.0, i: 0.1, d: 10.0}
     # right arm
-    right_shoulder_pan_joint: { p: 4000, d: 200, i: 1, i_clamp: 1 }
-    right_shoulder_lift_joint: { p: 10000, d: 200, i: 1, i_clamp: 1 }
-    right_elbow_joint: { p: 2000, d: 20, i: 1, i_clamp: 1 }
-    right_wrist_1_joint: { p: 500, d: 1, i: 1, i_clamp: 1 }
-    right_wrist_2_joint: { p: 500, d: 1, i: 1, i_clamp: 1 }
-    right_wrist_3_joint: { p: 10, d: 0.1, i: 0, i_clamp: 1 }
+    right_shoulder_pan_joint:  {p: 550.0, i: 2.0, d: 10.0}
+    right_shoulder_lift_joint: {p: 550.0, i: 2.0, d: 10.0}
+    right_elbow_joint:         {p: 650.0, i: 2.0, d: 10.0}
+    right_wrist_1_joint:       {p: 350.0, i: 0.5, d: 10.0}
+    right_wrist_2_joint:       {p: 350.0, i: 0.1, d: 10.0}
+    right_wrist_3_joint:       {p: 250.0, i: 0.1, d: 10.0}
