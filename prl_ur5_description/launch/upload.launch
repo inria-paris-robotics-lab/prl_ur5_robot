@@ -4,6 +4,7 @@
   <arg name="table" default="false" doc="Add or not the table model to the URDF."/>
   <arg name="backwall" default="true" doc="Add or not the backwall model to the URDF."/>
   <arg name="ceiling" default="true" doc="Add or not the ceiling model to the URDF."/>
+  <arg name="sensors" default="false" doc="Turn on cameras and sensors in gazebo"/>
 
   <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
   <arg name="hardware_interface" value="hardware_interface/PositionJointInterface" doc="The transmission hardware interface." unless="$(arg velocity_control)"/>
@@ -16,6 +17,7 @@
       table:=$(arg table)
       backwall:=$(arg backwall)
       ceiling:=$(arg ceiling)
+      sensors:=$(arg sensors)
       hardware_interface:=$(arg hardware_interface)
     "/>
 

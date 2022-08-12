@@ -8,7 +8,7 @@
   <!-- Fixed cameras -->
   <xacro:include filename="$(find prl_ur5_description)/urdf/_fixed_cameras.urdf.xacro"/>
 
-  <xacro:macro name="prl_ur5" params="setup_file hardware_interface table:=true backwall:=true ceiling:=true">
+  <xacro:macro name="prl_ur5" params="setup_file hardware_interface sensors:=false table:=true backwall:=true ceiling:=true">
 
     <!-- base link -->
     <link name="prl_ur5_base"/>
@@ -20,8 +20,8 @@
           <mesh filename="package://prl_ur5_description/model/vention_tower.dae"/>
         </geometry>
         <material name="Cyan">
-  14        <color rgba="0 1.0 1.0 1.0"/>
-  15      </material>
+          <color rgba="0 1.0 1.0 1.0"/>
+        </material>
       </visual>
       <collision>
         <geometry>
@@ -121,6 +121,7 @@
                  pose="${left['arm_pose']}"
                  gripper="${left.get('gripper')}"
                  gripper_pose="${left.get('gripper_pose')}"
+                 sensors="${sensors}"
                  camera="${left.get('camera')}"
                  camera_pose="${left.get('camera_pose')}"
                  hardware_interface="${hardware_interface}"/>
@@ -137,6 +138,7 @@
                  pose="${right['arm_pose']}"
                  gripper="${right.get('gripper')}"
                  gripper_pose="${right.get('gripper_pose')}"
+                 sensors="${sensors}"
                  camera="${right.get('camera')}"
                  camera_pose="${right.get('camera_pose')}"
                  hardware_interface="${hardware_interface}"/>

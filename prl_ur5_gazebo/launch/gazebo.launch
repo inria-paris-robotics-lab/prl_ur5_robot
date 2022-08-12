@@ -5,6 +5,7 @@
   <arg name="paused" default="true" doc="Start gazebo paused."/>
   <arg name="physics" default="ode" doc="Physics preset."/>
   <arg name="debug" default="false" doc="Debug flag to pass to Gazebo."/>
+  <arg name="sensors" default="false" doc="Start sensors"/>
   <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
   <arg name="ff_control" default="false" doc="Trajecotry of Feed-Forward control of the joints"/>
 
@@ -40,6 +41,7 @@
     <arg name="setup" value="$(arg setup)"/>
     <arg name="table" value="false"/>
     <arg name="velocity_control" value="$(arg velocity_control)"/>
+    <arg name="sensors" value="$(arg sensors)"/>
   </include>
 
   <!-- Send robot with table urdf to param server (only used in Gazebo) -->
@@ -47,6 +49,7 @@
     <arg name="setup" value="$(arg setup)"/>
     <arg name="table" value="true"/>
     <arg name="velocity_control" value="$(arg velocity_control)"/>
+    <arg name="sensors" value="$(arg sensors)"/>
   </include>
 
   <!-- Push robot_description to factory and spawn robot in gazebo at the origin, change x,y,z arguments to spawn in a different position -->

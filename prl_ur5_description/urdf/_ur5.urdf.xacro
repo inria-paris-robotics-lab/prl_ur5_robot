@@ -17,6 +17,7 @@
       kinematics
       joint_limits
       hardware_interface
+      sensors
       gripper:=None
       gripper_pose:=None
       camera:=None
@@ -77,7 +78,7 @@
 
     <!-- hand-eye camera -->
     <xacro:unless value="${camera is None}">
-      <xacro:camera_sensor camera="${camera}" prefix='${prefix}' parent="${prefix}tool" pose="${camera_pose}"/>
+      <xacro:camera_sensor camera="${camera}" prefix='${prefix}' parent="${prefix}tool" pose="${camera_pose}" turn_on="${sensors}"/>
     </xacro:unless>
 
   </xacro:macro>

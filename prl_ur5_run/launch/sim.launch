@@ -6,6 +6,7 @@
     <arg name="rviz" default="true" doc="Start RViz"/>
     <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>
     <arg name="debug" default="false" doc="Debug flag"/>
+    <arg name="sensors" default="false" doc="Start sensors"/>
     <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
     <arg name="ff_control" default="false" doc="Trajecotry of Feed-Forward control of the joints"/>
 
@@ -16,6 +17,7 @@
         <arg name="debug" value="$(arg debug)"/>
         <arg name="velocity_control" value="$(arg velocity_control)"/>
         <arg name="ff_control" value="$(arg ff_control)"/>
+        <arg name="sensors" value="$(arg sensors)"/>
     </include>
 
     <!-- start MoveIt -->

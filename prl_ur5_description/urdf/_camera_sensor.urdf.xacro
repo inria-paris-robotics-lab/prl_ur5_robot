@@ -5,7 +5,7 @@
   <xacro:include filename="$(find realsense2_description)/urdf/_d435i.urdf.xacro"/>
   <xacro:include filename="$(find prl_ur5_description)/urdf/_d435.gazebo.xacro"/>
 
-  <xacro:macro name="camera_sensor" params="prefix parent camera pose">
+  <xacro:macro name="camera_sensor" params="prefix parent camera pose turn_on:=false">
 
     <!-- check camera type -->
     <xacro:unless value="${camera in [None, 'realsense-d435i']}">
@@ -17,7 +17,7 @@
       <xacro:sensor_d435i name="${prefix}camera" parent="${prefix}tool">
         <origin xyz="${pose['x']} ${pose['y']} ${pose['z']}" rpy="${pose['roll']} ${pose['pitch']} ${pose['yaw']}"/>
       </xacro:sensor_d435i>
-      <xacro:gazebo_d435 name="${prefix}camera"/>
+      <xacro:gazebo_d435 name="${prefix}camera" turn_on="${turn_on}"/>
     </xacro:if>
 
   </xacro:macro>
