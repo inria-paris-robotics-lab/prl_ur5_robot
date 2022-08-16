@@ -12,7 +12,7 @@ roslaunch prl_ur5_run real.launch [setup:=standart_setup] [sensors:=false] [move
 To run simulation in Gazebo use:
 
 ```
-roslaunch prl_ur5_run sim.launch [setup:=standart_setup] [gazebo_gui:=true] [moveit:=true] [rviz:=true] [pipeline:=ompl] [debug:=false]
+roslaunch prl_ur5_run sim.launch [setup:=standart_setup] [sensors:=false] [gazebo_gui:=true] [moveit:=true] [rviz:=true] [pipeline:=ompl] [debug:=false]
 ```
 
 To run MoveIt's "demo" mode use:

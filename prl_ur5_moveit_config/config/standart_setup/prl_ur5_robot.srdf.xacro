@@ -68,7 +68,7 @@
     <xacro:call macro="${right_gripper_name}_col_with" prefix='right_gripper' link='right_wrist_3_link'/>
     <xacro:call macro="${right_gripper_name}_col_with" prefix='right_gripper' link='right_ft300_mounting_plate'/>
     <xacro:call macro="${right_gripper_name}_col_with" prefix='right_gripper' link='right_ft300_sensor'/>
-    <xacro:if value="${'caemra' in setup['right']}">
+    <xacro:if value="${'camera' in setup['right']}">
         <xacro:call macro="${right_gripper_name}_col_with" prefix='right_gripper' link='right_camera_link'/>
     </xacro:if>
 
@@ -204,4 +204,33 @@
     <disable_collisions link1="right_wrist_1_link" link2="right_wrist_3_link" reason="Never"/>
     <disable_collisions link1="right_wrist_2_link" link2="right_wrist_3_link" reason="Adjacent"/>
     <disable_collisions link1="right_wrist_3_link" link2="right_wrist_connector_link" reason="Adjacent"/>
+
+    <!-- External cameras -->
+    <xacro:macro name="external_camera_col" params="number camera">
+        <disable_collisions link1="fixed_camera_${number}_bb" link2="fixed_camera_${number}_sj" reason="Adjacent"/>
+        <disable_collisions link1="fixed_camera_${number}_vt" link2="fixed_camera_${number}_sj" reason="Adjacent"/>
+        <disable_collisions link1="fixed_camera_${number}_vt" link2="fixed_hr_${number}" reason="Adjacent"/>
+        <disable_collisions link1="fixed_camera_${number}_vt" link2="fixed_camera_${number}_bb" reason="Adjacent"/>
+
+        <disable_collisions link1="${camera['name_prefix']}_camera_link" link2="fixed_camera_${number}_vt" reason="Adjacent"/>
+        <disable_collisions link1="${camera['name_prefix']}_camera_link" link2="fixed_camera_${number}_sj" reason="Adjacent"/>
+        <disable_collisions link1="${camera['name_prefix']}_camera_link" link2="fixed_camera_${number}_bb" reason="Adjacent"/>
+    </xacro:macro>
+
+    <!-- Iterate voer all cameras using reccursive function-->
+    <xacro:property name="fixed_cameras_file" value="$(find prl_ur5_robot_configuration)/config/${setup['fixed_cameras_file']}"/>
+    <xacro:property name="fixed_cameras" value="${xacro.load_yaml(fixed_cameras_file)}"/>
+
+    <xacro:macro name="external_cameras_loop" params="cameras number">
+        <xacro:if value="${cameras}">
+                <!-- pop first item from list -->
+                <xacro:property name="camera" value="${cameras.pop(0)}"/>
+                <xacro:external_camera_col number="${number}" camera="${camera}"/>
+
+                <!-- recursive call -->
+                <xacro:external_cameras_loop cameras="${cameras}" number="${number+1}"/>
+        </xacro:if>
+    </xacro:macro>
+
+    <xacro:external_cameras_loop cameras="${fixed_cameras}" number="0"/>
 </robot>

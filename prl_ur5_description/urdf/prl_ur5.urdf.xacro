@@ -61,7 +61,7 @@
 
     <!-- Cameras fixtures (if any) -->
     <xacro:if value="${setup_file.get('fixed_cameras_file') is not None}">
-      <xacro:fixed_cameras parent="prl_ur5_base" fixed_cameras_file="$(find prl_ur5_robot_configuration)/config/${setup_file['fixed_cameras_file']}"/>
+      <xacro:fixed_cameras parent="prl_ur5_base" fixed_cameras_file="$(find prl_ur5_robot_configuration)/config/${setup_file['fixed_cameras_file']}" turn_on="${sensors}"/>
     </xacro:if>
 
     <!-- back wall -->

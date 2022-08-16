@@ -14,7 +14,7 @@
 
     <!-- if realsense d435i -->
     <xacro:if value="${camera == 'realsense-d435i'}">
-      <xacro:sensor_d435i name="${prefix}camera" parent="${prefix}tool">
+      <xacro:sensor_d435i name="${prefix}camera" parent="${parent}" use_nominal_extrinsics="true">
         <origin xyz="${pose['x']} ${pose['y']} ${pose['z']}" rpy="${pose['roll']} ${pose['pitch']} ${pose['yaw']}"/>
       </xacro:sensor_d435i>
       <xacro:gazebo_d435 name="${prefix}camera" turn_on="${turn_on}"/>
