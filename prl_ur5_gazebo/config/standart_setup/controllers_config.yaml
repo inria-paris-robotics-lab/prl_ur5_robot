@@ -42,12 +42,12 @@ left_arm:
       left_wrist_3_joint: {trajectory: 0.1, goal: 0.1}
     gains:
       #!!These values have been optimized very poorly
-      left_shoulder_pan_joint:  {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
-      left_shoulder_lift_joint: {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
-      left_elbow_joint:         {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
-      left_wrist_1_joint:       {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
-      left_wrist_2_joint:       {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
-      left_wrist_3_joint:       {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
+      left_shoulder_pan_joint:  {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
+      left_shoulder_lift_joint: {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
+      left_elbow_joint:         {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
+      left_wrist_1_joint:       {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
+      left_wrist_2_joint:       {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
+      left_wrist_3_joint:       {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
    # Use a feedforward term to reduce the size of PID gains
     velocity_ff:
       left_shoulder_pan_joint: 1.0
@@ -109,12 +109,12 @@ right_arm:
       right_wrist_3_joint: {trajectory: 0.1, goal: 0.1}
     gains:
       #!!These values have been optimized very poorly
-      right_shoulder_pan_joint:  {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
-      right_shoulder_lift_joint: {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
-      right_elbow_joint:         {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
-      right_wrist_1_joint:       {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
-      right_wrist_2_joint:       {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
-      right_wrist_3_joint:       {p: 0.1,  i: 0.05, d: 0.00, i_clamp: 1}
+      right_shoulder_pan_joint:  {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
+      right_shoulder_lift_joint: {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
+      right_elbow_joint:         {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
+      right_wrist_1_joint:       {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
+      right_wrist_2_joint:       {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
+      right_wrist_3_joint:       {p: 10.0,  i: 0.01, d: 0.0, i_clamp: 1}
    # Use a feedforward term to reduce the size of PID gains
     velocity_ff:
       right_shoulder_pan_joint: 1.0
