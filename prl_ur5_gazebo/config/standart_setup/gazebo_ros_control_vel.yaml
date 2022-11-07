@@ -1,16 +1,2 @@
 gazebo_ros_control:
-  pid_gains:
-    # left arm
-    left_shoulder_pan_joint:  { p: 100, i: 1}
-    left_shoulder_lift_joint: { p: 100, i: 1}
-    left_elbow_joint:         { p: 100, i: 1}
-    left_wrist_1_joint:       { p: 100, i: 1}
-    left_wrist_2_joint:       { p: 100, i: 1}
-    left_wrist_3_joint:       { p: 100, i: 1}
-    # right arm
-    right_shoulder_pan_joint:  { p: 100, i: 1}
-    right_shoulder_lift_joint: { p: 100, i: 1}
-    right_elbow_joint:         { p: 100, i: 1}
-    right_wrist_1_joint:       { p: 100, i: 1}
-    right_wrist_2_joint:       { p: 100, i: 1}
-    right_wrist_3_joint:       { p: 100, i: 1}
+  pid_gains: ""
