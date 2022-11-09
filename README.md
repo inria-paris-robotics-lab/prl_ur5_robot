@@ -62,7 +62,7 @@ source /opt/ros/noetic/setup.bash
 Install [wstool](http://wiki.ros.org/wstool) and [rosdep](http://wiki.ros.org/rosdep):
 
 ```
-sudo apt-get install python3-wstool python3-rosdep
+sudo apt-get install python3-catkin-tools python3-wstool python3-rosdep
 ```
 
 Make a folder for catkin workspace:
