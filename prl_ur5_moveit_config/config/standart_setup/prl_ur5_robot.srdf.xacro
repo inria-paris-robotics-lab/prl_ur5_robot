@@ -25,6 +25,11 @@
         <xacro:property name="left_gripper_name" value="onrobot_rg6"/>
     </xacro:if>
 
+    <!-- if onrobot-rg6-v2 -->
+    <xacro:if value="${setup['left']['gripper'] == 'onrobot-rg6-v2'}">
+        <xacro:property name="left_gripper_name" value="onrobot_rg6_v2"/>
+    </xacro:if>
+
     <!-- if custom gripper -->
     <xacro:if value="${setup['left']['gripper'].startswith('custom:')}">
         <xacro:include filename="$(find prl_ur5_robot_configuration)/urdf/${setup['left']['gripper'][7:]}.srdf.xacro"/>
@@ -52,6 +57,11 @@
     <!-- if onrobot-rg6 -->
     <xacro:if value="${setup['right']['gripper'] == 'onrobot-rg6'}">
         <xacro:property name="right_gripper_name" value="onrobot_rg6"/>
+    </xacro:if>
+
+    <!-- if onrobot-rg6 -->
+    <xacro:if value="${setup['right']['gripper'] == 'onrobot-rg6-v2'}">
+        <xacro:property name="right_gripper_name" value="onrobot_rg6_v2"/>
     </xacro:if>
 
     <!-- if custom gripper -->

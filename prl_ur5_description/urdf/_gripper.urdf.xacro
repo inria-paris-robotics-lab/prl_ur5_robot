@@ -7,7 +7,7 @@
   <xacro:macro name="gripper" params="gripper prefix parent pose hardware_interface">
 
     <!-- check gripper type -->
-    <xacro:unless value="${gripper in [None, 'onrobot-rg2', 'onrobot-rg6'] or gripper.startswith('custom:')}">
+    <xacro:unless value="${gripper in [None, 'onrobot-rg2', 'onrobot-rg6', 'onrobot-rg6-v2'] or gripper.startswith('custom:')}">
       <xacro:unknown_gripper_type/>
     </xacro:unless>
 
@@ -21,6 +21,13 @@
     <!-- if onrobot-rg6 -->
     <xacro:if value="${gripper == 'onrobot-rg6'}">
       <xacro:onrobot_rg prefix='${prefix}gripper' parent="${parent}" model="rg6_v1" safety_shield="true" transmission_hw_interface="${hardware_interface}">
+        <origin xyz="${pose['x']} ${pose['y']} ${pose['z']}" rpy="${pose['roll']} ${pose['pitch']} ${pose['yaw']}"/>
+      </xacro:onrobot_rg>
+    </xacro:if>
+
+    <!-- if onrobot-rg6-v2 -->
+    <xacro:if value="${gripper == 'onrobot-rg6-v2'}">
+      <xacro:onrobot_rg prefix='${prefix}gripper' parent="${parent}" model="rg6_v2" safety_shield="true" transmission_hw_interface="${hardware_interface}">
         <origin xyz="${pose['x']} ${pose['y']} ${pose['z']}" rpy="${pose['roll']} ${pose['pitch']} ${pose['yaw']}"/>
       </xacro:onrobot_rg>
     </xacro:if>
