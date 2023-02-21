@@ -63,13 +63,13 @@
       -J left_shoulder_pan_joint -1.57
       -J left_wrist_1_joint 0
       -J left_wrist_2_joint 1.57
-      -J left_wrist_3_joint -0.785
+      -J left_wrist_3_joint 2.36
       -J right_elbow_joint 1.57
       -J right_shoulder_lift_joint -1.57
       -J right_shoulder_pan_joint 1.57
       -J right_wrist_1_joint 3.14
       -J right_wrist_2_joint -1.57
-      -J right_wrist_3_joint 0.785
+      -J right_wrist_3_joint -2.36
 
     "/>
 
