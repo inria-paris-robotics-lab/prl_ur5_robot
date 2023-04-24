@@ -14,19 +14,19 @@ ROS stack for the bimanual UR5 robot
 
 To start real robot control use:
 
-```
+```bash
 roslaunch prl_ur5_run real.launch [setup:=standart_setup] [sensors:=false] [moveit:=true] [rviz:=true] [pipeline:=ompl] [debug:=false]
 ```
 
 To run simulation in Gazebo use:
 
-```
+```bash
 roslaunch prl_ur5_run sim.launch [setup:=standart_setup] [sensors:=false] [gazebo_gui:=true] [moveit:=true] [rviz:=true] [pipeline:=ompl] [debug:=false]
 ```
 
 To run MoveIt's "demo" mode use:
 
-```
+```bash
 roslaunch prl_ur5_run demo.launch [setup:=standart_setup] [rviz:=true] [pipeline:=ompl] [debug:=false]
 ```
 
@@ -49,67 +49,127 @@ See instructions [here](prl_ur5_demos/README.md).
 See instructions [here](https://github.com/inria-paris-robotic-lab/prl_containers).
 
 ## Install from sources
+The following section contains instructions that can be specific to apt or conda.
 
-Install Noetic ROS version (Desktop-Full Install recomended):
+1. Install Noetic ROS version (Desktop-Full Install recomended):
+<details open><summary>Conda</summary>
+
+```bash
+conda create -n my_ros -c conda-forge -c robostack ros-noetic-desktop
+```
+
+</details>
+<details><summary>Apt</summary>
+
 [instructions here](http://wiki.ros.org/noetic/Installation/Ubuntu).
 
-Make sure that ROS is correctly sourced:
+</details>
 
+2. Make sure that ROS is correctly sourced:
+<details open><summary>Conda</summary>
+
+```bash
+conda activate my_ros
 ```
+
+</details>
+<details><summary>Apt</summary>
+
+```bash
 source /opt/ros/noetic/setup.bash
 ```
 
-Install [wstool](http://wiki.ros.org/wstool) and [rosdep](http://wiki.ros.org/rosdep):
+</details>
 
+3. Install [wstool](http://wiki.ros.org/wstool) and [rosdep](http://wiki.ros.org/rosdep):
+
+<details open><summary>Conda</summary>
+
+```bash
+conda install -c conda-forge catkin_tools wstools
 ```
+
+</details>
+<details><summary>Apt</summary>
+
+```bash
 sudo apt-get install python3-catkin-tools python3-wstool python3-rosdep
 ```
 
-Make a folder for catkin workspace:
+</details>
 
-```
+
+4. Make a folder for catkin workspace:
+
+```bash
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws
 ```
 
-Clone the repo and install dependencies:
+5. Clone the repo, (automatically) clone the depencies that needs to be installed from source and install the other dependencies:
 
-```
+```bash
 git clone -b master https://github.com/inria-paris-robotic-lab/prl_ur5_robot src/prl_ur5_robot
 wstool init src ./src/prl_ur5_robot/prl_ur5_robot.rosinstall
 rosdep update
 rosdep install --from-paths src --ignore-src --skip-keys=python-pymodbus -r -y
 ```
 
-Get the robot configuration:
+6. Get the robot configuration:
 * **Option 1** :
 Clone the repo in your catkin workspace:
-```
+```bash
 git clone -b master https://github.com/inria-paris-robotic-lab/prl_ur5_robot_configuration src/prl_ur5_robot_configuration
 ```
 * **Option 2** :
 Create a symbolic link to an already existing configuration folder:
-```
+```bash
 ln -s /path/to/existing/folder src/prl_ur5_robot_configuration
 ```
 
-Init and build the workspace:
+7. Init the workspace:
 
+<details open><summary>Conda</summary>
+
+```bash
+catkin config --init --extend $CONDA_PREFIX
 ```
+
+</details>
+<details><summary>Apt</summary>
+
+```bash
 catkin config --init --extend /opt/ros/${ROS_DISTRO}/
+```
+
+</details>
+
+```bash
 catkin config --blacklist robotiq_3f_gripper_articulated_gazebo_plugins
+```
+
+8. Build everything
+```bash
 catkin build
 ```
 
-Add a link to setup to bashrc:
+9.  [optionnal - only for APT] Add a link to setup in your bashrc:
 
-```
+<details><summary>Apt</summary>
+
+```bash
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+```
+
+</details>
+
+10. Setup local ros environment variables
+```bash
 source ~/catkin_ws/devel/setup.bash
 ```
 
-Set environment variables (for log files):
+11. Set custom environment variables (for log files):
 
-```
+```bash
 echo "export PRL_LOG_PATH=/my/log/path" >> ~/.bashrc
 ```
