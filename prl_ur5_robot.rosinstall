@@ -1,5 +1,5 @@
 - git:
-    uri: https://github.com/fmauch/universal_robot.git
+    uri: https://github.com/inria-paris-robotic-lab/universal_robot.git
     local-name: universal_robot
     version: calibration_devel
 - git:
