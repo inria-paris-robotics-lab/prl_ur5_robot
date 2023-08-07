@@ -3,7 +3,7 @@
     local-name: universal_robot
     version: calibration_devel
 - git:
-    uri: https://github.com/ros-industrial/robotiq
+    uri: https://github.com/inria-paris-robotic-lab/robotiq
     local-name: robotiq
     version: kinetic-devel
 - git:
