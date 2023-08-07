@@ -25,7 +25,17 @@
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://prl_ur5_description/model/vention_tower.stl"/>
+          <mesh filename="package://prl_ur5_description/model/vention_tower_bottom_convex.stl"/>
+        </geometry>
+      </collision>
+      <collision>
+        <geometry>
+          <mesh filename="package://prl_ur5_description/model/vention_tower_middle_convex.stl"/>
+        </geometry>
+      </collision>
+      <collision>
+        <geometry>
+          <mesh filename="package://prl_ur5_description/model/vention_tower_top_convex.stl"/>
         </geometry>
       </collision>
     </link>

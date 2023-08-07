@@ -65,7 +65,7 @@
         </visual>
         <collision>
             <geometry>
-                <mesh filename="package://prl_ur5_description/model/RG_connector_simple.stl"/>
+                <mesh filename="package://prl_ur5_description/model/RG_connector_simple_convex.stl"/>
             </geometry>
         </collision>
       </link>
