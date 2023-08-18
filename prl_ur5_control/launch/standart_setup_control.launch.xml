@@ -15,9 +15,10 @@
     <!-- left arm driver -->
     <include file="$(find ur_robot_driver)/launch/ur_control.launch" ns="left_arm">
         <arg name="robot_ip" value="192.168.1.21"/>
-        <arg name="trajectory_port" value="50003"/>
         <arg name="reverse_port" value="50011"/>
         <arg name="script_sender_port" value="50012"/>
+        <arg name="trajectory_port" value="50013"/>
+        <arg name="script_command_port" value="50014"/>
         <arg name="tf_prefix" value="left_"/>
         <arg name="controllers" value="joint_state_controller $(arg controller_names) speed_scaling_state_controller force_torque_sensor_controller"/>
         <arg name="stopped_controllers" value="pos_joint_traj_controller joint_group_vel_controller"/>
@@ -43,9 +44,10 @@
     <!-- right arm driver -->
     <include file="$(find ur_robot_driver)/launch/ur_control.launch" ns="right_arm">
         <arg name="robot_ip" value="192.168.1.20"/>
-        <arg name="trajectory_port" value="50033"/>
-        <arg name="reverse_port" value="50001"/>
-        <arg name="script_sender_port" value="50002"/>
+        <arg name="reverse_port" value="50021"/>
+        <arg name="script_sender_port" value="50022"/>
+        <arg name="trajectory_port" value="50023"/>
+        <arg name="script_command_port" value="50024"/>
         <arg name="tf_prefix" value="right_"/>
         <arg name="controllers" value="joint_state_controller $(arg controller_names) speed_scaling_state_controller force_torque_sensor_controller"/>
         <arg name="stopped_controllers" value="pos_joint_traj_controller joint_group_vel_controller"/>
