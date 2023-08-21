@@ -39,7 +39,7 @@
 
     <!-- left gripper -->
     <node pkg="prl_ur5_control" type="gripper_controller_launcher.sh" name="gripper_controller_launcher" ns="left_gripper"
-          args="left ur_hardware_interface:='/left_arm/ur_hardware_interface' joint:='left_gripper_joint'"/>
+          args="left ur_hardware_interface:='/left_arm/ur_hardware_interface' joint:='left_gripper_joint'" output="screen"/>
 
     <!-- right arm driver -->
     <include file="$(find ur_robot_driver)/launch/ur_control.launch" ns="right_arm">
