@@ -1,13 +1,13 @@
 - git:
-    uri: https://github.com/inria-paris-robotic-lab/universal_robot.git
+    uri: https://github.com/inria-paris-robotics-lab/universal_robot.git
     local-name: universal_robot
     version: calibration_devel
 - git:
-    uri: https://github.com/inria-paris-robotic-lab/robotiq
+    uri: https://github.com/inria-paris-robotics-lab/robotiq
     local-name: robotiq
     version: kinetic-devel
 - git:
-    uri: https://github.com/inria-paris-robotic-lab/onrobot_ros
+    uri: https://github.com/inria-paris-robotics-lab/onrobot_ros
     local-name: onrobot_ros
     version: master
 - git:
@@ -28,5 +28,5 @@
     version: main
 - git:
     local-name: joint_group_ff_controllers
-    uri: https://github.com/inria-paris-robotic-lab/joint_group_ff_controllers.git
+    uri: https://github.com/inria-paris-robotics-lab/joint_group_ff_controllers.git
     version: master

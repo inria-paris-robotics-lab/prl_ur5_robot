@@ -12,8 +12,8 @@
 
   <license>MIT</license>
 
-  <url type="repository">https://github.com/inria-paris-robotic-lab/prl_ur5_robot</url>
-  <url type="bugtracker">https://github.com/inria-paris-robotic-lab/prl_ur5_robot/issues</url>
+  <url type="repository">https://github.com/inria-paris-robotics-lab/prl_ur5_robot</url>
+  <url type="bugtracker">https://github.com/inria-paris-robotics-lab/prl_ur5_robot/issues</url>
 
   <buildtool_depend>catkin</buildtool_depend>
 

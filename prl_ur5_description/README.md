@@ -4,7 +4,7 @@ This package provides a description of the UR5 bimanual robot from the Inria Par
 ## Setup
 
 For different experiments, the robot can be equipped with different grippers and sensors.
-To simplify the modification of the description, all changeable parameters are placed in separate setup files in the [prl_ur5_robot_configuration](https://github.com/inria-paris-robotic-lab/prl_ur5_robot_configuration) package.
+To simplify the modification of the description, all changeable parameters are placed in separate setup files in the [prl_ur5_robot_configuration](https://github.com/inria-paris-robotics-lab/prl_ur5_robot_configuration) package.
 (Each setup file contains a list of used devices and calibration parameters. The calibration parameters contain the positions of the arms, grippers, sensors, and kinematic parameters of UR5 arms.)
 UR5 factory calibrations were obtained using the [ur_calibration](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/tree/master/ur_calibration) package.
 
@@ -12,7 +12,7 @@ Available setups:
 
 - `standart_setup`: setup with OnRobot gripper and RealSense camera on each arm.
 
-![standart_setup](https://github.com/inria-paris-robotic-lab/prl_ur5_robot/blob/master/prl_ur5_description/media/standart_setup.png?raw=true "standart_setup")
+![standart_setup](https://github.com/inria-paris-robotics-lab/prl_ur5_robot/blob/master/prl_ur5_description/media/standart_setup.png?raw=true "standart_setup")
 
 ## Launch files
 

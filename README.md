@@ -46,7 +46,7 @@ See instructions [here](prl_ur5_demos/README.md).
 
 ## Using with docker
 
-See instructions [here](https://github.com/inria-paris-robotic-lab/prl_containers).
+See instructions [here](https://github.com/inria-paris-robotics-lab/prl_containers).
 
 ## Install from sources
 The following section contains instructions that can be specific to apt or conda.
@@ -109,7 +109,7 @@ cd ~/catkin_ws
 5. Clone the repo, (automatically) clone the depencies that needs to be installed from source and install the other dependencies:
 
 ```bash
-git clone -b master https://github.com/inria-paris-robotic-lab/prl_ur5_robot src/prl_ur5_robot
+git clone -b master https://github.com/inria-paris-robotics-lab/prl_ur5_robot src/prl_ur5_robot
 wstool init src ./src/prl_ur5_robot/prl_ur5_robot.rosinstall
 rosdep update
 rosdep install --from-paths src --ignore-src --skip-keys=python-pymodbus -r -y
@@ -119,7 +119,7 @@ rosdep install --from-paths src --ignore-src --skip-keys=python-pymodbus -r -y
 * **Option 1** :
 Clone the repo in your catkin workspace:
 ```bash
-git clone -b master https://github.com/inria-paris-robotic-lab/prl_ur5_robot_configuration src/prl_ur5_robot_configuration
+git clone -b master https://github.com/inria-paris-robotics-lab/prl_ur5_robot_configuration src/prl_ur5_robot_configuration
 ```
 * **Option 2** :
 Create a symbolic link to an already existing configuration folder:
