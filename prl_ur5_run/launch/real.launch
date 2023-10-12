@@ -5,7 +5,7 @@
     <arg name="moveit" default="true" doc="Start MoveIt"/>
     <arg name="pipeline" default="ompl" doc="MoveIt planning pipeline"/>
     <arg name="velocity_control" default="false" doc="Position or Velocity control of the joints"/>
-    <arg name="ff_control" default="false" doc="Trajecotry of Feed-Forward control of the joints"/>
+    <arg name="ff_control" default="false" doc="Trajectory of Feed-Forward control of the joints"/>
     <arg name="debug" default="false" doc="Debug flag"/>
     <arg name="rviz" default="true" doc="Start RViz"/>
 
