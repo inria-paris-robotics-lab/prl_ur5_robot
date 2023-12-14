@@ -7,7 +7,7 @@
   <xacro:macro name="gripper" params="gripper prefix parent pose hardware_interface">
 
     <!-- check gripper type -->
-    <xacro:unless value="${gripper in [None, 'onrobot-rg2', 'onrobot-rg6', 'onrobot-rg6-v2'] or gripper.startswith('custom:')}">
+    <xacro:unless value="${gripper in [None, 'onrobot-rg2', 'onrobot-rg6', 'onrobot-rg6-v2'] or gripper.startswith('custom:') or gripper.startswith('allegro-hand:')}">
       <xacro:unknown_gripper_type/>
     </xacro:unless>
 
@@ -30,6 +30,14 @@
       <xacro:onrobot_rg prefix='${prefix}gripper' parent="${parent}" model="rg6_v2" safety_shield="true" transmission_hw_interface="${hardware_interface}">
         <origin xyz="${pose['x']} ${pose['y']} ${pose['z']}" rpy="${pose['roll']} ${pose['pitch']} ${pose['yaw']}"/>
       </xacro:onrobot_rg>
+    </xacro:if>
+
+    <!-- if allegro-hand -->
+    <xacro:if value="${gripper.startswith('allegro-hand:')}">
+      <xacro:include filename="$(find allegro_hand_description)/allegro_hand_description.urdf.xacro"/>
+      <xacro:allegro_hand chirality='${gripper[13:]}' prefix='${prefix}gripper' parent="${parent}" last_links_inertia_factor="${20 if gz_sim else 1.0}">
+        <origin xyz="${pose['x']} ${pose['y']} ${pose['z']}" rpy="${pose['roll']} ${pose['pitch']} ${pose['yaw']}"/>
+      </xacro:allegro_hand>
     </xacro:if>
 
     <!-- if custom gripper -->
