@@ -12,6 +12,14 @@ ROS stack for the bimanual UR5 robot
 
 ## Start robot
 
+In order to be able to start the robot (in sim or real), you need to setup some environment variable in your terminal:
+```bash
+source /opt/ros/noetic/setup.bash # ONLY IF YOU ARE USING ROS FROM APT
+source ~/catkin_ws/devel/setup.bash # Make ros able to find packaged that you build manually (using catkin)
+
+source ~/catkin_ws/src/prl_ur5_robot_configuration/script/setup_env.bash # To have the robot specific configurations
+```
+
 To start real robot control use:
 
 ```bash

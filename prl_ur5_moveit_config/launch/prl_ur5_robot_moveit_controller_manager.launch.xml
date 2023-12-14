@@ -8,7 +8,15 @@
   <arg name="moveit_controller_manager" default="moveit_simple_controller_manager/MoveItSimpleControllerManager" />
   <param name="moveit_controller_manager" value="$(arg moveit_controller_manager)"/>
 
+  <!-- Prepare subsitution values for controller setup -->
+  <arg name="scaled_joint_traj_controller_name" value="scaled_pos_joint_traj_controller" unless="$(arg velocity_control)"/>
+  <arg name="scaled_joint_traj_controller_name" value="scaled_vel_joint_traj_controller"     if="$(arg velocity_control)"/>
+
+  <arg name="left_gripper_onrobot_comment" value=""      if="$(eval env('PRL_CONFIG_LEFT_GRIPPER_CONTROLLER') == 'onrobot_rg')"/>
+  <arg name="left_gripper_onrobot_comment" value="#" unless="$(eval env('PRL_CONFIG_LEFT_GRIPPER_CONTROLLER') == 'onrobot_rg')"/>
+  <arg name="right_gripper_onrobot_comment" value=""      if="$(eval env('PRL_CONFIG_RIGHT_GRIPPER_CONTROLLER') == 'onrobot_rg')"/>
+  <arg name="right_gripper_onrobot_comment" value="#" unless="$(eval env('PRL_CONFIG_RIGHT_GRIPPER_CONTROLLER') == 'onrobot_rg')"/>
+
   <!-- loads ros_controllers to the param server -->
-  <rosparam file="$(find prl_ur5_moveit_config)/config/$(arg setup)/ros_controllers_pos.yaml" unless="$(arg velocity_control)"/>
-  <rosparam file="$(find prl_ur5_moveit_config)/config/$(arg setup)/ros_controllers_vel.yaml"     if="$(arg velocity_control)"/>
+  <rosparam file="$(find prl_ur5_moveit_config)/config/$(arg setup)/ros_controllers.yaml" subst_value="True"/>
 </launch>

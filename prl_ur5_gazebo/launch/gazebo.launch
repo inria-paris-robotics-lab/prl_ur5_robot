@@ -90,4 +90,15 @@
   <!-- Given the published joint states, publish tf for the robot links -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen"/>
 
+  <!-- Grippers controllers (are necessary at least for Allegro) -->
+  <include file="$(find prl_ur5_control)/launch/$(arg setup)_gripper_control.launch.xml">
+      <arg name="gripper_prefix" value="left"/>
+      <arg name="sim" value="True"/>
+  </include>
+  <include file="$(find prl_ur5_control)/launch/$(arg setup)_gripper_control.launch.xml">
+      <arg name="gripper_prefix" value="right"/>
+      <arg name="sim" value="True"/>
+  </include>
+
+
 </launch>

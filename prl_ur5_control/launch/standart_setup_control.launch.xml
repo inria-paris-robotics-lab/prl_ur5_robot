@@ -37,10 +37,6 @@
         <param name="port" value="63351"/>
     </node>
 
-    <!-- left gripper -->
-    <node pkg="prl_ur5_control" type="gripper_controller_launcher.sh" name="gripper_controller_launcher" ns="left_gripper"
-          args="left ur_hardware_interface:='/left_arm/ur_hardware_interface' joint:='left_gripper_joint'" output="screen"/>
-
     <!-- right arm driver -->
     <include file="$(find ur_robot_driver)/launch/ur_control.launch" ns="right_arm">
         <arg name="robot_ip" value="192.168.1.20"/>
@@ -66,9 +62,15 @@
         <param name="port" value="63351"/>
     </node>
 
-    <!-- right gripper -->
-    <node pkg="prl_ur5_control" type="gripper_controller_launcher.sh" name="gripper_controller_launcher" ns="right_gripper"
-          args="right ur_hardware_interface:='/right_arm/ur_hardware_interface' joint:='right_gripper_joint'"/>
+    <!-- Grippers controllers -->
+    <include file="$(find prl_ur5_control)/launch/$(arg setup)_gripper_control.launch.xml">
+        <arg name="gripper_prefix" value="left"/>
+        <arg name="sim" value="False"/>
+    </include>
+    <include file="$(find prl_ur5_control)/launch/$(arg setup)_gripper_control.launch.xml">
+        <arg name="gripper_prefix" value="right"/>
+        <arg name="sim" value="False"/>
+    </include>
 
     <!-- combine joint states from arms and grippers -->
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
