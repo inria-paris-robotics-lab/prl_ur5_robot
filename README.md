@@ -24,12 +24,6 @@ To run simulation in Gazebo use:
 roslaunch prl_ur5_run sim.launch [setup:=standart_setup] [sensors:=false] [gazebo_gui:=true] [moveit:=true] [rviz:=true] [pipeline:=ompl] [debug:=false]
 ```
 
-To run MoveIt's "demo" mode use:
-
-```bash
-roslaunch prl_ur5_run demo.launch [setup:=standart_setup] [rviz:=true] [pipeline:=ompl] [debug:=false]
-```
-
 Possible arguments:
 
 - _setup_: robot setup (details [here](prl_ur5_description/README.md)), default="standart_setup"
