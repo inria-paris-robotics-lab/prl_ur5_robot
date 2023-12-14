@@ -18,6 +18,7 @@
         <arg name="debug" value="$(arg debug)"/>
         <arg name="velocity_control" value="$(arg velocity_control)"/>
         <arg name="ff_control" value="$(arg ff_control)"/>
+        <arg name="setup" value="$(arg setup)"/>
     </include>
 
     <!-- convert joint states to /tf tranforms -->
