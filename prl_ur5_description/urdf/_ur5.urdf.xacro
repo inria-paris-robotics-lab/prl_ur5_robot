@@ -18,6 +18,7 @@
       joint_limits
       hardware_interface
       sensors
+      gz_sim
       gripper:=None
       gripper_pose:=None
       camera:=None
@@ -53,7 +54,7 @@
 
     <!-- gripper -->
     <xacro:unless value="${gripper is None}">
-      <xacro:gripper gripper="${gripper}" prefix='${prefix}' parent="${prefix}tool" pose="${gripper_pose}" hardware_interface="${hardware_interface}"/>
+      <xacro:gripper gripper="${gripper}" prefix='${prefix}' parent="${prefix}tool" pose="${gripper_pose}" hardware_interface="${hardware_interface}" gz_sim="${gz_sim}"/>
 
       <!-- Right angle connector -->
       <link name="${prefix}wrist_connector_link">

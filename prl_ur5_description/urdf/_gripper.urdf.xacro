@@ -4,7 +4,7 @@
   <!-- onrobot RG2(6) -->
   <xacro:include filename="$(find onrobot_description)/urdf/onrobot_rg.urdf.xacro"/>
 
-  <xacro:macro name="gripper" params="gripper prefix parent pose hardware_interface">
+  <xacro:macro name="gripper" params="gripper prefix parent pose hardware_interface gz_sim">
 
     <!-- check gripper type -->
     <xacro:unless value="${gripper in [None, 'onrobot-rg2', 'onrobot-rg6', 'onrobot-rg6-v2'] or gripper.startswith('custom:') or gripper.startswith('allegro-hand:')}">

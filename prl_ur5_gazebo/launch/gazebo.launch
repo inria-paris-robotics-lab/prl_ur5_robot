@@ -50,6 +50,7 @@
     <arg name="table" value="true"/>
     <arg name="velocity_control" value="$(arg velocity_control)"/>
     <arg name="sensors" value="$(arg sensors)"/>
+    <arg name="gz_sim" value="true"/>
   </include>
 
   <!-- Push robot_description to factory and spawn robot in gazebo at the origin, change x,y,z arguments to spawn in a different position -->

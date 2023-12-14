@@ -6,6 +6,7 @@
   <xacro:arg name="table" default="true"/>
   <xacro:arg name="sensors" default="false"/>
   <xacro:arg name="hardware_interface" default="hardware_interface/PositionJointInterface"/>
+  <xacro:arg name="gz_sim" default="false"/>
 
   <!-- ur5 robot -->
   <xacro:include filename="$(find prl_ur5_description)/urdf/prl_ur5.urdf.xacro"/>
@@ -13,6 +14,7 @@
   <xacro:prl_ur5 setup_file="${xacro.load_yaml('$(find prl_ur5_robot_configuration)/config/$(arg setup).yaml')}"
                  table="$(arg table)"
                  hardware_interface="$(arg hardware_interface)"
-                 sensors="$(arg sensors)"/>
+                 sensors="$(arg sensors)"
+                 gz_sim="$(arg gz_sim)"/>
 
 </robot>
