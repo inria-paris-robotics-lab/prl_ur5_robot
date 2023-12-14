@@ -19,4 +19,6 @@
   <exec_depend>gazebo_ros</exec_depend>
   <exec_depend>ros_controllers</exec_depend>
   <exec_depend>prl_ur5_description</exec_depend>
+  <exec_depend>gazebo_ros_control_select_joints</exec_depend>
+
 </package>

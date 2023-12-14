@@ -3,8 +3,6 @@
 
   <!-- single arm -->
   <xacro:include filename="$(find prl_ur5_description)/urdf/_ur5.urdf.xacro"/>
-  <!-- gazebo -->
-  <xacro:include filename="$(find prl_ur5_description)/urdf/prl_ur5.gazebo.xacro"/>
   <!-- Fixed cameras -->
   <xacro:include filename="$(find prl_ur5_description)/urdf/_fixed_cameras.urdf.xacro"/>
 
@@ -167,7 +165,30 @@
     </xacro:if>
 
     <!-- gazebo stuff -->
-    <xacro:prl_ur5_gazebo/>
+    <gazebo>
+      <!-- enable ros_control loop -->
+      <plugin name="ros_control_arms" filename="libgazebo_ros_control_select_joints.so">
+        <joints>
+          left_shoulder_pan_joint  right_shoulder_pan_joint
+          left_shoulder_lift_joint right_shoulder_lift_joint
+          left_elbow_joint         right_elbow_joint
+          left_wrist_1_joint       right_wrist_1_joint
+          left_wrist_2_joint       right_wrist_2_joint
+          left_wrist_3_joint       right_wrist_3_joint
+        </joints>
+      </plugin>
+
+      <!-- gravity compensation -->
+      <plugin name="gravity_compensation" filename="libGravityCompensationPlugin.so">
+        <uri>model://prl_ur5_robot</uri>
+      </plugin>
+
+      <!-- fix base in Gazebo -->
+      <joint name="fixed" type="fixed">
+        <parent>world</parent>
+        <child>prl_ur5_base</child>
+      </joint>
+    </gazebo>
 
   </xacro:macro>
 </robot>
