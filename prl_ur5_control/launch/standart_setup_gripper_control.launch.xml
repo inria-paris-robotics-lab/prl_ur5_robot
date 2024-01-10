@@ -3,24 +3,26 @@
     <arg name="gripper_prefix" doc="Gripper prefix (Typ. 'left' or 'right')"/>
     <arg name="sim" doc="Simulation (True) or real robot (False)"/>
 
-    <arg name="_controller_env_varname" value="$(eval 'PRL_CONFIG_'+gripper_prefix.upper()+'_GRIPPER_CONTROLLER')"/>
+    <arg name="_gripper_controller_env_varname" value="$(eval 'PRL_CONFIG_'+gripper_prefix.upper()+'_GRIPPER_CONTROLLER')"/>
+    <arg name="_gripper_type_env_varname" value="$(eval 'PRL_CONFIG_'+gripper_prefix.upper()+'_GRIPPER')"/>
 
     <!-- Dumb way to raise an error from launchfile (if the gripper controller is not knowns) -->
-    <group if="$(eval env(_controller_env_varname).lower() not in ['onrobot_rg', 'allegro-hand', 'none', ''])">
-        <include file="Unkown controller in env var $(arg _controller_env_varname). Expecting 'onrobot_rg', 'allegro-hand', 'None' or ''"/>
+    <group if="$(eval env(_gripper_controller_env_varname).lower() not in ['onrobot_rg', 'allegro-hand', 'none', ''])">
+        <include file="Unkown controller in env var $(arg _gripper_controller_env_varname). Expecting 'onrobot_rg', 'allegro-hand', 'None' or ''"/>
     </group>
 
     <!-- Onrobot controller -->
-    <group if="$(eval env(_controller_env_varname).lower() == 'onrobot_rg')">
+    <group if="$(eval env(_gripper_controller_env_varname).lower() == 'onrobot_rg')">
         <!-- Launch controller only on real robot -->
         <include file="$(find onrobot_control)/launch/onrobot_gripper.launch" ns="$(arg gripper_prefix)_gripper" unless="$(arg sim)">
             <arg name="ur_hardware_interface" value="/$(arg gripper_prefix)_arm/ur_hardware_interface"/>
             <arg name="joint" value="$(arg gripper_prefix)_gripper_joint"/>
+            <arg name="gripper_type" value="$(eval env(_gripper_type_env_varname))"/>
         </include>
     </group>
 
     <!-- Allegro hand controller -->
-    <group if="$(eval env(_controller_env_varname).lower() == 'allegro-hand')">
+    <group if="$(eval env(_gripper_controller_env_varname).lower() == 'allegro-hand')">
         <!-- Launch controller -->
         <include file="$(find allegro_hand_controllers)/launch/allegro_hand_controllers.launch">
             <arg name="hand_name" value="$(arg gripper_prefix)_gripper"/>
