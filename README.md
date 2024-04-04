@@ -57,7 +57,8 @@ The following section contains instructions that can be specific to apt or conda
 <details open><summary>Conda</summary>
 
 ```bash
-conda create -n my_ros -c conda-forge -c robostack ros-noetic-desktop
+conda create -n my_ros -c conda-forge -c robostack -c default ros-noetic-desktop python=3.8.* --no-default-packages
+# For micromamba users, remove the "--no-default-packages" option
 ```
 
 </details>
@@ -88,7 +89,7 @@ source /opt/ros/noetic/setup.bash
 <details open><summary>Conda</summary>
 
 ```bash
-conda install -c conda-forge catkin_tools wstools
+conda install -c conda-forge catkin_tools wstool
 ```
 
 </details>

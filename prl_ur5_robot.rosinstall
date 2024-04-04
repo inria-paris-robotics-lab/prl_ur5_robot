@@ -15,6 +15,10 @@
     local-name: Universal_Robots_ROS_Driver
     version: master
 - git:
+    uri: https://github.com/UniversalRobots/Universal_Robots_Client_Library
+    local-name: Universal_Robots_Client_Library
+    version: master
+- git:
     uri: https://github.com/pal-robotics/realsense_gazebo_plugin
     local-name: realsense_gazebo_plugin
     version: melodic-devel
