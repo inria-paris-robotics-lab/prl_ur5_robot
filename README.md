@@ -169,10 +169,11 @@ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 10. Setup local ros environment variables
 ```bash
 source ~/catkin_ws/devel/setup.bash
+source ~/catkin_ws/src/prl_ur5_robot_configuration/script/setup_env.bash
 ```
 
 11. Set custom environment variables (for log files):
 
 ```bash
-echo "export PRL_LOG_PATH=/my/log/path" >> ~/.bashrc
+export PRL_LOG_PATH=/my/log/path
 ```
