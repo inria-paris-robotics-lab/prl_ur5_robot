@@ -177,3 +177,32 @@ source ~/catkin_ws/src/prl_ur5_robot_configuration/script/setup_env.bash
 ```bash
 export PRL_LOG_PATH=/my/log/path
 ```
+
+### Known issues
+<details close><summary>[Click here to expand]</summary>
+
+#### Rosdep install fail / Missing dependencies during `catkin build`
+##### Error
+* `Rosdep install` print messages such as `Unsupported OS [robostack]`
+* During the `catkin build` phase many ros packages are missing as dependencies
+
+#### Solution
+Here is a list of conda packages to install "by hand" to solve most of the dependencies issues :
+```bash
+conda install -c conda-forge -c robostack -c default console_bridge ros-noetic-gazebo-ros ros-noetic-urdfdom-py ros-noetic-moveit-core ros-noetic-moveit-kinematics ros-noetic-moveit-ros-planning ros-noetic-camera-info-manager ros-noetic-hardware-interface ros-noetic-moveit-ros-move-group ros-noetic-moveit-planners-ompl ros-noetic-moveit-ros-visualization ros-noetic-moveit-fake-controller-manager ros-noetic-moveit-simple-controller-manager ros-noetic-moveit-planners-chomp ros-noetic-moveit-setup-assistant ros-noetic-soem ros-noetic-controller-manager ros-noetic-effort-controllers ros-noetic-gazebo-ros-control ros-noetic-joint-state-controller ros-noetic-joint-trajectory-controller ros-noetic-position-controllers ros-noetic-ur-client-library ros-noetic-ros-controllers ros-noetic-gazebo-ros-control-select-joints ros-noetic-ros-control ros-noetic-industrial-robot-status-controller ros-noetic-realsense2-camera ros-noetic-gazebo-plugins ros-noetic-gazebo-msgs ros-noetic-controller-interface ros-noetic-realtime-tools ros-noetic-control-toolbox ros-noetic-forward-command-controller ros-noetic-industrial-robot-status-interface ros-noetic-controller-manager-msgs ros-noetic-pass-through-controllers ros-noetic-cartesian-trajectory-controller ros-noetic-force-torque-sensor-controller socat ros-noetic-twist-controller ros-noetic-velocity-controllers ros-noetic-moveit-commander ros-noetic-socketcan-interface ros-noetic-realsense2-description
+
+```
+
+#### Moveit is not starting (with conda)
+##### Error
+* Moveit is not appearing in RViz
+* In the terminal
+  ```bash
+  PluginlibFactory: The plugin for class 'moveit_rviz_plugin/MotionPlanning' failed to load.  Error: Failed to load library <my_home>/micromamba/envs/prl_ros/lib/libmoveit_motion_planning_rviz_plugin.so. Make sure that you are calling the PLUGINLIB_EXPORT_CLASS macro in the library code, and that names are consistent between this macro and your XML. Error string: Could not load library (Poco exception = libmoveit_semantic_world.so.1.1.0: cannot open shared object file: No such file or directory)
+  ```
+##### Solution
+`libmoveit_semantic_world` is probably installed already but with a slightly different version. Just create a simlink to it
+```bash
+ln -s $CONDA_PREFIX/lib/libmoveit_semantic_world.so $CONDA_PREFIX/lib/libmoveit_semantic_world.so.1.1.0
+```
+</details>
