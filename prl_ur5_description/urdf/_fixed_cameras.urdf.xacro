@@ -7,7 +7,7 @@
 
     <!-- Build fixed camera with their support from one file -->
     <xacro:macro name="fixed_cameras" params="parent fixed_cameras_file turn_on:=false">
-        <xacro:property name="fixed_cameras" value="${xacro.load_yaml(fixed_cameras_file)}"/>
+        <xacro:property name="fixed_cameras" value="${load_yaml(fixed_cameras_file)}"/>
         <xacro:fixed_cameras_loop parent="${parent}" number="0" cameras="${fixed_cameras}" turn_on="${turn_on}"/>
     </xacro:macro>
 

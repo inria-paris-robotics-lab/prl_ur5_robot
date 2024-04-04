@@ -5,7 +5,7 @@
 -->
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="prl_ur5_robot">
     <xacro:arg name="setup_name" default=""/>
-    <xacro:property name="setup" value="${xacro.load_yaml('$(find prl_ur5_robot_configuration)/config/$(arg setup_name).yaml')}"/>
+    <xacro:property name="setup" value="${load_yaml('$(find prl_ur5_robot_configuration)/config/$(arg setup_name).yaml')}"/>
 
     <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
     <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
@@ -226,7 +226,7 @@
 
     <!-- Iterate voer all cameras using reccursive function-->
     <xacro:property name="fixed_cameras_file" value="$(find prl_ur5_robot_configuration)/config/${setup['fixed_cameras_file']}"/>
-    <xacro:property name="fixed_cameras" value="${xacro.load_yaml(fixed_cameras_file)}"/>
+    <xacro:property name="fixed_cameras" value="${load_yaml(fixed_cameras_file)}"/>
 
     <xacro:macro name="external_cameras_loop" params="cameras number">
         <xacro:if value="${cameras}">
