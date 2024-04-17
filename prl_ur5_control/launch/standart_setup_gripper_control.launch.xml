@@ -27,6 +27,7 @@
         <include file="$(find allegro_hand_controllers)/launch/allegro_hand_controllers.launch">
             <arg name="hand_name" value="$(arg gripper_prefix)_gripper"/>
             <arg name="gazebo" value="$(arg sim)"/>
+            <arg name="controller_yaml" value="$(find allegro_hand_controllers)/config/default_pos_controller.yaml"/>
         </include>
     </group>
 
