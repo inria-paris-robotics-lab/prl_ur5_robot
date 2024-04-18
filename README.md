@@ -89,7 +89,7 @@ source /opt/ros/noetic/setup.bash
 <details open><summary>Conda</summary>
 
 ```bash
-conda install -c conda-forge catkin_tools wstool
+conda install -c conda-forge catkin_tools wstool compilers cxx-compiler cmake
 ```
 
 </details>
