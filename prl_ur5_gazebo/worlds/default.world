@@ -12,7 +12,7 @@
           <iters>200</iters>
         </solver>
       </ode>
-      <max_step_size>0.001</max_step_size>
+      <max_step_size>0.0005</max_step_size>
     </physics>
     <!-- A global light source -->
     <include>
