@@ -75,16 +75,13 @@
     "/>
 
   <!-- Load the controllers -->
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
-      joint_state_controller
-      left_arm/$(arg controller_names)
-      right_arm/$(arg controller_names)
-    "/>
+  <node name="controller_spawner_left" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller $(arg controller_names)" ns="left_arm"/>
+  <node name="controller_spawner_right" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller $(arg controller_names)" ns="right_arm"/>
 
   <!-- combine joint states from arms and grippers -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <param name="rate" value="50"/>
-    <rosparam param="source_list">[/arms/joint_states, /left_gripper/joint_states, /right_gripper/joint_states]</rosparam>
+    <rosparam param="source_list">[/left_arm/joint_states, /right_arm/joint_states, /left_gripper/joint_states, /right_gripper/joint_states]</rosparam>
   </node>
 
   <!-- Given the published joint states, publish tf for the robot links -->
