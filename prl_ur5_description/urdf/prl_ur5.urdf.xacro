@@ -6,50 +6,19 @@
   <!-- Fixed cameras -->
   <xacro:include filename="$(find prl_ur5_description)/urdf/_fixed_cameras.urdf.xacro"/>
 
-  <xacro:macro name="prl_ur5" params="setup_file hardware_interface gz_sim sensors:=false table:=true backwall:=true ceiling:=true">
+  <xacro:macro name="prl_ur5" params="setup_file hardware_interface gz_sim sensors:=false table:=true backwall:=true leftwall:=true">
 
     <!-- base link -->
     <link name="prl_ur5_base"/>
 
-    <!-- bimanual stand -->
-    <link name="stand_link">
-      <visual>
-        <geometry>
-          <mesh filename="package://prl_ur5_description/model/vention_tower.dae"/>
-        </geometry>
-        <material name="Cyan">
-          <color rgba="0 1.0 1.0 1.0"/>
-        </material>
-      </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://prl_ur5_description/model/vention_tower_bottom_convex.stl"/>
-        </geometry>
-      </collision>
-      <collision>
-        <geometry>
-          <mesh filename="package://prl_ur5_description/model/vention_tower_middle_convex.stl"/>
-        </geometry>
-      </collision>
-      <collision>
-        <geometry>
-          <mesh filename="package://prl_ur5_description/model/vention_tower_top_convex.stl"/>
-        </geometry>
-      </collision>
-    </link>
-
-    <joint name="stand_fix" type="fixed">
-      <parent link="prl_ur5_base"/>
-      <child link = "stand_link"/>
-      <origin xyz="0.0 -0.3825 0.0" rpy="0.0 0.0 0.0"/>
-    </joint>
 
     <!-- table -->
+    <!-- bimanual workbench -->
     <xacro:if value="$(arg table)">
       <link name="table_link">
         <visual>
           <geometry>
-            <mesh filename="package://prl_ur5_description/model/vention_table.dae"/>
+            <mesh filename="package://prl_ur5_description/model/vention_table.stl"/>
           </geometry>
         </visual>
         <collision>
@@ -59,12 +28,11 @@
         </collision>
       </link>
 
-      <joint name="table_fix" type="fixed">
-        <parent link="stand_link"/>
-        <child link = "table_link"/>
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-      </joint>
-
+    <joint name="table_fix" type="fixed">
+      <parent link="prl_ur5_base"/>
+      <child link = "table_link"/>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
     </xacro:if>
 
     <!-- Cameras fixtures (if any) -->
@@ -77,13 +45,13 @@
       <link name="backwall_link">
         <visual>
           <geometry>
-            <box size="3 0.1 2.5" />
+            <box size="3.5 0.1 2" />
           </geometry>
           <material name="grey"><color rgba="0.8 0.8 0.8 0.2"/></material>
         </visual>
         <collision>
           <geometry>
-            <box size="3 0.1 2.5" />
+            <box size="3.5 0.1 2" />
           </geometry>
         </collision>
       </link>
@@ -91,30 +59,30 @@
       <joint name="backwall_fix" type="fixed">
         <parent link="prl_ur5_base"/>
         <child link = "backwall_link"/>
-        <origin xyz="0 -1.05 0.5" rpy="0.0 0.0 0.0"/>
+        <origin xyz="0 -1.05 0.25" rpy="0.0 0.0 0.0"/>
       </joint>
     </xacro:if>
 
-    <!-- ceiling wall -->
-    <xacro:if value="$(arg ceiling)">
-      <link name="ceiling_link">
+    <!-- left wall -->
+    <xacro:if value="$(arg leftwall)">
+      <link name="leftwall_link">
         <visual>
           <geometry>
-            <box size="3 1.95 0.1" />
+            <box size="0.1 1.95 2" />
           </geometry>
           <material name="grey"><color rgba="0.8 0.8 0.8 0.1"/></material>
         </visual>
         <collision>
           <geometry>
-            <box size="3 1.95 0.1" />
+            <box size="0.1 1.95 2" />
           </geometry>
         </collision>
       </link>
 
-      <joint name="ceiling_fix" type="fixed">
+      <joint name="leftwall_fix" type="fixed">
         <parent link="prl_ur5_base"/>
-        <child link = "ceiling_link"/>
-        <origin xyz="0 0 1.3" rpy="0.0 0.0 0.0"/>
+        <child link = "leftwall_link"/>
+        <origin xyz="-1.65 0 0.25" rpy="0.0 0.0 0.0"/>
       </joint>
     </xacro:if>
 
@@ -123,7 +91,7 @@
 
     <xacro:if value="${left is not None}">
       <xacro:ur5 prefix="left_"
-                 parent="stand_link"
+                 parent="prl_ur5_base"
                  kinematics="$(find prl_ur5_robot_configuration)/config/${left['arm_kinematics']}"
                  joint_limits="$(find prl_ur5_robot_configuration)/config/${left['arm_joint_limits']}"
                  pose="${left['arm_pose']}"
@@ -141,7 +109,7 @@
 
     <xacro:if value="${right is not None}">
       <xacro:ur5 prefix="right_"
-                 parent="stand_link"
+                 parent="prl_ur5_base"
                  kinematics="$(find prl_ur5_robot_configuration)/config/${right['arm_kinematics']}"
                  joint_limits="$(find prl_ur5_robot_configuration)/config/${right['arm_joint_limits']}"
                  pose="${right['arm_pose']}"
@@ -152,18 +120,6 @@
                  camera_pose="${right.get('camera_pose')}"
                  hardware_interface="${hardware_interface}"
                  gz_sim="${gz_sim}"/>
-    </xacro:if>
-
-    <!-- head -->
-    <xacro:property name="head" value="${setup_file.get('head')}"/>
-
-    <xacro:if value="${head is not None}">
-      <xacro:unless value="${head.get('camera') is None}">
-        <xacro:camera_sensor prefix='head_'
-                             parent="stand_link"
-                             camera="${head['camera']}"
-                             pose="${head['camera_pose']}"/>
-      </xacro:unless>
     </xacro:if>
 
     <!-- gazebo stuff -->
