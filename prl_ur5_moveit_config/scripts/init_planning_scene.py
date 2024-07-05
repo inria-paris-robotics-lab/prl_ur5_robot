@@ -24,7 +24,7 @@ def run():
         r.get_path('prl_ur5_description'), 'model', 'vention_table.stl')
 
     pose = geometry_msgs.msg.PoseStamped()
-    pose.header.frame_id = 'stand_link'
+    pose.header.frame_id = 'prl_ur5_base'
     pose.pose.orientation.w = 1.0
 
     scene.add_mesh('table', pose, filename)
